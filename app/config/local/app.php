@@ -15,4 +15,11 @@ return array(
 
 	'debug' => true,
 
+    'providers' => array(
+        'Clockwork\Support\Laravel\ClockworkServiceProvider'
+    ),
+
+    'aliases'   => array(
+        'Clockwork' => 'Clockwork\Support\Laravel\Facade'
+    )
 );
