@@ -28,12 +28,12 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
 Route::group(['prefix' => 'admin'], function()
 {
     // Public
-    Route::get('/', 'AdminController@index');
     Route::post('login', 'AdminController@store');
 });
 
 Route::group(['before' => 'auth|admin', 'prefix' => 'admin'], function()
 {
+    Route::get('/', 'AdminController@index');
     Route::get('logout', 'AdminController@destroy');
     Route::post('save-reserved-seats', 'AdminController@saveReservedSeats');
     Route::get('movie/delete/{movieId}', 'AdminController@deleteMovie');
