@@ -12,7 +12,7 @@ Route::group(['prefix' => 'member'], function()
     Route::post('signup', 'MemberController@create');
 });
 
-Route::group(['before' => 'auth', 'prefix' => 'member'], function()
+Route::group(['before' => 'auth|admin', 'prefix' => 'member'], function()
 {
     Route::get('/', 'MemberController@index');
     Route::get('logout', 'MemberController@destroy');
