@@ -7,4 +7,5 @@ class MemberController extends BaseController {
         $title = 'Member Page';
         return View::make('member.index', compact('title'));
     }
+
 }
