@@ -8,4 +8,10 @@ class HomeController extends BaseController {
 		return View::make('home.index', compact('title'));
 	}
 
+    public function show($id)
+    {
+        $title = 'Movie Page';
+        $movie = Movie::find($id);
+        return View::make('home.show', compact('title', 'movie'));
+    }
 }
