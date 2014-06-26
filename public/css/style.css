@@ -1,0 +1,97 @@
+h1, h2 {
+  text-align: center; }
+
+.content {
+  margin-top: 50px; }
+
+a.inner-links {
+  color: #258faf;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: inherit; }
+  a.inner-links:first-child {
+    padding-left: 10px; }
+  a.inner-links:hover, a.inner-links:focus {
+    color: #258faf; }
+
+.page-name {
+  font-size: 12px; }
+
+a.forgot-pass {
+  color: #258faf;
+  border: none;
+  background: transparent; }
+  a.forgot-pass:hover {
+    color: #258faf;
+    background: transparent; }
+  a.forgot-pass:focus {
+    color: #258faf; }
+
+/* FOR SEARCH PAGE */
+span.sub-header {
+  display: block;
+  margin-bottom: 25px; }
+
+.search {
+  margin: 15% 0 15% 0;
+  text-align: center; }
+  .search input[type="text"] {
+    border-radius: 0px 20px 20px 0px;
+    border-left: 0; }
+    .search input[type="text"]:focus {
+      box-shadow: none;
+      border-color: #cccccc; }
+
+span.search-label {
+  border: 1px solid #cccccc;
+  background-color: #fff;
+  border-radius: 20px 0px 0px 20px;
+  border-right: 0;
+  font-size: 17px;
+  text-align: center; }
+  span.search-label i {
+    color: #cccccc; }
+
+/* FOR SINGLE PAGE */
+.single {
+  margin-bottom: 15%;
+  padding-top: 50px; }
+
+.song-info {
+  display: block;
+  margin: 0 0 5px 0; }
+
+.lyrics {
+  margin-top: 60px;
+  font-family: "Helvetica Neue";
+  line-height: 1.5em; }
+
+/* FOR LOGIN PAGE */
+.login-form {
+  margin-top: 100px; }
+
+/*----------------------MEDIA QUERIES-------------------------*/
+/* Define mobile styles */
+@media only screen and (max-width: 40em) {
+  .login-form {
+    max-width: 90%; }
+
+  .single {
+    max-width: 500px; }
+
+  .lyrics {
+    width: 100%; } }
+/* max-width 640px, mobile-only styles, use when QAing mobile issues */
+/* min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  div.login-form {
+    min-width: 400px; }
+
+  div.single {
+    min-width: 500px; } }
+/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+/* min-width 1025px, large screens */
+/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+/* min-width 1441px, xlarge screens */
+/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+/* min-width 1921px, xlarge screens */
