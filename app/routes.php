@@ -8,15 +8,15 @@ Route::get('/public/movie/{id}', 'HomeController@show');
 // Member Pages
 Route::group(['prefix' => 'member'], function()
 {
-    // GET
-    Route::post('login', 'MemberController@store');
+    Route::post('login', 'SessionController@memberLogin');
     Route::post('signup', 'MemberController@create');
 });
+
 
 Route::group(['before' => 'auth', 'prefix' => 'member'], function()
 {
     Route::get('/', 'MemberController@index');
-    Route::get('logout', 'MemberController@destroy');
+    Route::get('logout', 'SessionController@memberLogout');
     Route::get('reserve/movie/{movieId}', 'MemberController@reserve');
 
     // AJAX
@@ -29,7 +29,7 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
 Route::group(['prefix' => 'admin'], function()
 {
     // Public
-    Route::post('login', 'AdminController@store');
+    Route::post('login', 'SessionController@adminLogin');
 });
 
 Route::group(['before' => 'auth|admin', 'prefix' => 'admin'], function()

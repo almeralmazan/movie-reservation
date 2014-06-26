@@ -15,6 +15,6 @@
     @yield('content')
 </div>
 
-{{ HTML::script('js/vendor/jquery.min.js') }}
+{{ HTML::script('js/vendor/jquery.js') }}
 </body>
 </html>
