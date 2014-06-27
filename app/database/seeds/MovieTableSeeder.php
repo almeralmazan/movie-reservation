@@ -30,14 +30,14 @@ class MovieTableSeeder extends Seeder {
         Movie::create([
             'title'         =>  'Blended',
             'description'   =>  "After a bad blind date, a man and woman find themselves stuck together at a resort for families, where their attraction grows as their respective kids benefit from the burgeoning relationship.",
-            'image'         =>  'edge-of-tomorrow.jpg',
+            'image'         =>  'blended.jpg',
             'cinema_id'     =>  4
         ]);
 
         Movie::create([
             'title'         =>  'Maleficent',
             'description'   =>  "The 'Sleeping Beauty' tale is told from the perspective of the villainous Maleficent and looks at the events that hardened her heart and drove her to curse young Princess Aurora.",
-            'image'         =>  'edge-of-tomorrow.jpg',
+            'image'         =>  'maleficent.jpg',
             'cinema_id'     =>  5
         ]);
 
