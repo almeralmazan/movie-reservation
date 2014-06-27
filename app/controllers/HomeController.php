@@ -5,7 +5,8 @@ class HomeController extends BaseController {
 	public function index()
 	{
         $title = 'Home Page';
-		return View::make('home.index', compact('title'));
+        $movies = Movie::all();
+		return View::make('home.index', compact('title', 'movies'));
 	}
 
     public function show($id)
