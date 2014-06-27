@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ $title }}</title>
     {{ HTML::style('css/foundation.min.css') }}
-    {{ HTML::style('css/foundation-icons.css') }}
+    {{ HTML::style('css/font-awesome.min.css') }}
     {{ HTML::style('css/style.css') }}
-    {{ HTML::script('js/vendor/modernizr.js') }}
 </head>
 <body>
 
-<div class="content row">
-    @yield('content')
-</div>
+    <!--  Header  -->
+    @include('layouts/partials/nav')
+
+    <div class="content row">
+        @yield('content')
+    </div>
+
+    <!--  Footer  -->
+    @include('layouts/partials/footer')
 
 {{ HTML::script('js/vendor/jquery.js') }}
+{{ HTML::script('js/jquery.cycle2.js') }}
+{{ HTML::script('js/foundation.min.js') }}
+{{ HTML::script('js/script.js') }}
 </body>
 </html>
