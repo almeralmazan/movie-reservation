@@ -12,7 +12,7 @@
     <div class="row">
     @foreach ($movies as $movie)
         <li>{{ $movie->title }}</li>
-        <p>{{ $movie->image }}</p>
+        <p>{{ HTML::image('img/movies/' . $movie->image) }}</p>
     @endforeach
     </div>
 @stop
