@@ -6,35 +6,9 @@ class CinemaTableSeeder extends Seeder {
     {
         DB::table('cinemas')->delete();
 
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
-        Cinema::create(
-            ['occupied' => 1]
-        );
+        for ($i = 0; $i < 10; $i++)
+        {
+            Cinema::create( ['occupied' => 1] );
+        }
     }
 }
