@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('CinemaTimeTableSeeder');
         $this->command->info('CinemaTime table seeded');
+
+        $this->call('TimeTableSeeder');
+        $this->command->info('Time table seeded');
 	}
 
 }
