@@ -18,6 +18,7 @@ class CreateMoviesTable extends Migration {
             $table->string('title', 100)->nullable(false);
             $table->text('description')->nullable(false);
             $table->string('image')->nullable(false);
+            $table->date('showing_date')->default('0000-00-00');
             $table->integer('cinema_id')->default(0);
             $table->timestamps();
         });
