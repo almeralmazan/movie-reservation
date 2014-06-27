@@ -40,17 +40,12 @@
             @foreach ($movies as $movie)
             <a href="{{ URL::to('public/movie/' . $movie->id) }}">
                 {{ HTML::image('img/movies/' . $movie->image, null, ['width' => '185']) }}
-<!--                <img src="img/thumb1.jpg" alt="" width="185">-->
             </a>
             @endforeach
         </div>
     </div>
 </div>
 
-<!--    @foreach ($movies as $movie)-->
-<!--        <li>{{ $movie->title }}</li>-->
-<!--        <p>{{ HTML::image('img/movies/' . $movie->image) }}</p>-->
-<!--    @endforeach-->
 <div class="row">
     <hr>
 </div>
