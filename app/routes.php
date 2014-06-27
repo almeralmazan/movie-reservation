@@ -9,7 +9,7 @@ Route::get('/public/movie/{id}', 'HomeController@show');
 Route::group(['prefix' => 'member'], function()
 {
     Route::post('login', 'SessionController@memberLogin');
-    Route::post('signup', 'MemberController@create');
+    Route::post('register', 'MemberController@register');
 });
 
 
