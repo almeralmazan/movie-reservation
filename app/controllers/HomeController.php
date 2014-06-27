@@ -13,6 +13,7 @@ class HomeController extends BaseController {
     {
         $title = 'Movie Page';
         $movie = Movie::find($id);
-        return View::make('home.show', compact('title', 'movie'));
+        $movieTimes = Movie::getAllTimes($id);
+        return View::make('home.show', compact('title', 'movie', 'movieTimes'));
     }
 }
