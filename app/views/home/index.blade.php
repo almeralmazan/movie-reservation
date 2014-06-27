@@ -8,4 +8,11 @@
     {{ Form::password('password', ['placeholder' => 'Password']) }}
     {{ Form::submit('Login', ['class' => 'button']) }}
     {{ Form::close() }}
+
+    <div class="row">
+    @foreach ($movies as $movie)
+        <li>{{ $movie->title }}</li>
+        <p>{{ $movie->image }}</p>
+    @endforeach
+    </div>
 @stop
