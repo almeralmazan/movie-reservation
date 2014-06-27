@@ -15,8 +15,7 @@ class CreateTimesTable extends Migration {
         Schema::create('times', function($table)
         {
             $table->increments('id');
-            $table->time('from');
-            $table->time('to');
+            $table->time('start_time');
         });
 	}
 
