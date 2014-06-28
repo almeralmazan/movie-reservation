@@ -11,7 +11,7 @@ class UserTableSeeder extends Seeder {
             'last_name'     =>  'admin',
             'email'         =>  'admin@movie-reservation.com',
             'password'      =>  Hash::make('admin'),
-            'mobile_number' =>  '09159115188',
+            'mobile_number' =>  '+639159115188',
             'admin'         =>  1
         ]);
 
@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder {
             'last_name'     =>  'madia',
             'email'         =>  'ayi@gmail.com',
             'password'      =>  Hash::make('ayi'),
-            'mobile_number' =>  '09353626640',
+            'mobile_number' =>  '+639353626640',
         ]);
     }
 }
