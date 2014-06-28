@@ -20,12 +20,12 @@
                 <ul class="right">
                     @if ( ! Auth::check())
 
-                        {{ Form::open(['url' => 'member/login']) }}
+                        {{ Form::open(['url' => 'member/login', 'id' => 'member-login']) }}
                             <li class="has-form">
-                                {{ Form::email('email', null, ['class' => 'login-input', 'placeholder' => 'Email']) }}
+                                {{ Form::email('email', null, ['id' => 'email-input', 'placeholder' => 'Email', 'required' => 'required']) }}
                             </li>
                             <li class="has-form">
-                                {{ Form::password('password', ['class' => 'login-input', 'placeholder' => 'Password']) }}
+                                {{ Form::password('password', ['id' => 'password-input', 'placeholder' => 'Password', 'required' => 'required']) }}
                             </li>
                             <li class="has-form">
                                 {{ Form::submit('Login', ['class' => 'button']) }}

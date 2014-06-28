@@ -2,8 +2,8 @@
 header {
   background: #333333;
 }
-.content>.row {
-  margin-top: 50px;
+.content>.alert-container {
+  margin-bottom: 50px;
 }
 /*front page*/
 ul.right {
@@ -12,6 +12,17 @@ ul.right {
 
 ul.right li {
   margin-right: -20px;
+}
+
+ul.right .button {
+  font-size: 0.8125rem;
+  padding-top: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #008cba;
+  border-color: #007095;
+  color: white;
+  height: 29px;
 }
 
 ul.right input[type="email"],
@@ -100,10 +111,6 @@ div.movie-details>.row {
 
 @media only screen and (max-width: 40em) {
 
-  ul.right {
-    padding-right: 0;
-  }
-
   ul.right li {
     margin-right: 0px;
   }
@@ -115,7 +122,7 @@ div.movie-details>.row {
   }
 
   .error-login {
-    width: 98%;
+    width: 90%;
     margin: 15px auto;
     float: none;
   }

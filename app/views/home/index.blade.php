@@ -1,11 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="row">
+<div class="row alert-container">
     <!-- Error alert -->
-    <div class="alert-box alert error-login">
-        Error login
-    </div>
+    <div id="error-message"></div>
     <!-- end of Error alert -->
 </div>
 <div class="content">

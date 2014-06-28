@@ -13,7 +13,7 @@
     <!--  Header  -->
     @include('layouts/partials/nav')
 
-    <div class="content row">
+    <div class="content">
         @yield('content')
     </div>
 
@@ -23,6 +23,8 @@
 {{ HTML::script('js/vendor/jquery.js') }}
 {{ HTML::script('js/jquery.cycle2.js') }}
 {{ HTML::script('js/foundation.min.js') }}
+{{ HTML::script('js/dataService.js') }}
+{{ HTML::script('js/controllerPage.js') }}
 {{ HTML::script('js/script.js') }}
 </body>
 </html>
