@@ -13,6 +13,12 @@ var controllerPage = function() {
                 getMemberLoginInputs();
             });
 
+            $('#registration-form').on('submit', function(e) {
+                e.preventDefault();
+
+                getRegistrationInputs();
+            });
+
             // Live click from ajax dynamic button
             $(document).on('click', '#populate-seats .available-seats', function() {
 
@@ -86,14 +92,52 @@ var controllerPage = function() {
             dataService.memberLogin()
                 .done( function(data) {
                     if ( ! data.success) {
-                        $('#error-message').empty();
-                        $('#error-message').addClass('alert alert-box error-login').text(data.message);
+                        $('#error-message')
+                            .addClass('alert alert-box error-login')
+                            .text(data.message);
                     } else {
                         window.location.href = urlBase + '/member';
                     }
                 })
                 .fail( function(jqXHR, textStatus, error) {
                    console.log(textStatus);
+                });
+        },
+
+        getRegistrationInputs = function() {
+            dataService.register()
+                .done( function(data) {
+
+                    var errorsContainer = $('#registration-errors');
+                    var ulContainer = $('ul.content');
+                    var result = '';
+
+                    if ( ! data.success) {
+                        $.each(data.message, function(index, value) {
+                            result += '<li>' + value + '</li>';
+                        });
+
+                        errorsContainer.addClass('alert-box alert error-signin');
+                        ulContainer.html(result);
+
+                    } else {
+                        $('#error-signin').remove();
+                        errorsContainer.removeClass('alert')
+
+                        $('#first_name').val('');
+                        $('#last_name').val('');
+                        $('#mobile_number').val('');
+                        $('#email').val('');
+                        $('#password').val('');
+                        $('#password_confirmation').val('');
+
+                        errorsContainer
+                            .addClass('alert-box success error-signin')
+                            .html(data.message)
+                    }
+                })
+                .fail( function(jqXHR, textStatus, error) {
+                    console.log(textStatus);
                 });
         },
 

@@ -10,6 +10,14 @@ var dataService = function () {
             });
         },
 
+        register = function() {
+            return $.ajax({
+                url: urlBase + '/member/register',
+                type: 'post',
+                data: $('#registration-form').serialize()
+            });
+        },
+
         getMovieId = function(id) {
             return $.getJSON(urlBase + '/movie/' + id);
         },
@@ -48,6 +56,7 @@ var dataService = function () {
 
     return {
         memberLogin: memberLogin,
+        register: register,
         getMovieId: getMovieId,
         getReservedSeats: getReservedSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,

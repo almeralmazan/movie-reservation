@@ -11,21 +11,39 @@ class MemberController extends BaseController {
     public function register()
     {
         // Using Auth::attempt, no need for password to be hash
-        $credentials = Auth::attempt([
-            'email' => Input::get('email'),
-            'password' => Input::get('password')
-        ]);
+        $rules = [
+            'first_name'            =>  'required|alpha|min:2',
+            'last_name'             =>  'required|alpha|min:2',
+            'mobile_number'         =>  'required|numeric|regex:/^(09)([0-9]{9})$/',
+            'email'                 =>  'required|email|unique:users',
+            'password'              =>  'required|confirmed',
+            'password_confirmation' =>  'required'
+        ];
 
-        if ( ! $credentials)
+        $validation = Validator::make(Input::all(), $rules);
+
+        if ($validation->fails())
         {
             return Response::json([
                 'success' => false,
-                'message' => 'Invalid email/password input'
+                'message' => $validation->errors()->toArray()
             ]);
         }
         else
         {
-            return Response::json(['success' => true]);
+            User::create([
+                'first_name'    =>  Input::get('first_name'),
+                'last_name'     =>  Input::get('last_name'),
+                'mobile_number' =>  '+63' . substr(Input::get('mobile_number'), 1),
+                'email'         =>  Input::get('email'),
+                'password'      =>  Hash::make(Input::get('password')),
+                'admin'         =>  0
+            ]);
+
+            return Response::json([
+                'success' => true,
+                'message' => 'Successfully registered!'
+            ]);
         }
     }
 }

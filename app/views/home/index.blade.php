@@ -13,39 +13,36 @@
         </div>
         <div class="large-5 medium-5 columns">
             <div class="panel">
-                <form>
+                {{ Form::open(['url' => 'registration-form', 'id' => 'registration-form']) }}
                     <div class="row">
                         <div class="large-12 columns">
                             <span>Sign up:</span>
-                            <input type="text" placeholder="First Name" />
+                            {{ Form::text('first_name', null, ['id' => 'first_name', 'placeholder' => 'First Name', 'required' => 'required']) }}
                         </div>
                         <div class="large-12 columns">
-                            <input type="text" placeholder="Last Name" />
+                            {{ Form::text('last_name', null, ['id' => 'last_name', 'placeholder' => 'Last Name', 'required' => 'required']) }}
                         </div>
                         <div class="large-12 columns">
-                            <input type="text" placeholder="Mobile #" />
+                            {{ Form::text('mobile_number', null, ['id' => 'mobile_number', 'placeholder' => 'Mobile # - eg. 09199115188 ', 'required' => 'required']) }}
                         </div>
                         <div class="large-12 columns">
-                            <input type="email" placeholder="Email" />
+                            {{ Form::email('email', null, ['id' => 'email', 'placeholder' => 'Email', 'required' => 'required']) }}
                         </div>
                         <div class="large-12 columns">
-                            <input type="password" placeholder="Password" />
+                            {{ Form::password('password', ['id' => 'password', 'placeholder' => 'Password', 'required' => 'required']) }}
                         </div>
                         <div class="large-12 columns">
-                            <a href="#" class="button expand">Register</a>
+                            {{ Form::password('password_confirmation', ['id' => 'password_confirmation', 'placeholder' => 'Password Confirmation', 'required' => 'required']) }}
+                        </div>
+                        <div class="large-12 columns">
+                            {{ Form::submit('Register', ['id' => 'register-button', 'class' => 'button expand']) }}
                         </div>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
             <!-- Error alert -->
-            <div class="alert-box alert error-sign-in">
-                <ul>
-                    <li>error 1</li>
-                    <li>error 2</li>
-                    <li>error 3</li>
-                    <li>error 4</li>
-                    <li>error 5</li>
-                </ul>
+            <div id="registration-errors">
+                <ul class="content"></ul>
             </div>
             <!-- end of Error alert -->
         </div>
