@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="large-12 columns movie-showing-title">
-        <h1>Movies showing</h1>
+        <h1>Movies Showing</h1>
     </div>
 </div>
 <div class="row">

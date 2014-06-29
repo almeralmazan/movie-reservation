@@ -80,8 +80,7 @@ div.movie-details > .row {
 /*MEMBER PAGE*/
 div.movie-showing-title {
   margin-top: 50px;
-  text-align: center;
-  text-transform: uppercase; }
+  text-align: center; }
 
 div.movie-showing-container {
   margin: 10px auto 100px; }
