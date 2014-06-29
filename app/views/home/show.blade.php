@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="large-12 columns">
+    <div class="large-12 columns link-back-container">
         {{ HTML::link('/', 'Back') }}
     </div>
 </div>
