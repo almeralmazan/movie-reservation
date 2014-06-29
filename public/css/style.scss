@@ -2,10 +2,14 @@
 header {
   background: #333333;
 }
+
+/*front page*/
+
+
 .content>.alert-container {
   margin-bottom: 50px;
 }
-/*front page*/
+
 ul.right {
   padding-right: 2%;
 }
@@ -38,10 +42,6 @@ span.tagline {
   margin: 50px auto;
 }
 
-.content>.row form {
-  margin-top: 15px;
-}
-
 form>.row span {
   display: block;
   margin-bottom: 9px;
@@ -56,7 +56,11 @@ form>.row span {
   float: right;
 }
 
-.error-sign-in {
+div.sign-up {
+  margin-top: 50px;
+}
+
+.error-sign-up {
   opacity: .4;
 }
 
@@ -74,8 +78,12 @@ footer {
 
 /*SINGLE PAGE*/
 
+div.link-back-container {
+  margin-top: 50px;
+}
+
 div.movie-details {
-  margin: 0 auto;
+  margin: 25px auto 100px;
 }
 
 div.movie-details>.row {
@@ -102,6 +110,27 @@ div.movie-details>.row {
 }
 
 
+/*MEMBER PAGE*/
+
+div.movie-showing-title {
+  margin-top: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+div.movie-showing-container {
+  margin: 10px auto 100px;
+}
+
+div.movie-showing-container dd {
+  font-size: 14px;
+  text-align: justify;
+  line-height: 1.7em
+}
+
+div.movie-showing-container hr.divider {
+  margin: 50px 0 50px 0;
+}
 
 
 /*----------------------MEDIA QUERIES-------------------------*/
