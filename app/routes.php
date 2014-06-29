@@ -2,7 +2,7 @@
 
 // Public Pages
 Route::get('/', 'HomeController@index');
-Route::get('/public/movie/{id}', 'HomeController@show');
+Route::get('public/movie/{id}', 'HomeController@show');
 
 
 // Member Pages
