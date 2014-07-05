@@ -1,6 +1,12 @@
 <footer>
-    <div class="row">
-        <div class="large-6 columns">&copy; Online Movie Reservation - 2014</div>
-        <div class="large-6 columns"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <span>&copy; Online movie reservation 2014</span>
+            </div>
+            <div class="col-md-6">
+                <!-- Icons here -->
+            </div>
+        </div>
     </div>
 </footer>

@@ -29,6 +29,7 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
 Route::group(['prefix' => 'admin'], function()
 {
     // Public
+    Route::get('login', 'AdminController@index');
     Route::post('login', 'SessionController@adminLogin');
 });
 

@@ -1,41 +1,36 @@
-<header>
-    <div class="contain-to-grid">
-        <nav class="top-bar" data-topbar="">
-            <!-- Title -->
-            <ul class="title-area">
-                <li class="name">
-                    <h1>
-                        {{ HTML::link('/', 'Movie Reservation') }}
-                    </h1>
-                </li>
 
-                <!-- Mobile Menu Toggle -->
-                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-            </ul>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {{ HTML::link('/', 'Movie Reservation', ['class' => 'navbar-brand']) }}
+        </div>
 
-            <!-- Top Bar Section -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @if ( ! Auth::check())
 
-            <section class="top-bar-section">
-                <!-- Top Bar Right Nav Elements -->
-                <ul class="right">
-                    @if ( ! Auth::check())
+            {{ Form::open(['url' => 'member/login', 'class' => 'navbar-form navbar-right', 'role' => 'search']) }}
+                <div class="form-group">
+                    {{ Form::email('email', null, ['id' => 'email-input', 'class' => 'form-control', 'placeholder' => 'Email', 'required' => 'required']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::password('password', ['id' => 'password-input', 'class' => 'form-control', 'placeholder' => 'Password', 'required' => 'required']) }}
+                </div>
+                {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
+            {{ Form::close() }}
 
-                        {{ Form::open(['url' => 'member/login', 'id' => 'member-login']) }}
-                            <li class="has-form">
-                                {{ Form::email('email', null, ['id' => 'email-input', 'placeholder' => 'Email', 'required' => 'required']) }}
-                            </li>
-                            <li class="has-form">
-                                {{ Form::password('password', ['id' => 'password-input', 'placeholder' => 'Password', 'required' => 'required']) }}
-                            </li>
-                            <li class="has-form">
-                                {{ Form::submit('Login', ['class' => 'button']) }}
-                            </li>
-                            {{ Form::close() }}
-                    @else
-                        {{ HTML::link('member/logout', 'Logout', ['class' => 'button']) }}
-                    @endif
-                </ul>
-            </section>
-        </nav>
-    </div>
-</header>
+        @else
+
+            {{ HTML::link('member/logout', 'Logout', ['class' => 'button']) }}
+
+        @endif
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
