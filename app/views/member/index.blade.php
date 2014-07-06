@@ -1,5 +1,12 @@
 @extends('layouts.main')
 
+
+@section('header')
+    <!--  Header  -->
+    @include('layouts.partials.nav')
+
+@stop
+
 @section('content')
 <div class="row">
     <div class="large-12 columns movie-showing-title">

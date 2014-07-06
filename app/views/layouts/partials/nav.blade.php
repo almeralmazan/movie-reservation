@@ -27,10 +27,15 @@
             {{ Form::close() }}
 
         @else
-
-            {{ HTML::link('member/logout', 'Logout', ['class' => 'button']) }}
-
-        @endif
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <p class="navbar-text">Welcome - {{ Auth::user()->first_name }}</p>
+                </li>
+                <li>
+                    <a href="{{ URL::to('member/logout') }}"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                </li>
+            </ul>
+            @endif
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
