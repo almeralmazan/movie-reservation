@@ -1,3 +1,10 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="divider-before-footer">
+        </div>
+    </div>
+</div>
 <footer>
     <div class="container">
         <div class="row">

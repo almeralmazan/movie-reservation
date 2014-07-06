@@ -93,7 +93,7 @@ var controllerPage = function() {
                 .done( function(data) {
                     if ( ! data.success) {
                         $('#error-message')
-                            .addClass('alert alert-box error-login')
+                            .addClass('alert alert-danger')
                             .text(data.message);
                     } else {
                         window.location.href = urlBase + '/member';

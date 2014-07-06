@@ -4,9 +4,16 @@
 @section('header')
     <!--  Header  -->
     @include('layouts.partials.nav')
+
+    <div class="row">
+        <div class="col-md-offset-8 col-sm-3">
+            <div id="error-message" role="alert"></div>
+        </div>
+    </div>
 @stop
 
 @section('content')
+
 <div class="jumbotron">
     <div class="container">
         <div class="row">
@@ -23,7 +30,7 @@
                         <h3 class="panel-title">Sign up</h3>
                     </div>
                     <div class="panel-body">
-                        <form accept-charset="UTF-8" role="form">
+                        {{ Form::open(['url' => 'member/register', 'role' => 'form']) }}
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="email" type="text">
@@ -42,7 +49,7 @@
                                 </div>
                                 <input class="btn btn-primary btn-block" type="submit" value="Sign up">
                             </fieldset>
-                        </form>
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
@@ -76,7 +83,7 @@
                             <a data-toggle="modal" href="#myModal" rel="tooltip" title="Play trailer">
                             <span class="glyphicon glyphicon-play-circle"></span>
                             </a>
-                            <a href="#" rel="tooltip" title="Showtimes">
+                            <a href="{{ URL::to('public/movie', $movie->id) }}" rel="tooltip" title="Showtimes">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </a>
                         </p>
@@ -87,15 +94,10 @@
             </center>
         </div>
     </div>
-</div>
 
+    <!-- Preview Trailer -->
+    @include('home.modal-preview')
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <hr class="divider-before-footer">
-        </div>
-    </div>
 </div>
 @stop
 

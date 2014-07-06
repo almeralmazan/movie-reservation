@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         @if ( ! Auth::check())
 
-            {{ Form::open(['url' => 'member/login', 'class' => 'navbar-form navbar-right', 'role' => 'search']) }}
+            {{ Form::open(['url' => 'member/login', 'id' => 'member-login', 'class' => 'navbar-form navbar-right', 'role' => 'search']) }}
                 <div class="form-group">
                     {{ Form::email('email', null, ['id' => 'email-input', 'class' => 'form-control', 'placeholder' => 'Email', 'required' => 'required']) }}
                 </div>
@@ -34,3 +34,4 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
