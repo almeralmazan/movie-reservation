@@ -11,8 +11,8 @@
     </div>
 @stop
 
-@section('content')
 
+@section('content')
 <div class="jumbotron">
     <div class="container">
         <div class="row">
@@ -29,28 +29,39 @@
                         <h3 class="panel-title">Sign up</h3>
                     </div>
                     <div class="panel-body">
-                        {{ Form::open(['url' => 'member/register', 'role' => 'form']) }}
+                        {{ Form::open(['url' => 'member/register', 'id' => 'registration-form', 'role' => 'form']) }}
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="text">
+                                    <input class="form-control" placeholder="First Name" id="first_name" name="first_name" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Last Name" id="last_name" name="last_name" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="text">
+                                    <input class="form-control" placeholder="E-mail" id="email" name="email" type="email">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Mobile # 09159229239" id="mobile_number" name="mobile_number" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password_confirmation" type="password" value="">
+                                    <input class="form-control" placeholder="Password" id="password" name="password" type="password">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password Confirmation" id="password_confirmation" name="password_confirmation" type="password">
                                 </div>
                                 <input class="btn btn-primary btn-block" type="submit" value="Sign up">
                             </fieldset>
                         {{ Form::close() }}
                     </div>
                 </div>
+
+                <div class="row">
+                        <div id="registration-errors" role="alert">
+                            <ul class="content"></ul>
+                        </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -65,7 +76,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="container">
     <div class="row">

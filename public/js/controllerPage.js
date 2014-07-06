@@ -117,12 +117,11 @@ var controllerPage = function() {
                             result += '<li>' + value + '</li>';
                         });
 
-                        errorsContainer.addClass('alert-box alert error-signin');
+                        errorsContainer.addClass('alert alert-danger');
                         ulContainer.html(result);
 
                     } else {
-                        $('#error-signin').remove();
-                        errorsContainer.removeClass('alert')
+                        errorsContainer.removeClass('alert-danger');
 
                         $('#first_name').val('');
                         $('#last_name').val('');
@@ -132,7 +131,7 @@ var controllerPage = function() {
                         $('#password_confirmation').val('');
 
                         errorsContainer
-                            .addClass('alert-box success error-signin')
+                            .addClass('alert alert-success')
                             .html(data.message)
                     }
                 })
