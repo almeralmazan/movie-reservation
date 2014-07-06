@@ -6,6 +6,7 @@ class MemberController extends BaseController {
     {
         $title = 'Member Page';
         $movies = Movie::all();
+
         return View::make('member.index', compact('title', 'movies'));
     }
 

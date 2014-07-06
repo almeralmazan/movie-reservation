@@ -21,6 +21,7 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'ayi@gmail.com',
             'password'      =>  Hash::make('ayi'),
             'mobile_number' =>  '+639353626640',
+            'admin'         =>  0
         ]);
     }
 }

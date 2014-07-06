@@ -88,10 +88,7 @@
                     <div class="caption">
                         <h4><a href="">{{ $movie->title }}</h4>
                         <p>{{ Str::limit($movie->description, $limit = 150, $end = '...') }}</p>
-                        <p>
-                            <a data-toggle="modal" href="#myModal" rel="tooltip" title="Play trailer">
-                            <span class="glyphicon glyphicon-play-circle"></span>
-                            </a>
+                        <p class="text-center">
                             <a href="{{ URL::to('public/movie', $movie->id) }}" rel="tooltip" title="Showtimes">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </a>

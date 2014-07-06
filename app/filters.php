@@ -35,9 +35,9 @@ App::after(function($request, $response)
 
 Route::filter('admin', function()
 {
-    if (Auth::user()->admin != 1)
+    if (Auth::guest())
     {
-        return Redirect::to('/');
+        return Redirect::to('admin/login');
     }
 });
 
@@ -51,7 +51,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('');
+			return Redirect::guest('/');
 		}
 	}
 });

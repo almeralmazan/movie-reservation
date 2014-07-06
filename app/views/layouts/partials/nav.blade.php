@@ -25,7 +25,6 @@
                 </div>
                 {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
             {{ Form::close() }}
-
         @else
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -35,8 +34,7 @@
                     <a href="{{ URL::to('member/logout') }}"><span class="glyphicon glyphicon-off"></span> Logout</a>
                 </li>
             </ul>
-            @endif
+        @endif
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-

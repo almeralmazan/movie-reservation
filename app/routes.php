@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('login', 'SessionController@adminLogin');
 });
 
-Route::group(['before' => 'auth|admin', 'prefix' => 'admin'], function()
+Route::group(['before' => 'admin', 'prefix' => 'admin'], function()
 {
     Route::get('/', 'AdminController@index');
     Route::get('logout', 'AdminController@destroy');
