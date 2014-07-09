@@ -87,52 +87,27 @@
 
                 <br>
 
-                <?php for ($i = 0; $i < 5; $i++) : ?>
+            <?php for ($i = 0; $i < 5; $i++) : ?>
+
+                <?php if ($i % 10 == 0) : ?>
                 <div class="row margin-top-two">
                     <div class="col-md-1"><!-- palaman --></div>
+                <?php endif; ?>
+
                     <div class="col-md-1">
                         <button class="btn-seats btn btn-danger btn-block">01</button>
                     </div>
 
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">02</button>
-                    </div>
+<!--                    <div class="col-md-1">-->
+<!--                        <button class="btn-seats btn btn-default btn-block">10</button>-->
+<!--                    </div>-->
 
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">03</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-danger btn-block">04</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">05</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-danger btn-block">06</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">07</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">08</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">09</button>
-                    </div>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-default btn-block">10</button>
-                    </div>
-
+                <?php if ($i % 10 == 0) : ?>
                     <div class="col-md-1"><!-- palaman --></div>
                 </div>
-                <?php endfor; ?>
+                <?php endif; ?>
+
+            <?php endfor; ?>
 
                 <div class="row margin-top-two">
                     <div class="col-md-6 col-md-offset-3">

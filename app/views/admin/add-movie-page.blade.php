@@ -17,8 +17,8 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-lg">
                 <div class="row">
-                    <div class="col-md-8 text-uppercase">
-                        <h1>Add movie</h1>
+                    <div class="col-md-8">
+                        <h1>Add Movie</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <div class="col-md-11 text-right">
                                     <button class="btn btn-primary" type="submit">Save</button>
-                                    <a href="admin-home.html" class="btn btn-danger">Cancel</a>
+                                    <a href="{{ URL::to('admin/dashboard/movie') }}" class="btn btn-danger">Cancel</a>
                                 </div>
                             </div>
                         </form>

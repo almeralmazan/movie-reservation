@@ -27,10 +27,11 @@ class AdminController extends BaseController {
         return View::make('admin.add-movie-page', compact('title'));
     }
 
-    public function editMoviePage()
+    public function editMovie($movieId)
     {
         $title = 'Edit Movie Page';
-        return View::make('admin.edit-movie-page', compact('title'));
+        $movie = Movie::find($movieId);
+        return View::make('admin.edit-movie-page', compact('title', 'movie'));
     }
 
     public function member()

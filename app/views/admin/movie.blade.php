@@ -38,7 +38,7 @@
                                     {{ HTML::image('img/movies/' . $movie->image, null, ['class' => 'banner center-block img-responsive img-rounded', 'alt' => 'Responsive image']) }}
                                 </td>
                                 <td>
-                                    <a href="{{ URL::to('admin/dashboard/edit-movie-page') }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="{{ URL::to('admin/dashboard/edit-movie-page', [$movie->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
                                     <a href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
