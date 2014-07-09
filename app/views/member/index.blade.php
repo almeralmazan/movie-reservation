@@ -45,7 +45,7 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
-                        <a href="#reserve" class="btn btn-primary btn-block">reserve seat</a>
+                        {{ HTML::link('member/reserve/movie/' . $movie->id, 'reserve seat', ['class' => 'btn btn-primary btn-block']) }}
                     </div>
                 </div>
 
@@ -63,4 +63,8 @@
 </div>
 
 <div class="no-content col-xs-2 col-sm-2 cold-md-2"></div>
+@stop
+
+@section('footer')
+    @include('layouts.partials.footer')
 @stop

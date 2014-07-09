@@ -4,6 +4,10 @@
     margin-top: 50px;
 }
 
+.margin-top-two{
+    margin-top: 25px;
+}
+
 .container {
     max-width: 1200px;
 }
@@ -107,7 +111,8 @@ div.caption span {
 /*--------------------*/
 
 hr.member-movie-divider {
-    margin: 40px 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 
@@ -128,6 +133,21 @@ hr.member-movie-divider {
 /*--------------------*/
 /*home page*/
 /*--------------------*/
+
+
+div.home-link-container {
+    margin-bottom: 25px;
+}
+
+div.home-link-container>a {
+    font-size: 30px;
+    height: 150px;
+}
+
+div.home-link-container>a>span.icon {
+    margin-top: 15px;
+    font-size: 60px;
+}
 
 div.tab-container{
     z-index: 10;
@@ -193,6 +213,18 @@ div.tab-content{
 div.tab div.tab-content:not(.active){
     display: none;
 }
+
+/*movie's tab img*/
+
+img.banner {
+    width: 150px;
+}
+
+
+
+
+
+
 /*Styles for movies tab*/
 
 /*----------------------------------------------------------------------------------------------*/

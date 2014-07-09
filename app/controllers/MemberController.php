@@ -6,8 +6,15 @@ class MemberController extends BaseController {
     {
         $title = 'Member Page';
         $movies = Movie::all();
-
         return View::make('member.index', compact('title', 'movies'));
+    }
+
+    public function reserve($movieId)
+    {
+        $title = 'Movie Reservation Page';
+        $movie = Movie::find($movieId);
+        $times = Movie::getAllTimes($movieId);
+        return View::make('member.reserve-movie', compact('title', 'movie', 'times'));
     }
 
     public function register()
