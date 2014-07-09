@@ -47,9 +47,16 @@ Route::group(['before' => 'admin', 'prefix' => 'admin'], function()
 Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function()
 {
     Route::get('/', 'AdminController@dashboard');
-    Route::get('reserve', 'AdminController@reserve');
-    Route::get('view-add-movie', 'AdminController@viewAddMovie');
-    Route::post('add-movie', 'AdminController@addMovie');
-    Route::get('transaction', 'AdminController@transaction');
-    Route::get('all-movies', 'AdminController@getAllMovies');
+
+    Route::get('movie', 'AdminController@movie');
+    Route::get('add-movie-page', 'AdminController@addMoviePage');
+    Route::get('edit-movie-page', 'AdminController@editMoviePage');
+    Route::get('member', 'AdminController@member');
+    Route::get('seat', 'AdminController@seat');
+    Route::get('cinema', 'AdminController@cinema');
+
+//    Route::get('reserve', 'AdminController@reserve');
+//    Route::get('view-add-movie', 'AdminController@viewAddMovie');
+//    Route::get('transaction', 'AdminController@transaction');
+//    Route::get('all-movies', 'AdminController@getAllMovies');
 });

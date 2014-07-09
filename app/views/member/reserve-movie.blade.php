@@ -26,7 +26,6 @@
 
                 <div class="row">
                     <div class="col-md-12">
-<!--                        <img src="img/thumb3.jpg" alt="" class="img-rounded img-responsive" height="300">-->
                         {{ HTML::image('img/movies/' . $movie->image, null, ['class' => 'img-rounded img-responsive', 'height' => '300']) }}
                     </div>
 
@@ -47,7 +46,7 @@
                             </div>
 
                             <div class="movie-details col-xs-8 col-sm-8 col-md-7">
-                                <p>July 7, 2014</p>
+                                <p>{{ date('F j, Y', strtotime($movie->showing_date)) }}</p>
                             </div>
                         </div>
                     </div>
@@ -65,9 +64,10 @@
 
                                 <div class="col-sm-6">
                                     <select name="show_start_time" id="show-start-time" class="form-control">
-                                    @foreach ($times as $time)
-                                        <option value="">{{ $time->start_time }}</option>
-                                    @endforeach
+                                        <option value="empty">Select time</option>
+                                        @foreach ($times as $time)
+                                            <option value="{{ $time->start_time }}">{{ $time->start_time }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -87,7 +87,8 @@
 
                 <br>
 
-                <div class="row">
+                <?php for ($i = 0; $i < 5; $i++) : ?>
+                <div class="row margin-top-two">
                     <div class="col-md-1"><!-- palaman --></div>
                     <div class="col-md-1">
                         <button class="btn-seats btn btn-danger btn-block">01</button>
@@ -131,6 +132,7 @@
 
                     <div class="col-md-1"><!-- palaman --></div>
                 </div>
+                <?php endfor; ?>
 
                 <div class="row margin-top-two">
                     <div class="col-md-6 col-md-offset-3">
