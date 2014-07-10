@@ -25,7 +25,7 @@ class MemberController extends BaseController {
             'last_name'             =>  'required|alpha|min:2',
             'mobile_number'         =>  'required|numeric|regex:/^(09)([0-9]{9})$/',
             'email'                 =>  'required|email|unique:users',
-            'password'              =>  'required|confirmed',
+            'password'              =>  'required|min:8|confirmed',
             'password_confirmation' =>  'required'
         ];
 
