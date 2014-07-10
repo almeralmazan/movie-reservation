@@ -2,6 +2,8 @@
 
 class Movie extends Eloquent {
 
+    protected $fillable = ['title', 'description', 'image', 'trailer_url'];
+
     public static function getAllTimes($id)
     {
         $result = DB::table('movies')

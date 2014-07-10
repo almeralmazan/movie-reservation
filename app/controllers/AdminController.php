@@ -27,6 +27,30 @@ class AdminController extends BaseController {
         return View::make('admin.add-movie-page', compact('title'));
     }
 
+    public function addMovie()
+    {
+        $file            = Input::file('image');
+        $destinationPath = public_path() . '/img/movies';
+        $filename        = $file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+
+        Movie::create([
+            'title'         => Input::get('movie_title'),
+            'description'   => Input::get('movie_description'),
+            'image'         => $filename,
+            'trailer_url'   => Input::get('trailer_url'),
+        ]);
+
+        return Redirect::back()->withMessage('Created successfully');
+    }
+
+    public function deleteMovie($movieId)
+    {
+        $movie = Movie::find($movieId);
+        $movie->delete();
+        return Redirect::back()->withDelete('Deleted successfully');
+    }
+
     public function editMovie($movieId)
     {
         $title = 'Edit Movie Page';
