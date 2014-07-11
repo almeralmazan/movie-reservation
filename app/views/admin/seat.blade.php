@@ -18,12 +18,10 @@
             <form class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="" for="cinema">Movie title</label>
-                    <select name="" id="movie" class="form-control">
-                        <option value="Cinema #1">How to train your dragon 2</option>
-                        <option value="Cinema #2">Edge of tomorrow</option>
-                        <option value="Cinema #3">In the blood</option>
-                        <option value="Cinema #4">22 Jump street</option>
-                        <option value="Cinema #5">Fault in our stars</option>
+                    <select name="movie_id" id="movie-select" class="form-control">
+                        @foreach ($movies as $movie)
+                        <option value="{{ $movie->cinema_id }}">{{ $movie->title }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -268,7 +266,7 @@
                                     <td class="col-md-7"><em id="reserving-for-seat"></em></h4></td>
                                     <td id="total-seats" class="col-md-3 text-center"></td>
                                     <td id="price-per-seat" class="col-md-1 text-center">75</td>
-                                    <td id="total-seat-price" class="sub-totals col-md-1 text-center"></td>
+                                    <td id="total-seat-price" class="sub-totals col-md-1 text-center">0</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -292,7 +290,7 @@
                                     <td id="price-per-burger" class="col-md-1 text-center">
                                         30
                                     </td>
-                                    <td id="total-burger-price" class="col-md-1 text-center"></td>
+                                    <td id="total-burger-price" class="col-md-1 text-center">0</td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-7">
@@ -304,7 +302,7 @@
                                     <td id="price-per-fries" class="col-md-1 text-center">
                                         25
                                     </td>
-                                    <td id="total-fries-price" class="col-md-1 text-center"></td>
+                                    <td id="total-fries-price" class="col-md-1 text-center">0</td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-7">
@@ -316,7 +314,7 @@
                                     <td id="price-per-soda" class="col-md-1 text-center">
                                         15
                                     </td>
-                                    <td id="total-soda-price" class="col-md-1 text-center"></td>
+                                    <td id="total-soda-price" class="col-md-1 text-center">0</td>
                                 </tr>
                                 <tr>
                                     <td>   </td>

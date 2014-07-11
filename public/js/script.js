@@ -1,4 +1,5 @@
 // Date picker
+
 $('.form_date').datetimepicker({
     language:  'fr',
     weekStart: 1,
@@ -11,22 +12,23 @@ $('.form_date').datetimepicker({
 });
 
 // Time picker
+
 $('.form_time').datetimepicker({
     language:  'fr',
     weekStart: 1,
     todayBtn:  1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 1,
-    minView: 0,
-    maxView: 1,
-    forceParse: 0
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 1,
+	minView: 0,
+	maxView: 1,
+	forceParse: 0
 });
 
 //thumbnail (hover)
 $( document ).ready(function() {
-    $("[rel='tooltip']").tooltip();
-
+    $("[rel='tooltip']").tooltip();    
+ 
     $('.thumbnail').hover(
         function(){
             $(this).find('.caption').slideDown(250); //.fadeIn(250)
@@ -34,7 +36,7 @@ $( document ).ready(function() {
         function(){
             $(this).find('.caption').slideUp(250); //.fadeOut(205)
         }
-    );
+    ); 
 });
 
 // admin's home page tab
@@ -51,13 +53,13 @@ $(document).ready(function() {
 
 // Seats for cinema screen
 $( "#movie" )
-    .change(function () {
-        var str = "";
-        $( "#movie option:selected" ).each(function() {
-            str += $( this ).val() + " ";
-        });
-        $( "#cinema-screen" ).text( str );
-    }).change();
+  .change(function () {
+    var str = "";
+    $( "#movie option:selected" ).each(function() {
+      str += $( this ).val() + " ";
+    });
+    $( "#cinema-screen" ).text( str );
+  }).change();
 
 // Seats
 $('.btn-seats').on('click', function(){
@@ -70,62 +72,58 @@ $ ( "#reserve-seat" ).on('click', function(){
     var seats = [];
     var total_seats = $(".btn-info").length;
     var price = 75.00;
+    var total_burger_price = $("#total-burger-price").text();
+    var total_fries_price = $("#total-fries-price").text();
+    var total_soda_price = $("#total-soda-price").text();
     // for seats
-    $(".container").find(".btn-info").each(function(){ seats.push(this.id); });
-    $("#reserving-for-seat").text(seats);
-    $("#total-seats").text(total_seats);
-    $("#total-seat-price").text(total_seats*price);
-    $("#total").text(total_seats*price);
+    $(".container").find(".btn-info").each(function(){ seats.push(this.id); }); 
+    $("#reserving-for-seat").text(seats); 
+    $("#total-seats").text(total_seats); 
+    $("#total-seat-price").text(total_seats*price); 
+    $("#total").text(parseInt($("#total-seat-price").text()) + parseInt(total_fries_price) + parseInt(total_soda_price) + parseInt(total_burger_price));
 });
 // Add-ons burger
 $ ("#qty-burger").on('input',function(){
     var qty_burger = $("#qty-burger").val();
     var price_burger = 30.00;
-    var total = $("#total").text();
+    var total = $("#total-seat-price").text();
+    var total_fries_price = $("#total-fries-price").text();
+    var total_soda_price = $("#total-soda-price").text();
     $("#total-burger-price").text(qty_burger*price_burger);
-    $("#total").text(parseInt(total) + parseInt(qty_burger*price_burger));
+    $("#total").text(parseInt(total) + parseInt($("#total-burger-price").text()) + parseInt(total_fries_price) + parseInt(total_soda_price));
 });
 // Add-ons fries
 $ ("#qty-fries").on('input',function(){
     var qty_fries = $("#qty-fries").val();
     var price_fries = 25.00;
-    var total = $("#total").text();
+    var total_burger_price = $("#total-burger-price").text();
+    var total_soda_price = $("#total-soda-price").text();
+    var total = $("#total-seat-price").text();
     $("#total-fries-price").text(qty_fries*price_fries);
-    $("#total").text(parseInt(total) + parseInt(qty_fries*price_fries));
+    $("#total").text(parseInt(total) + parseInt($("#total-fries-price").text()) + parseInt(total_burger_price) + parseInt(total_soda_price));
 });
 // Add-ons soda
 $ ("#qty-soda").on('input',function(){
     var qty_soda = $("#qty-soda").val();
     var price_soda = 15.00;
-    var total = $("#total").text();
+    var total_burger_price = $("#total-burger-price").text();
+    var total_fries_price = $("#total-fries-price").text();
+    var total = $("#total-seat-price").text();
     $("#total-soda-price").text(qty_soda*price_soda);
-    $("#total").text(parseInt(total) + parseInt(qty_soda*price_soda));
+    $("#total").text(parseInt(total) + parseInt($("#total-soda-price").text())+ parseInt(total_burger_price) + parseInt(total_fries_price));
 });
-
-// total payments
-$ (".sub-total").on('change', function(){
-    var tae = $(this).text
-    console.log(tae);
-});
-
-
 
 
 //Cinema page
-$( '#btn-get-movie-1' ).on('click', function(event){
-    $(event.target).closest("div").animate({
+$( '#btn-get-movie-1' ).on('click', function(){
+    $('#details-1').css({
         opacity: 1
-    }, 5000, function(){
-        // Animation complete.
     });
-});
+}); 
 
 $( '#btn-get-movie-2' ).on('click', function(){
-    var id = $(this).attr("id");
-    console.log ( id );
+    $('#details-2').css({
+        opacity: 1
+    });
 });
-
-$( '#btn-get-movie-3' ).on('click', function(){
-    var id = $(this).attr("id");
-    console.log ( id );
-}); 
+ 

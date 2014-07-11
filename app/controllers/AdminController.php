@@ -68,12 +68,21 @@ class AdminController extends BaseController {
     public function seat()
     {
         $title = 'Seat Page';
-        return View::make('admin.seat', compact('title'));
+        $movies = Movie::all();
+        return View::make('admin.seat', compact('title', 'movies'));
     }
 
     public function cinema()
     {
         $title = 'Cinema Page';
+        $cinemas =
         return View::make('admin.cinema', compact('title'));
+    }
+
+    public function addShowTime($cinemaId)
+    {
+        $title = 'Add Showtime Page';
+        $cinema = Cinema::find($cinemaId);
+        return View::make('admin.cinema-add-showtime', compact('title', 'cinema'));
     }
 }
