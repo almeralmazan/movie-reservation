@@ -19,19 +19,15 @@
                 <div class="form-group">
                     <label class="" for="cinema">Movie title</label>
                     <select name="movie_id" id="movie-select" class="form-control">
+                        <option value="">-- Select Movies --</option>
                         @foreach ($movies as $movie)
                         <option value="{{ $movie->cinema_id }}">{{ $movie->title }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="" for="cinema">showtimes</label>
-                    <select name="" class="form-control">
-                        <option value="">10:00 AM</option>
-                        <option value="">12:00 PM</option>
-                        <option value="">3:00 PM</option>
-                        <option value="">6:00 PM</option>
-                        <option value="">8:00 PM</option>
+                    <label class="" for="cinema">Showtimes</label>
+                    <select name="showtimes" id="show-times" class="form-control">
                     </select>
                 </div>
             </form>
@@ -49,188 +45,7 @@
 
     <br>
 
-    <div class="row">
-        <div class="col-md-1"><!-- palaman --></div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-danger btn-block" id="seat-1">01</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-2">02</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-3">03</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-danger btn-block" id="seat-4">04</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-5">05</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-danger btn-block" id="seat-6">06</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-7">07</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-8">08</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-9">09</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-10">10</button>
-        </div>
-        <div class="col-md-1"><!-- palaman --></div>
-    </div>
 
-    <br />
-
-    <div class="row">
-        <div class="col-md-1"><!-- palaman --></div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-11">11</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-12">12</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-13">13</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-14">14</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-15">15</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-16">16</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-17">17</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-18">18</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-19">19</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-20">20</button>
-        </div>
-        <div class="col-md-1"><!-- palaman --></div>
-    </div>
-
-    <br />
-
-    <div class="row">
-        <div class="col-md-1"><!-- palaman --></div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-21">21</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-22">22</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-23">23</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-24">24</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-25">25</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-26">26</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-27">27</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-28">28</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-29">29</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-30">30</button>
-        </div>
-        <div class="col-md-1"><!-- palaman --></div>
-    </div>
-
-    <br />
-
-    <div class="row">
-        <div class="col-md-1"><!-- palaman --></div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-31">31</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-32">32</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-33">33</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-34">34</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-35">35</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-36">36</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-37">37</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-38">38</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-39">39</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-40">40</button>
-        </div>
-        <div class="col-md-1"><!-- palaman --></div>
-    </div>
-
-    <br />
-
-    <div class="row">
-        <div class="col-md-1"><!-- palaman --></div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-41">41</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-42">42</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-43">43</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-44">44</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-45">45</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-46">46</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-47">47</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-48">48</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-49">49</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn-seats btn btn-default btn-block" id="seat-50">50</button>
-        </div>
-        <div class="col-md-1"><!-- palaman --></div>
-    </div>
 
     <div class="row margin-top-two">
         <div class="col-md-6 col-md-offset-3">
