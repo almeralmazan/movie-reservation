@@ -96,4 +96,9 @@ class AdminController extends BaseController {
         $cinema = Cinema::find($cinemaId);
         return View::make('admin.cinema-add-showtime', compact('title', 'cinema'));
     }
+
+    public function getReservedSeats($cinemaId, $timeId)
+    {
+        $result = '';
+    }
 }

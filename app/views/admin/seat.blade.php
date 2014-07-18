@@ -34,6 +34,8 @@
         </div>
     </div>
 
+    <div id="populate-seats" class="row"></div>
+
     <div class="row margin-top-two">
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-info" role="alert">

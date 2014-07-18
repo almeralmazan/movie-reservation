@@ -61,6 +61,15 @@ var controllerPage = function() {
             getMovieTimesById(cinemaId);
         });
 
+
+        $('#show-times').on('change', function() {
+
+            var cinemaId = $('#movie-select').val();
+            var timeId = $(this).val();
+
+            getReservedSeats(cinemaId, timeId);
+        });
+
         // Member Check Button
         $('.check-reservation-seats').on('click', function () {
             var timeId = $('#movie-time').val();
@@ -183,10 +192,17 @@ var controllerPage = function() {
         dataService.getReservedSeats(movieId, timeId)
             .done(function (data) {
                 var seatsContent = $('#populate-seats');
-
                 seatsContent.empty();
 
-                var html = "<div style='margin-top: 20px;' class='btn-toolbar' role='toolbar'><div class='btn-group'>";
+                var html = '';
+
+//                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two">
+//                    <button class="btn-seats btn btn-default btn-block" id="seat-5">05</button>
+//                </div>
+//                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two">
+//                    <button class="btn-seats btn btn-danger btn-block" id="seat-6" disabled>06</button>
+//                </div>
+
 
                 if (data.length === 0) {
                     for (var index = 0; index < 50; index++) {

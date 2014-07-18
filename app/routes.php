@@ -60,4 +60,5 @@ Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function
 
     // ajax
     Route::get('get-movie-times/{cinemaId}', 'AdminController@getMovieTimesById');
+    Route::get('get-reserved-seats/{cinemaId}/{timeId}', 'AdminController@getReservedSeats');
 });
