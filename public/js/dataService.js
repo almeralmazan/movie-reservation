@@ -23,6 +23,10 @@ var dataService = function () {
         return $.getJSON(urlBase + '/movie/' + id);
     },
 
+    getMovieTimesById = function(cinemaId) {
+        return $.getJSON(urlBase + '/admin/dashboard/get-movie-times/' + cinemaId);
+    },
+
     getReservedSeats = function(movieId, timeId) {
         return $.getJSON(urlBase + '/member/movie/' + movieId + '/' + timeId);
     },
@@ -52,6 +56,7 @@ var dataService = function () {
         memberLogin: memberLogin,
         register: register,
         getMovieId: getMovieId,
+        getMovieTimesById: getMovieTimesById,
         getReservedSeats: getReservedSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
         saveReservedSeats: saveReservedSeats

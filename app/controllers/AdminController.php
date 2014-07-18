@@ -72,6 +72,17 @@ class AdminController extends BaseController {
         return View::make('admin.seat', compact('title', 'movies'));
     }
 
+    public function getMovieTimesById($cinemaId)
+    {
+        $result =  DB::table('times')
+                    ->select('times.start_time')
+                    ->join('cinema_time', 'cinema_time.time_id', '=', 'times.id')
+                    ->where('cinema_time.cinema_id', $cinemaId)
+                    ->get();
+
+        return $result;
+    }
+
     public function cinema()
     {
         $title = 'Cinema Page';

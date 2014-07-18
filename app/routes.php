@@ -57,4 +57,7 @@ Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function
     Route::get('seat', 'AdminController@seat');
     Route::get('cinema', 'AdminController@cinema');
     Route::get('cinema-add-showtime/{cinemaId}', 'AdminController@addShowTime');
+
+    // ajax
+    Route::get('get-movie-times/{cinemaId}', 'AdminController@getMovieTimesById');
 });
