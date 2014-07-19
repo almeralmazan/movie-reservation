@@ -17,7 +17,8 @@ class CreateReservedSeatsTable extends Migration {
             $table->increments('id');
             $table->string('customer_name', 50);
             $table->string('customer_status', 10);
-            $table->tinyInteger('seat_id');
+            $table->boolean('paid');
+            $table->tinyInteger('seat_number');
             $table->tinyInteger('cinema_id');
             $table->tinyInteger('time_id');
             $table->timestamps();

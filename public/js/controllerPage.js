@@ -114,7 +114,9 @@ var controllerPage = function() {
 
                 html = '<option>-- Select Times --</option>';
 
-                for (var i = 0; i < data.length; i++) html += '<option>' + data[i].start_time + '</option>';
+                for (var i = 0; i < data.length; i++) {
+                    html += "<option value='" + data[i].time_id + "'>" + data[i].start_time + '</option>';
+                }
 
                 showTimesContainer.html(html);
             })
@@ -188,42 +190,48 @@ var controllerPage = function() {
                 console.log(textStatus);
             });
     };
-    getReservedSeats = function (movieId, timeId) {
-        dataService.getReservedSeats(movieId, timeId)
+    getReservedSeats = function (cinemaId, timeId) {
+        dataService.getReservedSeats(cinemaId, timeId)
             .done(function (data) {
                 var seatsContent = $('#populate-seats');
                 seatsContent.empty();
 
                 var html = '';
-
-//                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two">
-//                    <button class="btn-seats btn btn-default btn-block" id="seat-5">05</button>
-//                </div>
-//                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two">
-//                    <button class="btn-seats btn btn-danger btn-block" id="seat-6" disabled>06</button>
-//                </div>
-
-
                 if (data.length === 0) {
                     for (var index = 0; index < 50; index++) {
-                        html += "<div id='seat-number-" + (index + 1) + "' class='btn btn-success available-seats'>" + (index + 1) + "</div>";
+                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
+                        html +=     "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                        html += "</div>";
                     }
                 } else {
                     var currentIndexValue = 0;
 
                     for (var index = 0; index < 50; index++) {
-                        if (data[currentIndexValue] !== undefined && (index + 1) === data[currentIndexValue].seat_number) {
-                            html += "<div id='seat-number-" + (index + 1) + "' class='btn btn-danger reserved-seats'>" + (index + 1) + "</div>";
+                        if (data[currentIndexValue] !== undefined &&
+                            (index + 1) === data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid === 1) {
+                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
+                            html +=     "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
+                            html += "</div>";
+
                             currentIndexValue++;
+
+                        } else if (data[currentIndexValue] !== undefined &&
+                                    (index + 1) === data[currentIndexValue].seat_number &&
+                                    data[currentIndexValue].paid === 2) {
+
+                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
+                            html +=     "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
+                            html += "</div>";
+
                         } else {
-                            html += "<div id='seat-number-" + (index + 1) + "' class='btn btn-success available-seats'>" + (index + 1) + "</div>";
+                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
+                            html +=     "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                            html += "</div>";
                         }
                     }
                 }
 
-                html += "</div></div>";
-
-                html += "<div id='customer-info'> <button class='btn btn-default' id='reserve-button' disabled='disabled'>Reserve</button> </div>";
 
                 seatsContent.html(html);
 

@@ -62,7 +62,7 @@ $( "#movie" )
   }).change();
 
 // Seats
-$('.btn-seats').on('click', function(){
+$(document).on('click', '.btn-seats', function() {
     $(this).toggleClass('btn-info');
 });
 

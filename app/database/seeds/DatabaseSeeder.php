@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('TimeTableSeeder');
         $this->command->info('Time table seeded');
+
+        $this->call('ReservedSeatTableSeeder');
+        $this->command->info('ReservedSeat table seeded');
 	}
 
 }

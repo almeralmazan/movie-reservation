@@ -75,7 +75,7 @@ class AdminController extends BaseController {
     public function getMovieTimesById($cinemaId)
     {
         $result =  DB::table('times')
-                    ->select('times.start_time')
+                    ->select('times.start_time', 'cinema_time.time_id')
                     ->join('cinema_time', 'cinema_time.time_id', '=', 'times.id')
                     ->where('cinema_time.cinema_id', $cinemaId)
                     ->get();
@@ -99,6 +99,17 @@ class AdminController extends BaseController {
 
     public function getReservedSeats($cinemaId, $timeId)
     {
-        $result = '';
+        $result = DB::table('reserved_seats')
+                    ->select(
+                        'reserved_seats.seat_number',
+                        'reserved_seats.paid',
+                        'reserved_seats.customer_name',
+                        'reserved_seats.time_id'
+                    )
+                    ->where('reserved_seats.cinema_id', $cinemaId)
+                    ->where('reserved_seats.time_id', $timeId)
+                    ->get();
+
+        return $result;
     }
 }

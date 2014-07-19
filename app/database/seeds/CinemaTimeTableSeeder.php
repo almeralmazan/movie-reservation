@@ -32,6 +32,11 @@ class CinemaTimeTableSeeder extends Seeder {
         ]);
 
         CinemaTime::create([
+            'cinema_id' =>  2,
+            'time_id'   =>  2
+        ]);
+
+        CinemaTime::create([
             'cinema_id' =>  3,
             'time_id'   =>  1
         ]);
