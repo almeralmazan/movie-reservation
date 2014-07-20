@@ -90,6 +90,13 @@ class AdminController extends BaseController {
         return View::make('admin.cinema', compact('title', 'cinemas'));
     }
 
+    public function transaction()
+    {
+        $title = 'Transaction Page';
+//        $cinemas = Cinema::all();
+        return View::make('admin.transaction', compact('title'));
+    }
+
     public function addShowTime($cinemaId)
     {
         $title = 'Add Showtime Page';
@@ -102,10 +109,11 @@ class AdminController extends BaseController {
         $result = DB::table('reserved_seats')
                     ->select(
                         'reserved_seats.seat_number',
-                        'reserved_seats.paid',
+                        'transactions.paid_status',
                         'reserved_seats.customer_name',
                         'reserved_seats.time_id'
                     )
+                    ->join('transactions', 'transactions.id', '=', 'reserved_seats.transaction_id')
                     ->where('reserved_seats.cinema_id', $cinemaId)
                     ->where('reserved_seats.time_id', $timeId)
                     ->get();

@@ -28,6 +28,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('ReservedSeatTableSeeder');
         $this->command->info('ReservedSeat table seeded');
+
+        $this->call('TransactionTableSeeder');
+        $this->command->info('Transaction table seeded');
 	}
 
 }

@@ -37,6 +37,14 @@
                     </a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 home-link-container">
+                    <a href="{{ URL::to('admin/dashboard/transaction') }}" class="btn btn-info btn-lg btn-block">
+                        <span class="glyphicon glyphicon-credit-card center-block icon"></span>
+                        <span class="center-block">Transactions</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
