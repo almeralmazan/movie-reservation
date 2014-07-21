@@ -25,12 +25,25 @@
                                     <span class="glyphicon glyphicon-plus"></span> Manage showtime
                                 </a>
                             </label>
-                            <select name="" id="" class="form-control">
-                                <option value="">How to train your dragon 2</option>
-                            </select>
+
+                            {{ Form::select('movie_select_name',
+                                [
+                                    '1'     =>  'How To Train Your Dragon 2',
+                                    '2'     =>  '22 Jump Street',
+                                    '3'     =>  'Edge of Tomorrow',
+                                    '4'     =>  'Blended',
+                                    '5'     =>  'Maleficent',
+                                    '6'     =>  'Noah',
+                                    '7'     =>  'In The Blood',
+                                    '8'     =>  '300: Rise Of An Empire',
+                                    '9'     =>  'The Fault In Our Stars',
+                                    '10'    =>  'X-Men: Days of Future Past'
+                                ],
+                                $cinema->id, ['class' => 'form-control', 'disabled' => 'disabled']) }}
                         </div>
                     </div>
                     @endforeach
+
                 </div>
             </div>
         </div>

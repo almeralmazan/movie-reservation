@@ -72,6 +72,15 @@ class AdminController extends BaseController {
         return View::make('admin.seat', compact('title', 'movies'));
     }
 
+    public function reservedSeat()
+    {
+        $burger_bought = Input::get('burger_bought');
+        $fries_bought = Input::get('fries_bought');
+        $soda_bought = Input::get('soda_bought');
+
+        dd($burger_bought);
+    }
+
     public function getMovieTimesById($cinemaId)
     {
         $result =  DB::table('times')
@@ -93,7 +102,8 @@ class AdminController extends BaseController {
     public function manageShowtime($cinemaId)
     {
         $title = 'Manage Showtime';
-        return View::make('admin.cinema-add-showtime', compact('title'));
+        $movie = Movie::find($cinemaId);
+        return View::make('admin.cinema-add-showtime', compact('title', 'movie'));
     }
 
     public function transaction()
@@ -111,23 +121,23 @@ class AdminController extends BaseController {
     public function getAllTransactions()
     {
         $transactions = DB::table('transactions')
-            ->select(
-                'transactions.receipt_number',
-                'reserved_seats.customer_name',
-                'movies.title as movie_title',
-                'times.start_time',
-                'transactions.tickets_bought',
-                'transactions.burger_bought',
-                'transactions.fries_bought',
-                'transactions.soda_bought',
-                'transactions.total',
-                'transactions.paid_status'
-            )
-            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
-            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
-            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
-            ->distinct()
-            ->get();
+                            ->select(
+                                'transactions.receipt_number',
+                                'reserved_seats.customer_name',
+                                'movies.title as movie_title',
+                                'times.start_time',
+                                'transactions.tickets_bought',
+                                'transactions.burger_bought',
+                                'transactions.fries_bought',
+                                'transactions.soda_bought',
+                                'transactions.total',
+                                'transactions.paid_status'
+                            )
+                            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+                            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+                            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+                            ->distinct()
+                            ->get();
 
         return $transactions;
     }

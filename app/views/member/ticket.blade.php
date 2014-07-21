@@ -1,6 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="container">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1">
+            <h1 class="text-center alert alert-success">
+                <strong>
+                    You've successfully reserved!
+                </strong>
+            </h1>
+        </div>
+    </div>
+</div>
+
 <div class="container margin-top ticket-container">
     <div class="container margin-top ticket-content-1">
         <div class="row hidden-print">

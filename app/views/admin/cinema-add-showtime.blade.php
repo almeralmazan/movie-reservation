@@ -18,8 +18,8 @@
             <div class="well">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2><small>Cinema #:</small> 1</h2>
-                        <h2><small>Movie title:</small> How to train your dragon 2</h2>
+                        <h2><small>Cinema #:</small> {{ $movie->cinema_id }}</h2>
+                        <h2><small>Movie title:</small> {{ $movie->title }}</h2>
                         <hr>
                     </div>
                     <div class="col-md-12">

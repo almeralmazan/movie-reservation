@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('header')
-    @include('layouts.partials.nav')
+@include('layouts.partials.nav')
 @stop
 
 @section('content')
@@ -38,6 +38,7 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-info" role="alert">
                 <h2 id="cinema-screen" class="text-center text-uppercase"></h2>
+
                 <h1 class="text-center text-uppercase">screen</h1>
             </div>
         </div>
@@ -55,108 +56,116 @@
         </div>
     </div>
 
-<!-- Button trigger modal -->
+    <!-- Button trigger modal -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header"></div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="row">
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Seat</th>
-                                    <th>total of seats</th>
-                                    <th class="text-center">Price</th>
-                                    <th class="text-center">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="col-md-7"><em id="reserving-for-seat"></em></h4></td>
-                                    <td id="total-seats" class="col-md-3 text-center"></td>
-                                    <td id="price-per-seat" class="col-md-1 text-center">75</td>
-                                    <td id="total-seat-price" class="sub-totals col-md-1 text-center">0</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Add-ons</th>
-                                    <th>Qty</th>
-                                    <th class="text-center">Price</th>
-                                    <th class="text-center">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="col-md-7">
-                                        <em>Burger</em>
-                                    </td>
-                                    <td class="col-md-3">
-                                        <input type="number" class="form-control" id="qty-burger" min="0">
-                                    </td>
-                                    <td id="price-per-burger" class="col-md-1 text-center">
-                                        30
-                                    </td>
-                                    <td id="total-burger-price" class="col-md-1 text-center">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-7">
-                                        <em>Fries</em>
-                                    </td>
-                                    <td class="col-md-3">
-                                        <input type="number" class="form-control" id="qty-fries" min="0">
-                                    </td>
-                                    <td id="price-per-fries" class="col-md-1 text-center">
-                                        25
-                                    </td>
-                                    <td id="total-fries-price" class="col-md-1 text-center">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-7">
-                                        <em>Soda</em>
-                                    </td>
-                                    <td class="col-md-3">
-                                        <input type="number" class="form-control" id="qty-soda" min="0">
-                                    </td>
-                                    <td id="price-per-soda" class="col-md-1 text-center">
-                                        15
-                                    </td>
-                                    <td id="total-soda-price" class="col-md-1 text-center">0</td>
-                                </tr>
-                                <tr>
-                                    <td>   </td>
-                                    <td>   </td>
-                                    <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                                    <td class="text-center text-danger"><h4 id="total"><strong></strong></h4></td>
-                                </tr>
-                                </tbody>
-                            </table>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+
+                {{ Form::open(['url' => 'admin/dashboard/reserved-seat']) }}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="row">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Seat</th>
+                                            <th>total of seats</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-md-7"><em id="reserving-for-seat"></em></h4></td>
+                                            <td id="total-seats" class="col-md-3 text-center"></td>
+                                            <td id="price-per-seat" class="col-md-1 text-center">75</td>
+                                            <td id="total-seat-price" class="sub-totals col-md-1 text-center">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Add-ons</th>
+                                            <th>Qty</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-md-7">
+                                                <em>Burger</em>
+                                            </td>
+                                            <td class="col-md-3">
+                                                <input type="number" name="burger_bought" class="form-control"
+                                                       id="qty-burger" min="0">
+                                            </td>
+                                            <td id="price-per-burger" class="col-md-1 text-center">
+                                                30
+                                            </td>
+                                            <td id="total-burger-price" class="col-md-1 text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-7">
+                                                <em>Fries</em>
+                                            </td>
+                                            <td class="col-md-3">
+                                                <input type="number" name="fries_bought" class="form-control" id="qty-fries"
+                                                       min="0">
+                                            </td>
+                                            <td id="price-per-fries" class="col-md-1 text-center">
+                                                25
+                                            </td>
+                                            <td id="total-fries-price" class="col-md-1 text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-7">
+                                                <em>Soda</em>
+                                            </td>
+                                            <td class="col-md-3">
+                                                <input type="number" name="soda_bought" class="form-control" id="qty-soda"
+                                                       min="0">
+                                            </td>
+                                            <td id="price-per-soda" class="col-md-1 text-center">
+                                                15
+                                            </td>
+                                            <td id="total-soda-price" class="col-md-1 text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                                            <td class="text-center text-danger"><h4 id="total"><strong></strong></h4></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
-                <a href="{{ URL::to('admin/dashboard/ticket') }}" class="btn btn-warning">Manual Payment</a>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
+<!--                    <a href="{{ URL::to('admin/dashboard/ticket') }}" class="btn btn-warning">Manual Payment</a>-->
+                    {{ Form::submit('Manual Payment', ['class' => 'btn btn-warning']) }}
+                </div>
+                {{ Form::close() }}
 
+            </div>
         </div>
     </div>
-</div>
 
 </div>
 @stop
 
 @section('footer')
-    @include('layouts.partials.footer')
+@include('layouts.partials.footer')
 @stop

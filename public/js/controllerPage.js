@@ -384,7 +384,7 @@ var controllerPage = function () {
 
                         } else if (data[currentIndexValue] !== undefined &&
                             (index + 1) === data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status === 2) {
+                            data[currentIndexValue].paid_status === 0) {
 
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                             html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
@@ -438,7 +438,7 @@ var controllerPage = function () {
 
                         } else if (data[currentIndexValue] !== undefined &&
                             (index + 1) === data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status === 2) {
+                            data[currentIndexValue].paid_status === 0) {
 
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                             html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";

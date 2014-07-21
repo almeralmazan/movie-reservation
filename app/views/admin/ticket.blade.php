@@ -1,6 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="container">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1">
+            <h1 class="text-center alert alert-success">
+                <strong>
+                    You've successfully reserved!
+                </strong>
+            </h1>
+        </div>
+    </div>
+</div>
+
 <div class="container margin-top ticket-container">
     <div class="container margin-top ticket-content-1">
         <div class="row hidden-print">
@@ -51,25 +63,25 @@
                     <tr>
                         <td>Seats</td>
                         <td>5</td>
-                        <td>500</td>
+                        <td>75</td>
                         <td>2500</td>
                     </tr>
                     <tr>
                         <td>Burger</td>
                         <td>5</td>
-                        <td>500</td>
+                        <td>30</td>
                         <td>2500</td>
                     </tr>
                     <tr>
                         <td>Fries</td>
                         <td>5</td>
-                        <td>500</td>
+                        <td>25</td>
                         <td>2500</td>
                     </tr>
                     <tr>
                         <td>Soda</td>
                         <td>5</td>
-                        <td>500</td>
+                        <td>15</td>
                         <td>2500</td>
                     </tr>
                     <tr>
