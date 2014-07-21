@@ -150,7 +150,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
-                <button type="button" class="btn btn-warning">Manual Payment</button>
+                <a href="{{ URL::to('admin/dashboard/ticket') }}" class="btn btn-warning">Manual Payment</a>
             </div>
 
         </div>

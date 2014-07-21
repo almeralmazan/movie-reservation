@@ -221,7 +221,25 @@ img.banner {
 }
 
 
+/*--------------*/
+/*Ticket page*/
+/*--------------*/
 
+.ticket-container {
+    border: 1px solid #eee;
+    margin-bottom: 50px;
+    width: 960px;
+}
+
+.ticket-content-1{
+    max-width: 800px;
+}
+
+.ticket-content-2 {
+    border-top: 1px dashed #3c3c3c;
+    padding-top: 30px;
+    max-width: 900px;
+}
 
 
 

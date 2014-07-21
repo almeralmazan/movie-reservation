@@ -17,22 +17,20 @@
         <div class="col-md-12">
             <div class="well well-lg">
                 <div class="row">
+                    @foreach ($cinemas as $cinema)
                     <div class="col-md-3 margin-top-two">
                         <div class="form-group">
-
-                        @foreach ($cinemas as $cinema)
-                            <label for="cinema-1">Cinema 1
-                                <a href="admin-cinema-add-showtime.html" class="btn btn-xs btn-primary">
+                            <label for="cinema-1">Cinema {{ $cinema->id }}
+                                <a href="{{ URL::to('admin/dashboard/manage-showtime', [$cinema->id]) }}" class="btn btn-xs btn-primary">
                                     <span class="glyphicon glyphicon-plus"></span> Manage showtime
                                 </a>
                             </label>
                             <select name="" id="" class="form-control">
                                 <option value="">How to train your dragon 2</option>
                             </select>
-                        @endforeach
-
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

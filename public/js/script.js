@@ -1,12 +1,14 @@
 (function () {
 
-    var adminApp = angular.module('AdminApp', []);
+    var adminApp = angular.module('AdminApp', ['ui.bootstrap']);
 
     adminApp.config(['$interpolateProvider', function ($interpolateProvider) {
         $interpolateProvider.startSymbol('{[');
         $interpolateProvider.endSymbol(']}');
     }]);
 
+
+    // AdminTransactionController
     var AdminTransactionController = function($scope, $http) {
 
         $scope.transactions = [];
@@ -21,4 +23,20 @@
 
     adminApp.controller('AdminTransactionController', ['$scope', '$http', AdminTransactionController]);
 
+
+    // CinemaController
+    var CinemaController = function($scope) {
+
+        $scope.select_box = [];
+
+        $scope.addSelect = function() {
+            $scope.select_box.push({});
+        };
+
+        $scope.closeSelect = function(index) {
+            $scope.select_box.splice(index, 1);
+        }
+    };
+
+    adminApp.controller('CinemaController', ['$scope', CinemaController]);
 }());
