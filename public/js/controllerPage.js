@@ -72,9 +72,10 @@ var controllerPage = function() {
         // Delete a movie on dashboard
         $('.delete-movie').click(function() {
             var movieId = $(this).data('movie-id');
+            var movieTitle = $(this).data('movie-title');
 
             bootbox.confirm(
-                'Are you sure you want to delete the movie?',
+                'Are you sure you want to delete -- <strong>' + movieTitle + '</strong> ?',
                 function(accept) {
                     if (accept) {
                         location.href = '/admin/dashboard/delete/movie/' + movieId;
