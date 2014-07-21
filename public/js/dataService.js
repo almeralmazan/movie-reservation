@@ -27,8 +27,12 @@ var dataService = function () {
         return $.getJSON(urlBase + '/admin/dashboard/get-movie-times/' + cinemaId);
     },
 
-    getReservedSeats = function(cinemaId, timeId) {
-        return $.getJSON(urlBase + '/admin/dashboard/get-reserved-seats/' + cinemaId + '/' + timeId);
+    getAdminReservedSeats = function(cinemaId, timeId) {
+        return $.getJSON(urlBase + '/admin/dashboard/get-admin-reserved-seats/' + cinemaId + '/' + timeId);
+    },
+
+    getMemberReservedSeats = function(timeId) {
+        return $.getJSON(urlBase + '/member/get-member-reserved-seats/' + timeId);
     },
 
     saveAdminReservedSeats = function(seatsArray, movieId, timeId, customerName) {
@@ -58,7 +62,8 @@ var dataService = function () {
         register: register,
         getMovieId: getMovieId,
         getMovieTimesById: getMovieTimesById,
-        getReservedSeats: getReservedSeats,
+        getAdminReservedSeats: getAdminReservedSeats,
+        getMemberReservedSeats: getMemberReservedSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
         saveReservedSeats: saveReservedSeats
     };

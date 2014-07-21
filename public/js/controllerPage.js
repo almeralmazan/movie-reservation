@@ -1,5 +1,4 @@
-
-var controllerPage = function() {
+var controllerPage = function () {
 
     var urlBase = window.location.origin;
 
@@ -10,7 +9,8 @@ var controllerPage = function() {
         getMovieId,
         getReservedSeats,
         getAdminReservedSeats,
-        saveAdminReservedSeats;
+        saveAdminReservedSeats,
+        getMemberReservedSeats;
 
     init = function () {
 
@@ -70,13 +70,13 @@ var controllerPage = function() {
         });
 
         // Delete a movie on dashboard
-        $('.delete-movie').click(function() {
+        $('.delete-movie').click(function () {
             var movieId = $(this).data('movie-id');
             var movieTitle = $(this).data('movie-title');
 
             bootbox.confirm(
                 'Are you sure you want to delete -- <strong>' + movieTitle + '</strong> ?',
-                function(accept) {
+                function (accept) {
                     if (accept) {
                         location.href = '/admin/dashboard/delete/movie/' + movieId;
                     }
@@ -85,37 +85,20 @@ var controllerPage = function() {
         });
 
 
-        $('#show-times').on('change', function() {
-
+        $('#show-times').on('change', function () {
             var cinemaId = $('#movie-select').val();
             var timeId = $(this).val();
 
-            getReservedSeats(cinemaId, timeId);
-        });
-
-        // Member Check Button
-        $('.check-reservation-seats').on('click', function () {
-            var timeId = $('#movie-time').val();
-            var movieId = $('#movie-id').val();
-
-            getReservedSeats(movieId, timeId);
+            getAdminReservedSeats(cinemaId, timeId);
         });
 
         // Admin Check Button
-        $('.admin-check-reserved-seats').on('click', function () {
-            var timeId = $('#movie-time').val();
-            var movieId = $('#movie-id').val();
-
-            getAdminReservedSeats(movieId, timeId);
-        });
-
-        // Member Reserve Button
-        $(document).on('click', '#reserve-button', function () {
-            var timeId = $('#movie-time').val();
-            var movieId = $('#movie-id').val();
-
-            saveReservedSeats(seatsArray, movieId, timeId);
-        });
+//        $('.admin-check-reserved-seats').on('click', function () {
+//            var timeId = $('#movie-time').val();
+//            var movieId = $('#movie-id').val();
+//
+//            getAdminReservedSeats(movieId, timeId);
+//        });
 
         // Admin Reserve Button
         $(document).on('click', '#admin-reserve-button', function () {
@@ -126,11 +109,37 @@ var controllerPage = function() {
             saveAdminReservedSeats(seatsArray, movieId, timeId, customerName);
         });
 
+
+        // Member Check Button
+        $('.check-reservation-seats').on('click', function () {
+            var timeId = $('#movie-time').val();
+            var movieId = $('#movie-id').val();
+
+            getReservedSeats(movieId, timeId);
+        });
+
+
+        // Member Reserve Button
+        $(document).on('click', '#reserve-button', function () {
+            var timeId = $('#movie-time').val();
+            var movieId = $('#movie-id').val();
+
+            saveReservedSeats(seatsArray, movieId, timeId);
+        });
+
+        // Member Select Time in Reserve Movie Page
+        $('#show-start-time').on('change', function () {
+            var timeId = $(this).val();
+
+            getMemberReservedSeats(timeId);
+        });
+
+
         // Date picker
         $('.form_date').datetimepicker({
-            language:  'fr',
+            language: 'fr',
             weekStart: 1,
-            todayBtn:  1,
+            todayBtn: 1,
             autoclose: 1,
             todayHighlight: 1,
             startView: 2,
@@ -140,9 +149,9 @@ var controllerPage = function() {
 
         // Time picker
         $('.form_time').datetimepicker({
-            language:  'fr',
+            language: 'fr',
             weekStart: 1,
-            todayBtn:  1,
+            todayBtn: 1,
             autoclose: 1,
             todayHighlight: 1,
             startView: 1,
@@ -152,22 +161,22 @@ var controllerPage = function() {
         });
 
         //thumbnail (hover)
-        $( document ).ready(function() {
+        $(document).ready(function () {
             $("[rel='tooltip']").tooltip();
 
             $('.thumbnail').hover(
-                function(){
+                function () {
                     $(this).find('.caption').slideDown(250); //.fadeIn(250)
                 },
-                function(){
+                function () {
                     $(this).find('.caption').slideUp(250); //.fadeOut(205)
                 }
             );
         });
 
         // admin's home page tab
-        $(document).ready(function() {
-            $("div.tab-menu>div.list-group>a").click(function(e) {
+        $(document).ready(function () {
+            $("div.tab-menu>div.list-group>a").click(function (e) {
                 e.preventDefault();
                 $(this).siblings('a.active').removeClass("active");
                 $(this).addClass("active");
@@ -178,22 +187,22 @@ var controllerPage = function() {
         });
 
         // Seats for cinema screen
-        $( "#movie" )
+        $("#movie")
             .change(function () {
                 var str = "";
-                $( "#movie option:selected" ).each(function() {
-                    str += $( this ).val() + " ";
+                $("#movie option:selected").each(function () {
+                    str += $(this).val() + " ";
                 });
-                $( "#cinema-screen" ).text( str );
+                $("#cinema-screen").text(str);
             }).change();
 
         // Seats
-        $(document).on('click', '.btn-seats', function() {
+        $(document).on('click', '.btn-seats', function () {
             $(this).toggleClass('btn-info');
         });
 
         // counting seats
-        $ ( "#reserve-seat" ).on('click', function(){
+        $("#reserve-seat").on('click', function () {
             // for seats
             var seats = [];
             var total_seats = $(".btn-info").length;
@@ -202,54 +211,56 @@ var controllerPage = function() {
             var total_fries_price = $("#total-fries-price").text();
             var total_soda_price = $("#total-soda-price").text();
             // for seats
-            $(".container").find(".btn-info").each(function(){ seats.push(this.id); });
+            $(".container").find(".btn-info").each(function () {
+                seats.push(this.id);
+            });
             $("#reserving-for-seat").text(seats);
             $("#total-seats").text(total_seats);
-            $("#total-seat-price").text(total_seats*price);
+            $("#total-seat-price").text(total_seats * price);
             $("#total").text(parseInt($("#total-seat-price").text()) + parseInt(total_fries_price) + parseInt(total_soda_price) + parseInt(total_burger_price));
         });
 
         // Add-ons burger
-        $ ("#qty-burger").on('input',function(){
+        $("#qty-burger").on('input', function () {
             var qty_burger = $("#qty-burger").val();
             var price_burger = 30.00;
             var total = $("#total-seat-price").text();
             var total_fries_price = $("#total-fries-price").text();
             var total_soda_price = $("#total-soda-price").text();
-            $("#total-burger-price").text(qty_burger*price_burger);
+            $("#total-burger-price").text(qty_burger * price_burger);
             $("#total").text(parseInt(total) + parseInt($("#total-burger-price").text()) + parseInt(total_fries_price) + parseInt(total_soda_price));
         });
 
         // Add-ons fries
-        $ ("#qty-fries").on('input',function(){
+        $("#qty-fries").on('input', function () {
             var qty_fries = $("#qty-fries").val();
             var price_fries = 25.00;
             var total_burger_price = $("#total-burger-price").text();
             var total_soda_price = $("#total-soda-price").text();
             var total = $("#total-seat-price").text();
-            $("#total-fries-price").text(qty_fries*price_fries);
+            $("#total-fries-price").text(qty_fries * price_fries);
             $("#total").text(parseInt(total) + parseInt($("#total-fries-price").text()) + parseInt(total_burger_price) + parseInt(total_soda_price));
         });
 
         // Add-ons soda
-        $ ("#qty-soda").on('input',function(){
+        $("#qty-soda").on('input', function () {
             var qty_soda = $("#qty-soda").val();
             var price_soda = 15.00;
             var total_burger_price = $("#total-burger-price").text();
             var total_fries_price = $("#total-fries-price").text();
             var total = $("#total-seat-price").text();
-            $("#total-soda-price").text(qty_soda*price_soda);
-            $("#total").text(parseInt(total) + parseInt($("#total-soda-price").text())+ parseInt(total_burger_price) + parseInt(total_fries_price));
+            $("#total-soda-price").text(qty_soda * price_soda);
+            $("#total").text(parseInt(total) + parseInt($("#total-soda-price").text()) + parseInt(total_burger_price) + parseInt(total_fries_price));
         });
 
         //Cinema page
-        $( '#btn-get-movie-1' ).on('click', function(){
+        $('#btn-get-movie-1').on('click', function () {
             $('#details-1').css({
                 opacity: 1
             });
         });
 
-        $( '#btn-get-movie-2' ).on('click', function(){
+        $('#btn-get-movie-2').on('click', function () {
             $('#details-2').css({
                 opacity: 1
             });
@@ -344,8 +355,9 @@ var controllerPage = function() {
                 console.log(textStatus);
             });
     };
-    getReservedSeats = function (cinemaId, timeId) {
-        dataService.getReservedSeats(cinemaId, timeId)
+
+    getAdminReservedSeats = function (cinemaId, timeId) {
+        dataService.getAdminReservedSeats(cinemaId, timeId)
             .done(function (data) {
                 var seatsContent = $('#populate-seats');
                 seatsContent.empty();
@@ -354,7 +366,7 @@ var controllerPage = function() {
                 if (data.length === 0) {
                     for (var index = 0; index < 50; index++) {
                         html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
-                        html +=     "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                        html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
                         html += "</div>";
                     }
                 } else {
@@ -365,22 +377,22 @@ var controllerPage = function() {
                             (index + 1) === data[currentIndexValue].seat_number &&
                             data[currentIndexValue].paid_status === 1) {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
-                            html +=     "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
+                            html += "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
                             html += "</div>";
 
                             currentIndexValue++;
 
                         } else if (data[currentIndexValue] !== undefined &&
-                                    (index + 1) === data[currentIndexValue].seat_number &&
-                                    data[currentIndexValue].paid_status === 2) {
+                            (index + 1) === data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status === 2) {
 
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
-                            html +=     "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
+                            html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
                             html += "</div>";
 
                         } else {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
-                            html +=     "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                            html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
                             html += "</div>";
                         }
                     }
@@ -395,40 +407,52 @@ var controllerPage = function() {
             });
     };
 
-    getAdminReservedSeats = function (movieId, timeId) {
-        dataService.getReservedSeats(movieId, timeId)
+    getMemberReservedSeats = function (timeId) {
+        dataService.getMemberReservedSeats(timeId)
             .done(function (data) {
-                var seatsContent = $('#populate-seats');
 
+                console.log(data);
+
+                var seatsContent = $('#populate-seats');
                 seatsContent.empty();
 
-                var html = "<div style='margin-top: 20px;' class='btn-toolbar' role='toolbar'><div class='btn-group'>";
-
+                var html = '';
                 if (data.length === 0) {
                     for (var index = 0; index < 50; index++) {
-                        html += "<div id='seat-number-" + (index + 1) + "' class='btn btn-success available-seats'>" + (index + 1) + "</div>";
+                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
+                        html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                        html += "</div>";
                     }
                 } else {
                     var currentIndexValue = 0;
 
                     for (var index = 0; index < 50; index++) {
-                        if (data[currentIndexValue] !== undefined && (index + 1) === data[currentIndexValue].seat_number) {
-                            html += "<div id='seat-number-" + (index + 1) + "' class='btn btn-danger reserved-seats'>" + (index + 1) + "</div>";
+                        if (data[currentIndexValue] !== undefined &&
+                            (index + 1) === data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status === 1) {
+                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
+                            html += "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
+                            html += "</div>";
+
                             currentIndexValue++;
+
+                        } else if (data[currentIndexValue] !== undefined &&
+                            (index + 1) === data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status === 2) {
+
+                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
+                            html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
+                            html += "</div>";
+
                         } else {
-                            html += "<div id='seat-number-" + (index + 1) + "' class='btn btn-success available-seats'>" + (index + 1) + "</div>";
+                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
+                            html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                            html += "</div>";
                         }
                     }
                 }
 
-                html += "</div></div>";
-
-                html += "<div><input id='customer-name' type='text' name='customer_name' class='form-control'/></div>";
-
-                html += "<div id='customer-info'> <button class='btn btn-default' id='admin-reserve-button' disabled='disabled'>Reserve</button> </div>";
-
                 seatsContent.html(html);
-
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
@@ -445,13 +469,13 @@ var controllerPage = function() {
             });
     };
 
-    saveReservedSeats = function(seatsArray, movieId, timeId) {
+    saveReservedSeats = function (seatsArray, movieId, timeId) {
         dataService.saveReservedSeats(seatsArray, movieId, timeId)
-            .done( function(data) {
+            .done(function (data) {
                 console.log('Success sending data...');
                 window.location.reload();
             })
-            .fail( function(jqXHR, textStatus, error) {
+            .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
             });
     };
