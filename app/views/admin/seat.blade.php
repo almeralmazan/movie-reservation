@@ -149,7 +149,8 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Proceed to payment</button>
+                <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
+                <button type="button" class="btn btn-warning">Manual Payment</button>
             </div>
 
         </div>
