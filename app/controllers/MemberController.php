@@ -14,7 +14,14 @@ class MemberController extends BaseController {
         $title = 'Movie Reservation Page';
         $movie = Movie::find($movieId);
         $times = Movie::getAllTimes($movieId);
+        Session::put('movie_id', $movieId);
         return View::make('member.reserve-movie', compact('title', 'movie', 'times'));
+    }
+
+    public function ticket()
+    {
+        $title = 'Member Ticket Page';
+        return View::make('member.ticket', compact('title'));
     }
 
     public function register()
@@ -54,5 +61,24 @@ class MemberController extends BaseController {
                 'message' => 'Successfully registered!'
             ]);
         }
+    }
+
+    public function getReservedSeats($timeId)
+    {
+        $movieId = (int) Session::get('movie_id');
+
+        $result = DB::table('reserved_seats')
+                    ->select(
+                        'reserved_seats.seat_number',
+                        'transactions.paid_status',
+                        'reserved_seats.customer_name',
+                        'reserved_seats.time_id'
+                    )
+                    ->join('transactions', 'transactions.id', '=', 'reserved_seats.transaction_id')
+                    ->where('reserved_seats.cinema_id', $movieId)
+                    ->where('reserved_seats.time_id', $timeId)
+                    ->get();
+
+        return $result;
     }
 }
