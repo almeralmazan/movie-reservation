@@ -14,6 +14,8 @@
         </div>
     </div>
 
+
+    <!-- Left Panel -->
     <div class="row margin-top">
         <div class="content col-md-3">
             <div class="well">
@@ -54,6 +56,8 @@
             </div>
         </div>
 
+
+        <!-- Right Panel -->
         <div class="col-md-9">
             <div class="well">
                 <div class="row margin-top-two">
@@ -66,7 +70,7 @@
                                     <select name="show_start_time" id="show-start-time" class="form-control">
                                         <option value="empty">Select time</option>
                                         @foreach ($times as $time)
-                                            <option value="{{ $time->start_time }}">{{ $time->start_time }}</option>
+                                            <option value="{{ $time->id }}">{{ $time->start_time }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,6 +81,7 @@
                     </div>
                 </div>
 
+
                 <div class="row margin-top-two">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="alert alert-info" role="alert">
@@ -85,37 +90,110 @@
                     </div>
                 </div>
 
-                <br>
-
-            <?php for ($i = 0; $i < 5; $i++) : ?>
-
-                <?php if ($i % 10 == 0) : ?>
-                <div class="row margin-top-two">
-                    <div class="col-md-1"><!-- palaman --></div>
-                <?php endif; ?>
-
-                    <div class="col-md-1">
-                        <button class="btn-seats btn btn-danger btn-block">01</button>
-                    </div>
-
-<!--                    <div class="col-md-1">-->
-<!--                        <button class="btn-seats btn btn-default btn-block">10</button>-->
-<!--                    </div>-->
-
-                <?php if ($i % 10 == 0) : ?>
-                    <div class="col-md-1"><!-- palaman --></div>
-                </div>
-                <?php endif; ?>
-
-            <?php endfor; ?>
+                <div id="populate-seats" class="row"></div>
 
                 <div class="row margin-top-two">
                     <div class="col-md-6 col-md-offset-3">
-                        <a href="" class="btn btn-primary btn-lg btn-block">
-                            reserve
-                        </a>
+                        <button class="btn btn-primary btn-block" id="reserve-seat" data-toggle="modal" data-target="#myModal">
+                            Reserve seat
+                        </button>
                     </div>
                 </div>
+
+                <!-- Button trigger modal -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header"></div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="row">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Seat</th>
+                                                    <th>total of seats</th>
+                                                    <th class="text-center">Price</th>
+                                                    <th class="text-center">Total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="col-md-7"><em id="reserving-for-seat"></em></h4></td>
+                                                    <td id="total-seats" class="col-md-3 text-center"></td>
+                                                    <td id="price-per-seat" class="col-md-1 text-center">75</td>
+                                                    <td id="total-seat-price" class="sub-totals col-md-1 text-center">0</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Add-ons</th>
+                                                    <th>Qty</th>
+                                                    <th class="text-center">Price</th>
+                                                    <th class="text-center">Total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="col-md-7">
+                                                        <em>Burger</em>
+                                                    </td>
+                                                    <td class="col-md-3">
+                                                        <input type="number" class="form-control" id="qty-burger" min="0">
+                                                    </td>
+                                                    <td id="price-per-burger" class="col-md-1 text-center">
+                                                        30
+                                                    </td>
+                                                    <td id="total-burger-price" class="col-md-1 text-center">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-7">
+                                                        <em>Fries</em>
+                                                    </td>
+                                                    <td class="col-md-3">
+                                                        <input type="number" class="form-control" id="qty-fries" min="0">
+                                                    </td>
+                                                    <td id="price-per-fries" class="col-md-1 text-center">
+                                                        25
+                                                    </td>
+                                                    <td id="total-fries-price" class="col-md-1 text-center">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-7">
+                                                        <em>Soda</em>
+                                                    </td>
+                                                    <td class="col-md-3">
+                                                        <input type="number" class="form-control" id="qty-soda" min="0">
+                                                    </td>
+                                                    <td id="price-per-soda" class="col-md-1 text-center">
+                                                        15
+                                                    </td>
+                                                    <td id="total-soda-price" class="col-md-1 text-center">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>   </td>
+                                                    <td>   </td>
+                                                    <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                                                    <td class="text-center text-danger"><h4 id="total"><strong></strong></h4></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
+                                <a href="{{ URL::to('member/ticket') }}" class="btn btn-warning">Manual Payment</a>
+                            </div>
             </div>
         </div>
     </div>
