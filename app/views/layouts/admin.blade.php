@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" ng-app="AdminApp">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,6 +19,8 @@
 {{ HTML::script('js/jquery.min.js') }}
 {{ HTML::script('js/bootstrap.min.js') }}
 {{ HTML::script('js/bootstrap-datetimepicker.js') }}
+{{ HTML::script('js/bootbox.min.js') }}
+{{ HTML::script('js/angular.min.js') }}
 {{ HTML::script('js/dataService.js') }}
 {{ HTML::script('js/controllerPage.js') }}
 {{ HTML::script('js/script.js') }}

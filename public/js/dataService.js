@@ -50,7 +50,14 @@ var dataService = function () {
             data: { reservedSeats: seatsArray, movieId: movieId, timeId: timeId },
             type: 'POST'
         });
-    }
+    },
+
+    deleteMovie = function(movieId) {
+        return $.ajax({
+            url: urlBase + '/admin/dashboard/delete/movie/' + movieId,
+            type: 'DELETE'
+        });
+    };
 
     return {
         memberLogin: memberLogin,
@@ -59,6 +66,7 @@ var dataService = function () {
         getMovieTimesById: getMovieTimesById,
         getReservedSeats: getReservedSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
-        saveReservedSeats: saveReservedSeats
+        saveReservedSeats: saveReservedSeats,
+        deleteMovie: deleteMovie
     };
 }();

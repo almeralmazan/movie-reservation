@@ -46,9 +46,8 @@ class AdminController extends BaseController {
 
     public function deleteMovie($movieId)
     {
-        $movie = Movie::find($movieId);
-        $movie->delete();
-        return Redirect::back()->withDelete('Deleted successfully');
+        DB::table('movies')->where('id', $movieId)->delete();
+        return Redirect::back();
     }
 
     public function editMovie($movieId)
@@ -93,8 +92,31 @@ class AdminController extends BaseController {
     public function transaction()
     {
         $title = 'Transaction Page';
-//        $cinemas = Cinema::all();
         return View::make('admin.transaction', compact('title'));
+    }
+
+    public function getAllTransactions()
+    {
+        $transactions = DB::table('transactions')
+            ->select(
+                'transactions.receipt_number',
+                'reserved_seats.customer_name',
+                'movies.title as movie_title',
+                'times.start_time',
+                'transactions.tickets_bought',
+                'transactions.burger_bought',
+                'transactions.fries_bought',
+                'transactions.soda_bought',
+                'transactions.total',
+                'transactions.paid_status'
+            )
+            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+            ->distinct()
+            ->get();
+
+        return $transactions;
     }
 
     public function addShowTime($cinemaId)

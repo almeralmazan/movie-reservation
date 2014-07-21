@@ -4,7 +4,6 @@
     @include('layouts.partials.nav')
 @stop
 
-
 @section('content')
 <div class="container margin-top">
     <div class="row">
@@ -16,15 +15,15 @@
     </div>
     <div class="row margin-top-two">
         <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="Search....">
+            <input type="text" class="form-control" placeholder="Search...." ng-model="search_transaction">
         </div>
         <div class="col-xs-2">
-            <select name="" id="" class="form-control">
-                <option value="">paid</option>
-                <option value="">not paid</option>
+            <select class="form-control" ng-model="paid_status">
+                <option value="1">Paid</option>
+                <option value="0">Not Paid</option>
             </select>
         </div>
-        <div class="col-md-12 margin-top-two">
+        <div class="col-md-12 margin-top-two" ng-controller="AdminTransactionController">
             <table id="mytable" class="table table-bordered table-striped">
                 <thead>
                     <th>Receipt #</th>
@@ -41,39 +40,37 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>0001</td>
-                        <td>ayi</td>
-                        <td>How To Train Your Dragon 2</td>
-                        <td>July 6, 2014</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>500</td>
+                    <tr ng-repeat="transaction in transactions | filter:search_transaction | filter:paid_status">
+                        <td>{[ transaction.receipt_number ]}</td>
+                        <td>{[ transaction.customer_name ]}</td>
+                        <td>{[ transaction.movie_title ]}</td>
+                        <td>{[ transaction.start_time ]}</td>
+                        <td>{[ transaction.tickets_bought ]}</td>
+                        <td>{[ transaction.burger_bought ]}</td>
+                        <td>{[ transaction.fries_bought ]}</td>
+                        <td>{[ transaction.soda_bought ]}</td>
+                        <td>{[ transaction.total ]}</td>
+
                         <td>
-                            <span class="label label-success">Paid</span>
+                            <span class="label label-success" ng-show="transaction.paid_status">
+                                Paid
+                            </span>
+                            <span class="label label-warning" ng-hide="transaction.paid_status">
+                                Not Paid
+                            </span>
                         </td>
-                        <td></td>
+                        <td>
+                            <a href="" class="btn btn-xs btn-primary" ng-show="!transaction.paid_status">
+                                Pay now
+                            </a>
+                            <a href="" class="btn btn-xs btn-danger" ng-show="!transaction.paid_status">
+                                Cancel
+                            </a>
+                        </td>
+
+
                     </tr>
-                    <tr>
-                        <td>0002</td>
-                        <td>almer</td>
-                        <td>Noah</td>
-                        <td>July 2, 2014</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>450</td>
-                        <td>
-                            <span class="label label-warning">Not paid</span>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-xs btn-primary">Pay now</a>
-                            <a href="" class="btn btn-xs btn-danger">Cancel</a>
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>

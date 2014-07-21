@@ -39,7 +39,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ URL::to('admin/dashboard/edit-movie-page', [$movie->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <a href="{{ URL::to('admin/dashboard/delete', [$movie->id]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a href="{{ URL::to('admin/dashboard/delete/movie', [$movie->id]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                         @endforeach
