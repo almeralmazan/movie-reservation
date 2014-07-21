@@ -10,8 +10,7 @@ var controllerPage = function() {
         getMovieId,
         getReservedSeats,
         getAdminReservedSeats,
-        saveAdminReservedSeats,
-        deleteMovie;
+        saveAdminReservedSeats;
 
     init = function () {
 
@@ -28,19 +27,6 @@ var controllerPage = function() {
 
             getRegistrationInputs();
         });
-
-//        $('.delete-movie').on('click', function() {
-//            var movieId = $(this).data('movie-id');
-//
-//            bootbox.confirm(
-//                'Are you sure you want to delete this movie?',
-//                function(accept) {
-//                    if (accept) {
-//                        deleteMovie(movieId);
-//                    }
-//                }
-//            );
-//        });
 
         // Live click from ajax dynamic button
         $(document).on('click', '#populate-seats .available-seats', function () {
@@ -81,6 +67,20 @@ var controllerPage = function() {
             var cinemaId = $(this).val();
 
             getMovieTimesById(cinemaId);
+        });
+
+        // Delete a movie on dashboard
+        $('.delete-movie').click(function() {
+            var movieId = $(this).data('movie-id');
+
+            bootbox.confirm(
+                'Are you sure you want to delete the movie?',
+                function(accept) {
+                    if (accept) {
+                        location.href = '/admin/dashboard/delete/movie/' + movieId;
+                    }
+                }
+            );
         });
 
 
@@ -454,16 +454,6 @@ var controllerPage = function() {
                 console.log(textStatus);
             });
     };
-
-//    deleteMovie = function(movieId) {
-//        dataService.deleteMovie(movieId)
-//            .done( function(data) {
-//                console.log('Success sending data...');
-//            })
-//            .fail( function(jqXHR, textStatus, error) {
-//                console.log(textStatus);
-//            });
-//    };
 
     return {
         init: init
