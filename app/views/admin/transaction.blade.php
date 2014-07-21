@@ -17,8 +17,9 @@
         <div class="col-md-3">
             <input type="text" class="form-control" placeholder="Search...." ng-model="search_transaction">
         </div>
-        <div class="col-xs-2">
-            <select class="form-control" ng-model="paid_status">
+        <div class="col-xs-3">
+            <select class="form-control" ng-model="ps.paid_status">
+                <option value="">-- Select Payment Status --</option>
                 <option value="1">Paid</option>
                 <option value="0">Not Paid</option>
             </select>
@@ -40,7 +41,7 @@
                 </thead>
 
                 <tbody>
-                    <tr ng-repeat="transaction in transactions | filter:search_transaction | filter:paid_status">
+                    <tr ng-repeat="transaction in transactions | filter:search_transaction | filter:ps">
                         <td>{[ transaction.receipt_number ]}</td>
                         <td>{[ transaction.customer_name ]}</td>
                         <td>{[ transaction.movie_title ]}</td>
