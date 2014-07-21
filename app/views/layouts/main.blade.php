@@ -19,6 +19,8 @@
 {{ HTML::script('js/jquery.min.js') }}
 {{ HTML::script('js/bootstrap.min.js') }}
 {{ HTML::script('js/bootstrap-datetimepicker.js') }}
+{{ HTML::script('js/angular.min.js') }}
+{{ HTML::script('js/ui-bootstrap-tpls-0.11.0.min.js') }}
 {{ HTML::script('js/dataService.js') }}
 {{ HTML::script('js/controllerPage.js') }}
 {{ HTML::script('js/script.js') }}

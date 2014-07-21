@@ -47,9 +47,6 @@
 
     <div id="populate-seats" class="row"></div>
 
-
-
-
     <div class="row margin-top-two">
         <div class="col-md-6 col-md-offset-3">
             <button class="btn btn-primary btn-block" id="reserve-seat" data-toggle="modal" data-target="#myModal">
