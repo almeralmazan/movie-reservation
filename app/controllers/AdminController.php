@@ -46,8 +46,9 @@ class AdminController extends BaseController {
 
     public function deleteMovie($movieId)
     {
-        DB::table('movies')->where('id', $movieId)->delete();
-        return Redirect::back();
+        $movie = Movie::find($movieId);
+        $movie->delete();
+        return Redirect::back()->withDelete('Deleted successfully');
     }
 
     public function editMovie($movieId)
