@@ -92,13 +92,17 @@ var controllerPage = function () {
             getAdminReservedSeats(cinemaId, timeId);
         });
 
-        // Admin Check Button
-//        $('.admin-check-reserved-seats').on('click', function () {
-//            var timeId = $('#movie-time').val();
-//            var movieId = $('#movie-id').val();
-//
-//            getAdminReservedSeats(movieId, timeId);
-//        });
+        // Admin Reserve Seat
+        $('#admin-reserve-seat').on('submit', function(event) {
+            event.preventDefault();
+
+            var seatsReserved = $('#reserving-for-seat').text();
+            var totalSeats = $('#total-seats').text();
+
+            console.log(typeof seatsReserved);
+
+//            location.href = '/admin/dashboard/seat';
+        });
 
         // Admin Reserve Button
         $(document).on('click', '#admin-reserve-button', function () {
