@@ -65,7 +65,7 @@
             <div class="modal-content">
                 <div class="modal-header"></div>
 
-                {{ Form::open(['url' => 'admin/dashboard/reserved-seat']) }}
+                {{ Form::open(['url' => 'admin/dashboard/reserved-seat', 'id' => 'admin-reserve-seat']) }}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
