@@ -88,7 +88,7 @@ class ReservedSeatTableSeeder extends Seeder {
         ]);
 
         ReservedSeat::create([
-            'customer_name'     =>  'juan',
+            'customer_name'     =>  'walkin',
             'customer_status'   =>  'walkin',
             'transaction_id'    =>  4,
             'seat_number'       =>  10,
@@ -97,7 +97,7 @@ class ReservedSeatTableSeeder extends Seeder {
         ]);
 
         ReservedSeat::create([
-            'customer_name'     =>  'mari',
+            'customer_name'     =>  'walkin',
             'customer_status'   =>  'walkin',
             'transaction_id'    =>  5,
             'seat_number'       =>  11,
@@ -106,7 +106,7 @@ class ReservedSeatTableSeeder extends Seeder {
         ]);
 
         ReservedSeat::create([
-            'customer_name'     =>  'mari',
+            'customer_name'     =>  'walkin',
             'customer_status'   =>  'walkin',
             'transaction_id'    =>  5,
             'seat_number'       =>  12,
