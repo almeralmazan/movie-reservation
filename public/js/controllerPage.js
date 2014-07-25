@@ -18,13 +18,11 @@ var controllerPage = function () {
 
         $('#member-login').on('submit', function (e) {
             e.preventDefault();
-
             getMemberLoginInputs();
         });
 
         $('#registration-form').on('submit', function (e) {
             e.preventDefault();
-
             getRegistrationInputs();
         });
 
@@ -32,10 +30,6 @@ var controllerPage = function () {
         $(document).on('click', '#populate-seats .available-seats', function () {
 
             var seatId = $(this).attr('id').replace('seat-number-', '');
-
-            // for testing purposes
-            // console.log("seatsArray.length before = " + seatsArray.length);
-
 
             if ($(this).hasClass('process-reservation')) {
                 $(this).removeClass('btn-info process-reservation')
@@ -57,15 +51,10 @@ var controllerPage = function () {
             } else {
                 $('button#reserve-button, button#admin-reserve-button').prop('disabled', true).removeClass('btn-warning');
             }
-
-            // for testing purposes
-            // console.log('After seatsArray: ' + seatsArray);
-            // console.log("seatsArray.length after = " + seatsArray.length);
         });
 
         $('#movie-select').on('change', function () {
             var cinemaId = $(this).val();
-
             getMovieTimesById(cinemaId);
         });
 
@@ -269,8 +258,6 @@ var controllerPage = function () {
                 opacity: 1
             });
         });
-
-
     };
 
     getMovieTimesById = function (cinemaId) {
