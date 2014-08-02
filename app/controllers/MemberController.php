@@ -29,7 +29,7 @@ class MemberController extends BaseController {
         // Using Auth::attempt, no need for password to be hash
         $rules = [
             'first_name'            =>  'required|alpha|min:2',
-            'last_name'             =>  'required|alpha|min:2',
+            'last_name'             =>  'required|min:2',
             'mobile_number'         =>  'required|numeric|regex:/^(09)([0-9]{9})$/',
             'email'                 =>  'required|email|unique:users',
             'password'              =>  'required|min:8|confirmed',
