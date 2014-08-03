@@ -34,12 +34,13 @@ class SessionController extends BaseController {
         // Using Auth::attempt, 'password' is automatically Hash::make()
         $credentials = Auth::attempt(array(
             'email' => Input::get('email'),
-            'password' => Input::get('password')
+            'password' => Input::get('password'),
+            'admin' => 1
         ));
 
         if ($credentials) return Redirect::to('admin/dashboard');
 
-        return Redirect::back();
+        return Redirect::back()->withMessage('Sorry, only the administrator allowed here');
     }
 
     public function adminLogout()
