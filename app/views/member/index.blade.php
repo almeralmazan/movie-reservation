@@ -41,7 +41,17 @@
                     </div>
                 </div>
 
-                <!--  meron pa dito -->
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <span><b>Show Times:</b></span>
+                    </div>
+                    <div class="movie-details col-xs-8 col-sm-8 col-md-8">
+                        <?php $times = show_times($movie->id) ?>
+                        @foreach ($times as $time)
+                        <p>{{ $time->start_time }}</p>
+                        @endforeach
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
