@@ -134,7 +134,9 @@ class AdminController extends BaseController {
                             ->select(
                                 'transactions.receipt_number',
                                 'reserved_seats.customer_name',
+                                'users.mobile_number',
                                 'movies.title as movie_title',
+                                'transactions.created_at',
                                 'times.start_time',
                                 'transactions.tickets_bought',
                                 'transactions.burger_bought',
@@ -144,6 +146,7 @@ class AdminController extends BaseController {
                                 'transactions.paid_status'
                             )
                             ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+                            ->join('users', 'users.id', '=', 'transactions.id')
                             ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
                             ->join('times', 'times.id', '=', 'reserved_seats.time_id')
                             ->distinct()

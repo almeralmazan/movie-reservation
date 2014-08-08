@@ -29,9 +29,11 @@
                 <thead>
                     <th>Receipt #</th>
                     <th>Name</th>
+                    <th>Contact #</th>
                     <th>Movie Watched</th>
+                    <th>Date</th>
                     <th>Showtime</th>
-                    <th>Tickets Bought</th>
+                    <th>Tickets</th>
                     <th>Burger</th>
                     <th>Fries</th>
                     <th>Soda</th>
@@ -44,7 +46,9 @@
                     <tr ng-repeat="transaction in transactions | filter:search_transaction | filter:ps">
                         <td>{[ transaction.receipt_number ]}</td>
                         <td>{[ transaction.customer_name ]}</td>
+                        <td>{[ transaction.mobile_number ]}</td>
                         <td>{[ transaction.movie_title ]}</td>
+                        <td>{[ transaction.created_at | date:'longDate' ]}</td>
                         <td>{[ transaction.start_time ]}</td>
                         <td>{[ transaction.tickets_bought ]}</td>
                         <td>{[ transaction.burger_bought ]}</td>

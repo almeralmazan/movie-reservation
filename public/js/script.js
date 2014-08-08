@@ -14,6 +14,12 @@
         $scope.transactions = [];
 
         var onComplete = function(response) {
+            var length = response.data.length;
+
+            for (var i = 0; i < length; i++) {
+                response.data[i].created_at = new Date(response.data[i].created_at.replace(/-/g, "/"));
+            }
+
             $scope.transactions = response.data;
         };
 
