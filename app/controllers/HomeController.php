@@ -6,7 +6,9 @@ class HomeController extends BaseController {
 	{
         $title = 'Home Page';
         $movies = Movie::all();
-		return View::make('home.index', compact('title', 'movies'));
+        $randomTrailer = DB::select('SELECT trailer_url FROM movies ORDER BY RAND() LIMIT 1');
+        $trailer = $randomTrailer[0]->trailer_url;
+		return View::make('home.index', compact('title', 'movies', 'trailer'));
 	}
 
     public function show($id)

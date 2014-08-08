@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/r8HPIH5JCak"></iframe>
+                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ $trailer }}"></iframe>
                 </div>
             </div>
             <br class="hidden-md hidden-lg">
