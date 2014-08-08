@@ -39,4 +39,27 @@
     };
 
     adminApp.controller('CinemaController', ['$scope', CinemaController]);
+
+
+    // MemberController
+    var MemberController = function($scope, $http) {
+
+        $scope.members = [];
+
+        var onComplete = function(response) {
+            var length = response.data.length;
+
+            for (var i = 0; i < length; i++) {
+                response.data[i].created_at = new Date(response.data[i].created_at.replace(/-/g, "/"));
+            }
+
+            $scope.members = response.data;
+        };
+
+        $http.get('/admin/dashboard/get-all-members')
+            .then(onComplete);
+
+    };
+
+    adminApp.controller('MemberController', ['$scope', '$http', MemberController]);
 }());

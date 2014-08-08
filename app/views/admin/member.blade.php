@@ -14,7 +14,14 @@
             </a>
         </div>
     </div>
-    <div class="row margin-top-two">
+
+    <div class="row margin-top">
+        <div class="col-md-3">
+            <input type="text" placeholder="Search name here..." class="form-control" ng-model="name"/>
+        </div>
+    </div>
+
+    <div class="row margin-top-two" ng-controller="MemberController">
         <div class="col-md-12">
             <table id="mytable" class="table table-bordered table-striped">
                 <thead>
@@ -24,14 +31,12 @@
                     <th>Date registered</th>
                 </thead>
                 <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->first_name .' '. $user->last_name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->mobile_number }}</td>
-                        <th>{{ date('F j, Y', strtotime($user->created_at)) }}</th>
+                    <tr ng-repeat="member in members | filter:name">
+                        <td>{[ member.last_name + ', ' + member.first_name ]}</td>
+                        <td>{[ member.email ]}</td>
+                        <td>{[ member.mobile_number ]}</td>
+                        <td>{[ member.created_at | date:'longDate']}</td>
                     </tr>
-                @endforeach
                 </tbody>
             </table>
 

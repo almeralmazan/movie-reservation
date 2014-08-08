@@ -65,6 +65,16 @@ class AdminController extends BaseController {
         return View::make('admin.member', compact('title', 'users'));
     }
 
+    public function getAllMembers()
+    {
+        $members = DB::table('users')
+                    ->orderBy('last_name')
+                    ->orderBy('first_name')
+                    ->get();
+
+        return $members;
+    }
+
     public function seat()
     {
         $title = 'Seat Page';
