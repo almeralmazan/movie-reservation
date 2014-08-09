@@ -9,6 +9,18 @@ class MemberController extends BaseController {
         return View::make('member.index', compact('title', 'movies'));
     }
 
+    public function forgotPassword()
+    {
+        $title = 'Forgot Password';
+        return View::make('member.forgot-password', compact('title'));
+    }
+
+    public function memberProfile()
+    {
+        $title = 'Profile Page';
+        return View::make('member.member-profile', compact('title'));
+    }
+
     public function reserve($movieId)
     {
         $title = 'Movie Reservation Page';
