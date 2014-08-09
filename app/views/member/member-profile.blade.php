@@ -3,11 +3,23 @@
 @section('content')
 <div class="container margin-top">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-1 col-sm-1 col-md-1">
             <a href="{{ URL::to('member') }}" class="btn btn-default">
                 {{ HTML::image('img/back.png') }}
             </a>
         </div>
+
+        @if (Session::has('message'))
+        <div class="col-md-9">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                {{ Session::get('message') }}
+            </div>
+        </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
