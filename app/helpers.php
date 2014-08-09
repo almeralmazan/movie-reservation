@@ -9,3 +9,8 @@ function show_times($movieId)
             ->where('movies.id', $movieId)
             ->get();
 }
+
+function set_bg()
+{
+    return Request::is('/') ? 'cinema-background' : '';
+}
