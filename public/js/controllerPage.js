@@ -5,6 +5,7 @@ var controllerPage = function () {
     var init,
         getMovieTimesById,
         getMemberLoginInputs,
+        changePassword,
         getRegistrationInputs,
         getMovieId,
         getReservedSeats,
@@ -24,6 +25,11 @@ var controllerPage = function () {
         $('#registration-form').on('submit', function (e) {
             e.preventDefault();
             getRegistrationInputs();
+        });
+
+        $('#change-password-form').on('submit', function (e) {
+            e.preventDefault();
+            changePassword();
         });
 
         // Live click from ajax dynamic button
@@ -290,6 +296,36 @@ var controllerPage = function () {
                         .text(data.message);
                 } else {
                     window.location.href = urlBase + '/member';
+                }
+            })
+            .fail(function (jqXHR, textStatus, error) {
+                console.log(textStatus);
+            });
+    };
+
+    changePassword = function() {
+        dataService.changePassword()
+            .done(function (data) {
+                if ( ! data.success) {
+                    $('#change-password-error')
+                        .removeClass('hidden')
+                        .text(data.message);
+                } else {
+                    $('#old-password').val('');
+                    $('#new-password').val('');
+                    $('#confirm-password').val('');
+
+                    $('#myModal-change-pass').modal('hide');
+
+                    $('#change-password-success')
+                        .html(
+                            '<div class="alert alert-success alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' + data.message + '</div>'
+                        );
+
                 }
             })
             .fail(function (jqXHR, textStatus, error) {

@@ -11,6 +11,14 @@ var dataService = function () {
         });
     },
 
+    changePassword = function() {
+        return $.ajax({
+            url: urlBase + '/member/change-password',
+            type: 'post',
+            data: $('#change-password-form').serialize()
+        });
+    },
+
     register = function() {
         return $.ajax({
             url: urlBase + '/member/register',
@@ -59,6 +67,7 @@ var dataService = function () {
 
     return {
         memberLogin: memberLogin,
+        changePassword: changePassword,
         register: register,
         getMovieId: getMovieId,
         getMovieTimesById: getMovieTimesById,

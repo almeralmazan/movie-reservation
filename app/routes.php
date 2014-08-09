@@ -14,6 +14,7 @@ Route::group(['prefix' => 'member'], function()
     Route::get('profile', 'MemberController@memberProfile');
     Route::get('transaction', 'MemberController@memberTransaction');
     Route::post('update-account', 'MemberController@updateAccount');
+    Route::post('change-password', 'MemberController@changePassword');
 });
 
 

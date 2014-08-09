@@ -35,6 +35,44 @@ class MemberController extends BaseController {
         return Redirect::back()->withMessage('Account Updated successfully!');
     }
 
+    public function changePassword()
+    {
+        $currentPassword = Input::get('current_password');
+        $newPassword = Input::get('new_password');
+        $confirmPassword = Input::get('confirm_password');
+
+        $member = User::where('email', Session::get('email'))->first();
+
+        if (Hash::check($currentPassword, $member->password))
+        {
+            if ($newPassword == $confirmPassword)
+            {
+                $member->password = Hash::make($newPassword);
+                $member->save();
+
+                return Response::json([
+                    'success'   =>  true,
+                    'message'   =>  'Password changed successfully'
+                ]);
+            }
+            else
+            {
+                return Response::json([
+                    'success'   =>  false,
+                    'message'   =>  "New and Confirm password doesn't match"
+                ]);
+            }
+        }
+        else
+        {
+            return Response::json([
+                'success'   =>  false,
+                'message'   =>  'Current password is invalid'
+            ]);
+        }
+
+    }
+
     public function memberTransaction()
     {
         $title = 'Transaction Page';

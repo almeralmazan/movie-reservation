@@ -9,6 +9,8 @@
             </a>
         </div>
 
+        <div class="col-md-9" id="change-password-success"></div>
+
         @if (Session::has('message'))
         <div class="col-md-9">
             <div class="alert alert-success alert-dismissible" role="alert">
