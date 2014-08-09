@@ -32,7 +32,14 @@
                 <li><h3><small>Date registered:</small> {{ date('F j, Y', strtotime($member->created_at)) }}</h3></li>
                 <li><h3><small>Contact #:</small> {{ $member->mobile_number }}</h3></li>
                 <li><h3><small>Email:</small> {{ $member->email }}</h3></li>
-                <li><a href="" class="btn btn-primary btn-sm margin-top-two" data-toggle="modal" data-target="#myModal-change-pass">Change Password</a> <a href="" class="btn btn-primary btn-sm margin-top-two"data-toggle="modal" data-target="#myModal-edit-account">Edit Account</a></li>
+                <li>
+                    <a href="" class="btn btn-primary btn-sm margin-top-two" data-toggle="modal" data-target="#myModal-change-pass">
+                        Change Password
+                    </a>
+<!--                    <a href="" class="btn btn-primary btn-sm margin-top-two"data-toggle="modal" data-target="#myModal-edit-account">-->
+<!--                        Edit Account-->
+<!--                    </a>-->
+                </li>
             </ul>
         </div>
 
