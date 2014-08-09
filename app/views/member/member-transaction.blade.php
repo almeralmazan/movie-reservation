@@ -15,61 +15,31 @@
             <hr>
             <table id="mytable" class="table table-bordered table-striped">
                 <thead>
-                <th>Receipt #</th>
-                <th>Date Bought</th>
-                <th>Movie watched</th>
-                <th>Showtime</th>
-                <th>Tickets bought</th>
-                <th>Burger</th>
-                <th>Fries</th>
-                <th>Soda</th>
-                <th>Total</th>
-                <th>Status</th>
+                    <th>Receipt #</th>
+                    <th>Date Bought</th>
+                    <th>Movie watched</th>
+                    <th>Showtime</th>
+                    <th>Tickets bought</th>
+                    <th>Burger</th>
+                    <th>Fries</th>
+                    <th>Soda</th>
+                    <th>Total</th>
                 </thead>
+
                 <tbody>
-                <tr>
-                    <td>A123SDF34-001</td>
-                    <td>August 3, 2014</td>
-                    <td>How to Train Your Pussy 2</td>
-                    <td>July 6, 2014</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>
-                        <span class="label label-success">Paid</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>A123SDF34-001</td>
-                    <td>August 3, 2014</td>
-                    <td>almer@gmail.com</td>
-                    <td>09353234567</td>
-                    <td>KoniChiwa</td>
-                    <td>July 2, 2014</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>
-                        <span class="label label-primary">Reserved</span>
-                        <a href="">Pay Online</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>A123SDF34-001</td>
-                    <td>August 3, 2014</td>
-                    <td>almer@gmail.com</td>
-                    <td>09353234567</td>
-                    <td>KoniChiwa</td>
-                    <td>July 2, 2014</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>
-                        <span class="label label-danger">Expired</span>
-                    </td>
-                </tr>
+                @foreach ($transactions as $transaction)
+                    <tr>
+                        <td>{{ $transaction->receipt_number }}</td>
+                        <td>{{ date('F j, Y', strtotime($transaction->created_at)) }}</td>
+                        <td>{{ $transaction->title }}</td>
+                        <td>{{ date('h:m a', strtotime($transaction->start_time)) }}</td>
+                        <td>{{ $transaction->tickets_bought }}</td>
+                        <td>{{ $transaction->burger_bought }}</td>
+                        <td>{{ $transaction->fries_bought }}</td>
+                        <td>{{ $transaction->soda_bought }}</td>
+                        <td>{{ $transaction->total }}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

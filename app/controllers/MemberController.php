@@ -76,7 +76,29 @@ class MemberController extends BaseController {
     public function memberTransaction()
     {
         $title = 'Transaction Page';
-        return View::make('member.member-transaction', compact('title'));
+
+        $member = User::where('email', Session::get('email'))->first();
+
+        $transactions = DB::table('transactions')
+                            ->select(
+                                'transactions.receipt_number',
+                                'transactions.created_at',
+                                'movies.title',
+                                'times.start_time',
+                                'transactions.tickets_bought',
+                                'transactions.burger_bought',
+                                'transactions.fries_bought',
+                                'transactions.soda_bought',
+                                'transactions.total'
+                            )
+                            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+                            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+                            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+                            ->where('reserved_seats.customer_name', $member->first_name)
+                            ->distinct()
+                            ->get();
+
+        return View::make('member.member-transaction', compact('title', 'transactions'));
     }
 
     public function reserve($movieId)
