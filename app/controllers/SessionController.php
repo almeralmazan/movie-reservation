@@ -4,23 +4,26 @@ class SessionController extends BaseController {
 
     public function memberLogin()
     {
-            // Using Auth::attempt, no need for password to be hash
-            $credentials = Auth::attempt([
-                'email' => Input::get('email'),
-                'password' => Input::get('password')
-            ]);
+        // Using Auth::attempt, no need for password to be hash
+        $credentials = Auth::attempt([
+            'email' => Input::get('email'),
+            'password' => Input::get('password')
+        ]);
 
-            if ( ! $credentials)
-            {
-                return Response::json([
-                    'success' => false,
-                    'message' => 'Invalid email/password input'
-                ]);
-            }
-            else
-            {
-                return Response::json(['success' => true]);
-            }
+        if ( ! $credentials)
+        {
+            return Response::json([
+                'success' => false,
+                'message' => 'Invalid email/password input'
+            ]);
+        }
+        else
+        {
+            Session::put('email', Input::get('email'));
+
+            return Response::json(['success' => true]);
+        }
+
     }
 
     public function memberLogout()
