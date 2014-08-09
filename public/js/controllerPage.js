@@ -286,7 +286,7 @@ var controllerPage = function () {
             .done(function (data) {
                 if (!data.success) {
                     $('#error-message')
-                        .addClass('alert alert-danger')
+                        .addClass('alert-danger')
                         .text(data.message);
                 } else {
                     window.location.href = urlBase + '/member';
