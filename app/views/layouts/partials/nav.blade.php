@@ -15,8 +15,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         @if ( ! Auth::check())
-
             {{ Form::open(['url' => 'member/login', 'id' => 'member-login', 'class' => 'navbar-form navbar-right', 'role' => 'search']) }}
+                <!-- login errors -->
+                <div class="form-group">
+                    <span id="error-message" class="center-block error-log-in"></span>
+                </div>
+
                 <div class="form-group">
                     {{ Form::email('email', null, ['id' => 'email-input', 'class' => 'form-control', 'placeholder' => 'Email', 'required' => 'required']) }}
                 </div>
@@ -24,6 +28,10 @@
                     {{ Form::password('password', ['id' => 'password-input', 'class' => 'form-control', 'placeholder' => 'Password', 'required' => 'required']) }}
                 </div>
                 {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
+
+                <div class="form-group">
+                    <a href="{{ URL::to('/forgot-password') }}" class="forgot-password">forgot password?</a>
+                </div>
             {{ Form::close() }}
         @else
             <ul class="nav navbar-nav navbar-right">
