@@ -18,7 +18,10 @@ class MemberController extends BaseController {
     public function memberProfile()
     {
         $title = 'Profile Page';
-        return View::make('member.member-profile', compact('title'));
+
+        $member = User::where('email', Session::get('email'))->first();
+
+        return View::make('member.member-profile', compact('title', 'member'));
     }
 
     public function memberTransaction()
