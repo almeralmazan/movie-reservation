@@ -11,6 +11,12 @@ class HomeController extends BaseController {
 		return View::make('home.index', compact('title', 'movies', 'trailer'));
 	}
 
+    public function forgotPassword()
+    {
+        $title = 'Forgot Password';
+        return View::make('home.forgot-password', compact('title'));
+    }
+
     public function show($id)
     {
         $title = 'Movie Page';
