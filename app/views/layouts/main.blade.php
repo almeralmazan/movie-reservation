@@ -8,7 +8,7 @@
     {{ HTML::style('css/bootstrap-datetimepicker.min.css') }}
     {{ HTML::style('css/style.css') }}
 </head>
-<body>
+<body id="{{ set_bg() }}">
 
     @yield('header')
 
