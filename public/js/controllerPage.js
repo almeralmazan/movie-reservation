@@ -315,6 +315,8 @@ var controllerPage = function () {
                     $('#new-password').val('');
                     $('#confirm-password').val('');
 
+                    $('#change-password-error').addClass('hidden');
+
                     $('#myModal-change-pass').modal('hide');
 
                     $('#change-password-success')
