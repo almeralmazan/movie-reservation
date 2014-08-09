@@ -12,6 +12,7 @@ Route::group(['prefix' => 'member'], function()
     Route::post('login', 'SessionController@memberLogin');
     Route::post('register', 'MemberController@register');
     Route::get('profile', 'MemberController@memberProfile');
+    Route::get('transaction', 'MemberController@memberTransaction');
 });
 
 
