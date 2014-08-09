@@ -24,6 +24,17 @@ class MemberController extends BaseController {
         return View::make('member.member-profile', compact('title', 'member'));
     }
 
+    public function updateAccount()
+    {
+        $member = User::where('email', Session::get('email'))->first();
+        $member->first_name = Input::get('first_name');
+        $member->last_name = Input::get('last_name');
+        $member->mobile_number = Input::get('mobile_number');
+        $member->save();
+
+        return Redirect::back()->withMessage('Account Updated successfully!');
+    }
+
     public function memberTransaction()
     {
         $title = 'Transaction Page';
