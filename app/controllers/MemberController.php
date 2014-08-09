@@ -21,6 +21,12 @@ class MemberController extends BaseController {
         return View::make('member.member-profile', compact('title'));
     }
 
+    public function memberTransaction()
+    {
+        $title = 'Transaction Page';
+        return View::make('member.member-transaction', compact('title'));
+    }
+
     public function reserve($movieId)
     {
         $title = 'Movie Reservation Page';
