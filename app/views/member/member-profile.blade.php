@@ -14,10 +14,10 @@
             <h1>Account History</h1>
             <hr>
             <ul class="list-unstyled">
-                <li><h2><small>Name:</small> Jenary Madia</h2></li>
-                <li><h3><small>Date registered:</small> August 8, 2014</h3></li>
-                <li><h3><small>Contact #:</small> 09353626640</h3></li>
-                <li><h3><small>Email:</small> buboi_tanga@yahoo.com</h3></li>
+                <li><h2><small>Name:</small> {{ $member->first_name . ' ' . $member->last_name }}</h2></li>
+                <li><h3><small>Date registered:</small> {{ date('F j, Y', strtotime($member->created_at)) }}</h3></li>
+                <li><h3><small>Contact #:</small> {{ $member->mobile_number }}</h3></li>
+                <li><h3><small>Email:</small> {{ $member->email }}</h3></li>
                 <li><a href="" class="btn btn-primary btn-sm margin-top-two" data-toggle="modal" data-target="#myModal-change-pass">Change Password</a> <a href="" class="btn btn-primary btn-sm margin-top-two"data-toggle="modal" data-target="#myModal-edit-account">Edit Account</a></li>
             </ul>
         </div>
