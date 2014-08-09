@@ -3,12 +3,6 @@
 @section('header')
     <!--  Header  -->
     @include('layouts.partials.nav')
-
-    <div class="row">
-        <div class="col-md-offset-8 col-sm-3">
-            <div id="error-message" role="alert"></div>
-        </div>
-    </div>
 @stop
 
 
