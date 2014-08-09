@@ -13,6 +13,7 @@ Route::group(['prefix' => 'member'], function()
     Route::post('register', 'MemberController@register');
     Route::get('profile', 'MemberController@memberProfile');
     Route::get('transaction', 'MemberController@memberTransaction');
+    Route::post('update-account', 'MemberController@updateAccount');
 });
 
 
