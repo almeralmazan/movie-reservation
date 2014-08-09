@@ -3,7 +3,7 @@
 // Public Pages
 Route::get('/', 'HomeController@index');
 Route::get('public/movie/{id}', 'HomeController@show');
-Route::get('forgot-password', 'HomeController@forgotPassword');
+Route::get('forgot-password', 'MemberController@forgotPassword');
 
 
 // Member Pages
@@ -11,6 +11,7 @@ Route::group(['prefix' => 'member'], function()
 {
     Route::post('login', 'SessionController@memberLogin');
     Route::post('register', 'MemberController@register');
+    Route::get('profile', 'MemberController@memberProfile');
 });
 
 
