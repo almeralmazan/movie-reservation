@@ -3,6 +3,7 @@
 // Public Pages
 Route::get('/', 'HomeController@index');
 Route::get('public/movie/{id}', 'HomeController@show');
+Route::get('forgot-password', 'HomeController@forgotPassword');
 
 
 // Member Pages
