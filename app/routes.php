@@ -5,6 +5,11 @@ Route::get('/', 'HomeController@index');
 Route::get('public/movie/{id}', 'HomeController@show');
 Route::get('forgot-password', 'MemberController@forgotPassword');
 
+// Password Reset
+Route::resource('password', 'RemindersController', [
+    'only'  =>  ['index', 'store', 'show', 'update']
+]);
+
 
 // Member Pages
 Route::group(['prefix' => 'member'], function()
