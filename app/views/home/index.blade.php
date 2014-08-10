@@ -27,21 +27,27 @@
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="First Name" id="first_name" name="first_name" type="text">
+                                    <span class="alert-danger" id="first-name-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Last Name" id="last_name" name="last_name" type="text">
+                                    <span class="alert-danger" id="last-name-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" id="email" name="email" type="email">
+                                    <span class="alert-danger" id="email-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Mobile # 09159229239" id="mobile_number" name="mobile_number" type="text">
+                                    <span class="alert-danger" id="mobile-number-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" id="password" name="password" type="password">
+                                    <span class="alert-danger" id="password-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password Confirmation" id="password_confirmation" name="password_confirmation" type="password">
+                                    <span class="alert-danger" id="password-confirmation-error"></span>
                                 </div>
                                 <input class="btn btn-primary btn-block" type="submit" value="Sign up">
                             </fieldset>
@@ -50,9 +56,7 @@
                 </div>
 
                 <div class="row">
-                        <div id="registration-errors" role="alert">
-                            <ul class="content"></ul>
-                        </div>
+                    <div id="registration-success" role="alert"></div>
                 </div>
 
 
@@ -94,9 +98,6 @@
             </center>
         </div>
     </div>
-
-    <!-- Preview Trailer -->
-    @include('home.modal-preview')
 
 </div>
 @stop

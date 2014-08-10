@@ -134,7 +134,7 @@ class MemberController extends BaseController {
         {
             return Response::json([
                 'success' => false,
-                'message' => $validation->errors()->toArray()
+                'errors' => $validation->messages()
             ]);
         }
         else
@@ -150,7 +150,7 @@ class MemberController extends BaseController {
 
             return Response::json([
                 'success' => true,
-                'message' => 'Successfully registered!'
+                'message' => 'Successfully registered! Please activate your account sent to your email'
             ]);
         }
     }

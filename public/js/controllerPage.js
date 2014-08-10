@@ -339,32 +339,41 @@ var controllerPage = function () {
         dataService.register()
             .done(function (data) {
 
-                var errorsContainer = $('#registration-errors');
-                var ulContainer = $('ul.content');
-                var result = '';
+                if ( ! data.success) {
 
-                if (!data.success) {
-                    $.each(data.message, function (index, value) {
-                        result += '<li>' + value + '</li>';
-                    });
+                    $('#first-name-error').empty();
+                    $('#last-name-error').empty();
+                    $('#email-error').empty();
+                    $('#mobile-number-error').empty();
+                    $('#password-error').empty();
+                    $('#password-confirmation-error').empty();
 
-                    errorsContainer.addClass('alert alert-danger');
-                    ulContainer.html(result);
+                    $('#first-name-error').text(data.errors.first_name);
+                    $('#last-name-error').text(data.errors.last_name);
+                    $('#email-error').text(data.errors.email);
+                    $('#mobile-number-error').text(data.errors.mobile_number);
+                    $('#password-error').text(data.errors.password);
+                    $('#password-confirmation-error').text(data.errors.password_confirmation);
 
                 } else {
-                    errorsContainer.removeClass('alert-danger');
 
-                    $('#first_name').val('');
-                    $('#last_name').val('');
-                    $('#mobile_number').val('');
-                    $('#email').val('');
-                    $('#password').val('');
-                    $('#password_confirmation').val('');
+                    $('#first-name-error').empty();
+                    $('#last-name-error').empty();
+                    $('#email-error').empty();
+                    $('#mobile-number-error').empty();
+                    $('#password-error').empty();
+                    $('#password-confirmation-error').empty();
 
-                    errorsContainer
-                        .addClass('alert alert-success')
-                        .html(data.message)
+                    $('#registration-success')
+                        .html(
+                            '<div class="alert alert-success alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '<span class="sr-only">Close</span></button>' + data.message +
+                            '</div>'
+                        );
                 }
+
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
