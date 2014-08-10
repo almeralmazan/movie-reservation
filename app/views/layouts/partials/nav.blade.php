@@ -30,7 +30,7 @@
                 {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
 
                 <div class="form-group">
-                    <a href="{{ URL::to('/forgot-password') }}" class="forgot-password">forgot password?</a>
+                    <a href="{{ URL::to('/password-reset') }}" class="forgot-password">forgot password?</a>
                 </div>
             {{ Form::close() }}
         @else

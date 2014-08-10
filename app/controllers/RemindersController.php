@@ -9,7 +9,8 @@ class RemindersController extends Controller {
 	 */
 	public function index()
 	{
-		return View::make('password.remind');
+        $title = 'Password Reset';
+		return View::make('password.remind', compact('title'));
 	}
 
 	/**
@@ -19,7 +20,10 @@ class RemindersController extends Controller {
 	 */
 	public function store()
 	{
-		switch ($response = Password::remind(Input::only('email')))
+        $response = Password::remind(Input::only('email'), function($message) {
+            $message->subject('Password Reset');
+        });
+		switch ($response)
 		{
 			case Password::INVALID_USER:
 				return Redirect::back()->with('error', Lang::get($response));
@@ -39,7 +43,9 @@ class RemindersController extends Controller {
 	{
 		if (is_null($token)) App::abort(404);
 
-		return View::make('password.reset')->with('token', $token);
+        $title = 'Password Reset';
+
+		return View::make('password.reset')->with('token', $token)->with('title', $title);
 	}
 
 	/**

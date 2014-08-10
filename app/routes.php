@@ -3,12 +3,12 @@
 // Public Pages
 Route::get('/', 'HomeController@index');
 Route::get('public/movie/{id}', 'HomeController@show');
-Route::get('forgot-password', 'MemberController@forgotPassword');
 
 // Password Reset
-Route::resource('password', 'RemindersController', [
-    'only'  =>  ['index', 'store', 'show', 'update']
-]);
+Route::get('password-reset', 'RemindersController@index');
+Route::post('password-reset', 'RemindersController@store');
+Route::get('password/reset/{token}', 'RemindersController@show');
+Route::post('password-update', 'RemindersController@update');
 
 
 // Member Pages
