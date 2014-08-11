@@ -13,6 +13,7 @@ class UserTableSeeder extends Seeder {
             'password'      =>  Hash::make('admin'),
             'mobile_number' =>  '+639159115188',
             'admin'         =>  1,
+            'code'          =>  '',
             'active'        =>  1
         ]);
 
@@ -23,6 +24,7 @@ class UserTableSeeder extends Seeder {
             'password'      =>  Hash::make('ayi'),
             'mobile_number' =>  '+639353626640',
             'admin'         =>  2,   // member
+            'code'          =>  '',
             'active'        =>  1
         ]);
 
@@ -33,6 +35,7 @@ class UserTableSeeder extends Seeder {
             'password'      =>  Hash::make('xian'),
             'mobile_number' =>  '+639336013797',
             'admin'         =>  2,   // member
+            'code'          =>  '',
             'active'        =>  1
         ]);
 
@@ -43,6 +46,7 @@ class UserTableSeeder extends Seeder {
             'password'      =>  Hash::make('arnold'),
             'mobile_number' =>  '+639494149766',
             'admin'         =>  2,   // member
+            'code'          =>  '',
             'active'        =>  1
         ]);
 
@@ -53,6 +57,7 @@ class UserTableSeeder extends Seeder {
             'password'      =>  Hash::make('juan'),
             'mobile_number' =>  '+639159115122',
             'admin'         =>  0,   // walkin
+            'code'          =>  '',
             'active'        =>  0
         ]);
 
@@ -63,6 +68,7 @@ class UserTableSeeder extends Seeder {
             'password'      =>  Hash::make('marimar'),
             'mobile_number' =>  '+639159222345',
             'admin'         =>  0,   // walkin
+            'code'          =>  '',
             'active'        =>  0
         ]);
     }

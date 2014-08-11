@@ -139,6 +139,9 @@ class MemberController extends BaseController {
         }
         else
         {
+            // Activation code
+            $code = str_random(60);
+
             User::create([
                 'first_name'    =>  Input::get('first_name'),
                 'last_name'     =>  Input::get('last_name'),
@@ -146,6 +149,7 @@ class MemberController extends BaseController {
                 'email'         =>  Input::get('email'),
                 'password'      =>  Hash::make(Input::get('password')),
                 'admin'         =>  2,
+                'code'          =>  $code,
                 'active'        =>  0
             ]);
 

@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', 60)->nullable(false);
             $table->string('mobile_number', 15)->nullable(false);
             $table->boolean('admin')->default(0);
+            $table->string('code', 60)->nullable(true);
             $table->boolean('active')->default(0);
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
