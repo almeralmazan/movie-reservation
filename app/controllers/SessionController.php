@@ -6,8 +6,9 @@ class SessionController extends BaseController {
     {
         // Using Auth::attempt, no need for password to be hash
         $credentials = Auth::attempt([
-            'email' => Input::get('email'),
-            'password' => Input::get('password')
+            'email'     =>  Input::get('email'),
+            'password'  =>  Input::get('password'),
+            'active'    =>  1
         ]);
 
         if ( ! $credentials)

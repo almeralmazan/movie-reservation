@@ -10,6 +10,9 @@ Route::post('password-reset', 'RemindersController@store');
 Route::get('password/reset/{token}', 'RemindersController@show');
 Route::post('password-update', 'RemindersController@update');
 
+// Activate Account
+Route::get('activate-account/{code}', 'MemberController@activateAccount');
+Route::get('activate-message', 'MemberController@activateMessage');
 
 // Member Pages
 Route::group(['prefix' => 'member'], function()

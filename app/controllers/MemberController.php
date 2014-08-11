@@ -24,6 +24,12 @@ class MemberController extends BaseController {
         return View::make('member.member-profile', compact('title', 'member'));
     }
 
+    public function activateMessage()
+    {
+        $title = 'Activate Page';
+
+        return View::make('member.activate-message', compact('title'));
+    }
     public function updateAccount()
     {
         $member = User::where('email', Session::get('email'))->first();
@@ -120,7 +126,7 @@ class MemberController extends BaseController {
     {
         // Using Auth::attempt, no need for password to be hash
         $rules = [
-            'first_name'            =>  'required|alpha|min:2',
+            'first_name'            =>  'required|min:2',
             'last_name'             =>  'required|min:2',
             'mobile_number'         =>  'required|numeric|regex:/^(09)([0-9]{9})$/',
             'email'                 =>  'required|email|unique:users',
@@ -139,25 +145,65 @@ class MemberController extends BaseController {
         }
         else
         {
+            $firstName = Input::get('first_name');
+            $lastName = Input::get('last_name');
+            $mobileNumber = Input::get('mobile_number');
+            $email = Input::get('email');
+            $password = Input::get('password');
+
             // Activation code
             $code = str_random(60);
 
-            User::create([
-                'first_name'    =>  Input::get('first_name'),
-                'last_name'     =>  Input::get('last_name'),
-                'mobile_number' =>  '+63' . substr(Input::get('mobile_number'), 1),
-                'email'         =>  Input::get('email'),
-                'password'      =>  Hash::make(Input::get('password')),
+            $user = User::create([
+                'first_name'    =>  $firstName,
+                'last_name'     =>  $lastName,
+                'mobile_number' =>  '+63' . substr($mobileNumber, 1),
+                'email'         =>  $email,
+                'password'      =>  Hash::make($password),
                 'admin'         =>  2,
                 'code'          =>  $code,
                 'active'        =>  0
             ]);
 
-            return Response::json([
-                'success' => true,
-                'message' => 'Successfully registered! Please activate your account sent to your email'
-            ]);
+            if ($user)
+            {
+                // Send email
+                Mail::send('emails.auth.activate',
+                    ['link' => URL::to('activate-account', $code), 'fullName' => $user->first_name . ' ' . $user->last_name],
+                    function($message) use ($user) {
+                        $message->to($user->email, $user->first_name . ' ' . $user->last_name)
+                                ->subject('Activate your account');
+                });
+
+                return Response::json([
+                    'success' => true,
+                    'message' => 'Your account has been created! We have sent you an email to activate your account.'
+                ]);
+            }
         }
+    }
+
+    public function activateAccount($code)
+    {
+        $user = User::where('code', $code)->where('active', 0)->get();
+
+        if ($user->count())
+        {
+            $user = $user->first();
+
+            // Update user to active state
+            $user->active = 1;
+            $user->code = '';
+
+            if ( $user->save() )
+            {
+                return Redirect::to('activate-message')
+                        ->withMessage('Activated! You can now sign in!');
+            }
+        }
+
+        return Redirect::to('activate-message')
+                ->withError('We could not activate your account. Try again later.');
     }
 
     public function getReservedSeats($timeId)
