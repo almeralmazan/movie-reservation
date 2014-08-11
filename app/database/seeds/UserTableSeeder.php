@@ -12,7 +12,8 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'admin@movie-reservation.com',
             'password'      =>  Hash::make('admin'),
             'mobile_number' =>  '+639159115188',
-            'admin'         =>  1
+            'admin'         =>  1,
+            'active'        =>  1
         ]);
 
         User::create([
@@ -21,7 +22,8 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'ayi@gmail.com',
             'password'      =>  Hash::make('ayi'),
             'mobile_number' =>  '+639353626640',
-            'admin'         =>  2   // member
+            'admin'         =>  2,   // member
+            'active'        =>  1
         ]);
 
         User::create([
@@ -30,7 +32,8 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'xian@gmail.com',
             'password'      =>  Hash::make('xian'),
             'mobile_number' =>  '+639336013797',
-            'admin'         =>  2   // member
+            'admin'         =>  2,   // member
+            'active'        =>  1
         ]);
 
         User::create([
@@ -39,7 +42,8 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'arnold@gmail.com',
             'password'      =>  Hash::make('arnold'),
             'mobile_number' =>  '+639494149766',
-            'admin'         =>  2   // member
+            'admin'         =>  2,   // member
+            'active'        =>  1
         ]);
 
         User::create([
@@ -48,7 +52,8 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'juandelacruz@gmail.com',
             'password'      =>  Hash::make('juan'),
             'mobile_number' =>  '+639159115122',
-            'admin'         =>  0   // walkin
+            'admin'         =>  0,   // walkin
+            'active'        =>  0
         ]);
 
         User::create([
@@ -57,7 +62,8 @@ class UserTableSeeder extends Seeder {
             'email'         =>  'marimar@gmail.com',
             'password'      =>  Hash::make('marimar'),
             'mobile_number' =>  '+639159222345',
-            'admin'         =>  0   // walkin
+            'admin'         =>  0,   // walkin
+            'active'        =>  0
         ]);
     }
 }

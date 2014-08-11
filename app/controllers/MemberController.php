@@ -145,7 +145,8 @@ class MemberController extends BaseController {
                 'mobile_number' =>  '+63' . substr(Input::get('mobile_number'), 1),
                 'email'         =>  Input::get('email'),
                 'password'      =>  Hash::make(Input::get('password')),
-                'admin'         =>  0
+                'admin'         =>  2,
+                'active'        =>  0
             ]);
 
             return Response::json([
