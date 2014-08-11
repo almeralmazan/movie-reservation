@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'admin@e-movie-reservation.info', 'name' => 'Admin'),
+	'from' => array('address' => 'admin@e-movie-reservation.info', 'name' => 'e-movie Admin'),
 
 	/*
 	|--------------------------------------------------------------------------
