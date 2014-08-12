@@ -33,12 +33,12 @@ class MemberController extends BaseController {
     public function updateAccount()
     {
         $member = User::where('email', Session::get('email'))->first();
-        $member->first_name = Input::get('first_name');
-        $member->last_name = Input::get('last_name');
+//        $member->first_name = Input::get('first_name');
+//        $member->last_name = Input::get('last_name');
         $member->mobile_number = Input::get('mobile_number');
         $member->save();
 
-        return Redirect::back()->withMessage('Account Updated successfully!');
+        return Redirect::back()->withMessage('Contact # updated successfully!');
     }
 
     public function changePassword()

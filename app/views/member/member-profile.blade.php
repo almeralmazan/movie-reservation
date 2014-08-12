@@ -36,9 +36,9 @@
                     <a href="" class="btn btn-primary btn-sm margin-top-two" data-toggle="modal" data-target="#myModal-change-pass">
                         Change Password
                     </a>
-<!--                    <a href="" class="btn btn-primary btn-sm margin-top-two"data-toggle="modal" data-target="#myModal-edit-account">-->
-<!--                        Edit Account-->
-<!--                    </a>-->
+                    <a href="" class="btn btn-primary btn-sm margin-top-two"data-toggle="modal" data-target="#myModal-edit-account">
+                        Edit Contact #
+                    </a>
                 </li>
             </ul>
         </div>

@@ -8,11 +8,11 @@
             </div>
             {{ Form::open(['url' => 'member/update-account', 'class' => 'form-horizontal']) }}
                 <div class="modal-body">
-                        <label for="first-name">First Name</label>
-                        <input type="text" id="first-name" name="first_name" class="form-control" value="{{ $member->first_name }}" required>
-
-                        <label for="last-name">Last Name</label>
-                        <input type="text" id="last-name" name="last_name" class="form-control" value="{{ $member->last_name }}" required>
+<!--                        <label for="first-name">First Name</label>-->
+<!--                        <input type="text" id="first-name" name="first_name" class="form-control" value="{{ $member->first_name }}" required>-->
+<!---->
+<!--                        <label for="last-name">Last Name</label>-->
+<!--                        <input type="text" id="last-name" name="last_name" class="form-control" value="{{ $member->last_name }}" required>-->
 
                         <label for="contact-no">Contact #</label>
                         <input type="text" id="contact-no" name="mobile_number" class="form-control" value="{{ $member->mobile_number }}" required>
