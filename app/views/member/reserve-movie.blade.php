@@ -21,7 +21,7 @@
             <div class="well">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
-                        <h2 class="movie-title-single title">{{ $movie->title }}</h2>
+                        <h2 class="text-center title">{{ $movie->title }}</h2>
                         <hr>
                     </div>
                 </div>

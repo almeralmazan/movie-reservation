@@ -18,7 +18,7 @@
             <div class="col-sm-12 col-md-8">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
-                        <h2 class="movie-title-single title">{{ $movie->title }}</h2>
+                        <h3 class="movie-title-single title">{{ $movie->title }}</h3>
                         <hr>
                     </div>
                 </div>
