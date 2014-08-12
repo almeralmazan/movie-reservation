@@ -48,7 +48,7 @@
                     <div class="movie-details col-xs-8 col-sm-8 col-md-8">
                         <?php $times = show_times($movie->id) ?>
                         @foreach ($times as $time)
-                        <p>{{ $time->start_time }}</p>
+                        <p>{{ date('h:i a', strtotime($time->start_time)) }}</p>
                         @endforeach
                     </div>
                 </div>
