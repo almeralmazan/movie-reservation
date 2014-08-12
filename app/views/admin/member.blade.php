@@ -25,14 +25,31 @@
         <div class="col-md-12">
             <table id="mytable" class="table table-bordered table-striped">
                 <thead>
-                    <th>Name</th>
+                    <th>
+                        First Name &NonBreakingSpace; &NonBreakingSpace; &NonBreakingSpace;
+                        <a href="" ng-click="predicate = 'first_name'; reverse=!reverse">
+                            <span class="glyphicon glyphicon-sort"></span>
+                        </a>
+                    </th>
+                    <th>
+                        Last Name &NonBreakingSpace; &NonBreakingSpace; &NonBreakingSpace;
+                        <a href="" ng-click="predicate = 'last_name'; reverse=!reverse">
+                            <span class="glyphicon glyphicon-sort"></span>
+                        </a>
+                    </th>
                     <th>Email</th>
                     <th>Contact #</th>
-                    <th>Date registered</th>
+                    <th>
+                        Date registered &NonBreakingSpace; &NonBreakingSpace; &NonBreakingSpace;
+                        <a href="" ng-click="predicate = 'created_at'; reverse=!reverse">
+                            <span class="glyphicon glyphicon-sort"></span>
+                        </a>
+                    </th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="member in members | filter:name">
-                        <td>{[ member.last_name + ', ' + member.first_name ]}</td>
+                    <tr ng-repeat="member in members | filter:name | orderBy:predicate:reverse">
+                        <td>{[ member.first_name ]}</td>
+                        <td>{[ member.last_name ]}</td>
                         <td>{[ member.email ]}</td>
                         <td>{[ member.mobile_number ]}</td>
                         <td>{[ member.created_at | date:'longDate']}</td>
