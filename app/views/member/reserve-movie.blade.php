@@ -193,6 +193,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
                                 <a href="{{ URL::to('member/success-page') }}" id="bank-deposit" class="btn btn-warning">Bank Deposit</a>
+                                <p id="sms-loading-message" style="color: green; margin-top: 10px;"></p>
                             </div>
             </div>
         </div>

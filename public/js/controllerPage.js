@@ -269,6 +269,9 @@ var controllerPage = function () {
         // Bank Deposit
         $('#bank-deposit').on('click', function(e) {
             e.preventDefault();
+
+            $('#sms-loading-message').html('<strong>Sending SMS... Please wait for a moment.</strong>');
+
             depositAmount( $('#total').text() );
         });
 
