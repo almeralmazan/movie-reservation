@@ -264,6 +264,14 @@ var controllerPage = function () {
                 opacity: 1
             });
         });
+
+        // ---------------
+        // Bank Deposit
+        $('#bank-deposit').on('click', function(e) {
+            e.preventDefault();
+            depositAmount( $('#total').text() );
+        });
+
     };
 
     getMovieTimesById = function (cinemaId) {
@@ -501,6 +509,18 @@ var controllerPage = function () {
         dataService.saveAdminReservedSeats(seatsArray, movieId, timeId, customerName)
             .done(function (data) {
                 console.log('Success sending data...');
+            })
+            .fail(function (jqXHR, textStatus, error) {
+                console.log(textStatus);
+            });
+    };
+
+    depositAmount = function (amount) {
+        dataService.depositAmount(amount)
+            .done( function (data) {
+                console.log('Done');
+
+                window.location.href = urlBase + '/member/success-page'
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);

@@ -20,7 +20,10 @@ class SessionController extends BaseController {
         }
         else
         {
+            $user = User::where('email', Input::get('email'))->first();
+
             Session::put('email', Input::get('email'));
+            Session::put('mobile_number', $user->mobile_number);
 
             return Response::json(['success' => true]);
         }

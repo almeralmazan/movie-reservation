@@ -31,12 +31,13 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
     Route::get('/', 'MemberController@index');
     Route::get('logout', 'SessionController@memberLogout');
     Route::get('reserve/movie/{movieId}', 'MemberController@reserve');
-    Route::get('ticket', 'MemberController@ticket');
+    Route::get('success-page', 'MemberController@successPage');
 
     // AJAX
     Route::get('movie/{movieId}/{timeId}', 'MemberController@checkReserveSeats');
     Route::get('get-member-reserved-seats/{timeId}', 'MemberController@getReservedSeats');
     Route::post('save-reserved-seats', 'MemberController@saveReservedSeats');
+    Route::post('deposit-amount', 'MemberController@depositAmount');
 });
 
 

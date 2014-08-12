@@ -116,10 +116,29 @@ class MemberController extends BaseController {
         return View::make('member.reserve-movie', compact('title', 'movie', 'times'));
     }
 
-    public function ticket()
+    public function depositAmount()
     {
-        $title = 'Member Ticket Page';
-        return View::make('member.ticket', compact('title'));
+        $totalPrice = Input::get('amount');
+
+        // Initiate sms sending to user
+        $account_sid = $_ENV['TWILIO_SID'];
+        $auth_token = $_ENV['TWILIO_AUTH_TOKEN'];
+        $client = new Services_Twilio($account_sid, $auth_token);
+
+        $client->account->messages->create(array(
+            'To' => Session::get('mobile_number'),
+            'From' => $_ENV['TWILIO_ACCOUNT_NUMBER'],
+            'Body' => 'You can now deposit your payment at the nearest PS Bank Branch ' .
+                      'at your location. ' . 'Deposit the total amount of P' . $totalPrice . ' pesos ' .
+                      "to this \n\nAccount Number: \n5299-7876-5050-7727. \n\nNote: If you cannot pay one day " .
+                      'before the movie showtime, your transaction/s will be cancelled.'
+        ));
+    }
+
+    public function successPage()
+    {
+        $title = 'Success Page';
+        return View::make('member.success', compact('title'));
     }
 
     public function register()

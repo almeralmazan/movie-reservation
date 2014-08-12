@@ -62,6 +62,14 @@ var dataService = function () {
             data: { reservedSeats: seatsArray, movieId: movieId, timeId: timeId },
             type: 'POST'
         });
+    },
+
+    depositAmount = function (amount) {
+        return $.ajax({
+            url: urlBase + '/member/deposit-amount',
+            data: { amount: amount },
+            type: 'POST'
+        });
     };
 
 
@@ -74,6 +82,7 @@ var dataService = function () {
         getAdminReservedSeats: getAdminReservedSeats,
         getMemberReservedSeats: getMemberReservedSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
-        saveReservedSeats: saveReservedSeats
+        saveReservedSeats: saveReservedSeats,
+        depositAmount: depositAmount
     };
 }();
