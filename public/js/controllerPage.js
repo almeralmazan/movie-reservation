@@ -205,7 +205,7 @@ var controllerPage = function () {
             // for seats
             var seats = [];
             var total_seats = $(".btn-info").length;
-            var price = 75.00;
+            var price = 250.00;
             var total_burger_price = $("#total-burger-price").text();
             var total_fries_price = $("#total-fries-price").text();
             var total_soda_price = $("#total-soda-price").text();
@@ -222,7 +222,7 @@ var controllerPage = function () {
         // Add-ons burger
         $("#qty-burger").on('input', function () {
             var qty_burger = $("#qty-burger").val();
-            var price_burger = 30.00;
+            var price_burger = 50.00;
             var total = $("#total-seat-price").text();
             var total_fries_price = $("#total-fries-price").text();
             var total_soda_price = $("#total-soda-price").text();
@@ -233,7 +233,7 @@ var controllerPage = function () {
         // Add-ons fries
         $("#qty-fries").on('input', function () {
             var qty_fries = $("#qty-fries").val();
-            var price_fries = 25.00;
+            var price_fries = 50.00;
             var total_burger_price = $("#total-burger-price").text();
             var total_soda_price = $("#total-soda-price").text();
             var total = $("#total-seat-price").text();
@@ -244,7 +244,7 @@ var controllerPage = function () {
         // Add-ons soda
         $("#qty-soda").on('input', function () {
             var qty_soda = $("#qty-soda").val();
-            var price_soda = 15.00;
+            var price_soda = 30.00;
             var total_burger_price = $("#total-burger-price").text();
             var total_fries_price = $("#total-fries-price").text();
             var total = $("#total-seat-price").text();

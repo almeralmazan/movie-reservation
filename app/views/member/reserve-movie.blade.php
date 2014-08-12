@@ -125,7 +125,7 @@
                                                 <tr>
                                                     <td class="col-md-7"><em id="reserving-for-seat"></em></h4></td>
                                                     <td id="total-seats" class="col-md-3 text-center"></td>
-                                                    <td id="price-per-seat" class="col-md-1 text-center">75</td>
+                                                    <td id="price-per-seat" class="col-md-1 text-center">250</td>
                                                     <td id="total-seat-price" class="sub-totals col-md-1 text-center">0</td>
                                                 </tr>
                                                 </tbody>
@@ -148,7 +148,7 @@
                                                         <input type="number" class="form-control" id="qty-burger" min="0">
                                                     </td>
                                                     <td id="price-per-burger" class="col-md-1 text-center">
-                                                        30
+                                                        50
                                                     </td>
                                                     <td id="total-burger-price" class="col-md-1 text-center">0</td>
                                                 </tr>
@@ -160,7 +160,7 @@
                                                         <input type="number" class="form-control" id="qty-fries" min="0">
                                                     </td>
                                                     <td id="price-per-fries" class="col-md-1 text-center">
-                                                        25
+                                                        50
                                                     </td>
                                                     <td id="total-fries-price" class="col-md-1 text-center">0</td>
                                                 </tr>
@@ -172,7 +172,7 @@
                                                         <input type="number" class="form-control" id="qty-soda" min="0">
                                                     </td>
                                                     <td id="price-per-soda" class="col-md-1 text-center">
-                                                        15
+                                                        30
                                                     </td>
                                                     <td id="total-soda-price" class="col-md-1 text-center">0</td>
                                                 </tr>
