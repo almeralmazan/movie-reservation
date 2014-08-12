@@ -48,7 +48,7 @@
                         <td>{[ transaction.customer_name ]}</td>
                         <td>{[ transaction.mobile_number ]}</td>
                         <td>{[ transaction.movie_title ]}</td>
-                        <td>{[ transaction.created_at | date:'longDate' ]}</td>
+                        <td>{[ transaction.created_at | date:'shortDate' ]}</td>
                         <td>{[ transaction.start_time ]}</td>
                         <td>{[ transaction.tickets_bought ]}</td>
                         <td>{[ transaction.burger_bought ]}</td>
