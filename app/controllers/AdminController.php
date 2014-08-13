@@ -113,7 +113,8 @@ class AdminController extends BaseController {
     {
         $title = 'Manage Showtime';
         $movie = Movie::find($cinemaId);
-        return View::make('admin.cinema-add-showtime', compact('title', 'movie'));
+        $times = Time::all();
+        return View::make('admin.cinema-add-showtime', compact('title', 'movie', 'times'));
     }
 
     public function transaction()
