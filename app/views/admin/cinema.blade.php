@@ -13,40 +13,22 @@
             </a>
         </div>
     </div>
+
     <div class="row margin-top-two">
-        <div class="col-md-12">
-            <div class="well well-lg">
-                <div class="row">
-                    @foreach ($cinemas as $cinema)
-                    <div class="col-md-3 margin-top-two">
-                        <div class="form-group">
-                            <label for="cinema-1">Cinema {{ $cinema->id }}
-                                <a href="{{ URL::to('admin/dashboard/manage-showtime', [$cinema->id]) }}" class="btn btn-xs btn-primary">
-                                    <span class="glyphicon glyphicon-plus"></span> Manage showtime
-                                </a>
-                            </label>
 
-                            {{ Form::select('movie_select_name',
-                                [
-                                    '1'     =>  'How To Train Your Dragon 2',
-                                    '2'     =>  '22 Jump Street',
-                                    '3'     =>  'Edge of Tomorrow',
-                                    '4'     =>  'Blended',
-                                    '5'     =>  'Maleficent',
-                                    '6'     =>  'Noah',
-                                    '7'     =>  'In The Blood',
-                                    '8'     =>  '300: Rise Of An Empire',
-                                    '9'     =>  'The Fault In Our Stars',
-                                    '10'    =>  'X-Men: Days of Future Past'
-                                ],
-                                $cinema->id, ['class' => 'form-control', 'disabled' => 'disabled']) }}
-                        </div>
-                    </div>
-                    @endforeach
-
-                </div>
+        @foreach ($cinemas as $cinema)
+        <div class="col-md-2 margin-top-two">
+            <div class="well" style="height: 150px;">
+                <h4><strong>Cinema {{ $cinema->id }}</strong></h4>
+                <a href="{{ URL::to('admin/dashboard/manage-showtime', [$cinema->id]) }}" class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-pencil"></span> Manage Cinema
+                </a>
+                <?php $movie = show_movie_title($cinema->id) ?>
+                <h5>{{ $movie->title }}</h5>
             </div>
         </div>
+        @endforeach
+
     </div>
 </div>
 @stop

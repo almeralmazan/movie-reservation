@@ -10,6 +10,14 @@ function show_times($movieId)
             ->get();
 }
 
+function show_movie_title($cinemaId)
+{
+    return DB::table('movies')
+            ->select('movies.title')
+            ->where('movies.cinema_id', $cinemaId)
+            ->first();
+}
+
 function set_bg()
 {
     return Request::is('/') ? 'cinema-background' : '';
