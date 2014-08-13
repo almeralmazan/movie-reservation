@@ -44,7 +44,7 @@
                         </h5>
 
                         <div class="input-group date form_date col-md-3" data-date="" data-date-format="MM dd yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                            <input name="date" class="form-control" size="16" type="text" value="{{ $movie->showing_date }}" readonly>
+                            <input name="movie_showing_date" class="form-control" size="16" type="text" value="{{ $movie->showing_date }}" readonly>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
@@ -57,7 +57,11 @@
                             <tr>
                                 @foreach ($times as $time)
                                 <td>
-                                    <input type="checkbox" id="{{ $time->id }}">
+                                    @if ( in_array($time->id, $cinemaTimes->lists('time_id')) )
+                                        <input type="checkbox" name="time_{{ $time->id }}" id="{{ $time->id }}" checked>
+                                    @else
+                                        <input type="checkbox" name="time_{{ $time->id }}" id="{{ $time->id }}">
+                                    @endif
                                     <label for="{{ $time->id }}">{{ date('g:i a', strtotime($time->start_time)) }}</label>
                                 </td>
                                 @endforeach
