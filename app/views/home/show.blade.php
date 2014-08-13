@@ -71,7 +71,7 @@
                             <div class="movie-details col-xs-8 col-sm-8 col-md-8">
                                 <ul class="list-unstyled">
                                 @foreach ($movieTimes as $mt)
-                                    <li>{{ date('H:i a', strtotime($mt->start_time)) }}</li>
+                                    <li>{{ date('g:i a', strtotime($mt->start_time)) }}</li>
                                 @endforeach
                                 </ul>
                             </div>
