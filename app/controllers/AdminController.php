@@ -125,11 +125,41 @@ class AdminController extends BaseController {
     public function manageShowtime($cinemaId)
     {
         $title = 'Manage Showtime';
+        $cinema_id = $cinemaId;
         $movie = Movie::find($cinemaId);
         $cinemaTimes = CinemaTime::where('cinema_id', $cinemaId)->get();
         $times = Time::all();
 
-        return View::make('admin.cinema-add-showtime', compact('title', 'movie', 'cinemaTimes', 'times'));
+        return View::make('admin.cinema-update-datetime', compact('title', 'cinema_id', 'movie', 'cinemaTimes', 'times'));
+    }
+
+    public function updateCinema()
+    {
+        $cinemaId = Input::get('cinema_id');
+        $showingDate = Input::get('movie_showing_date');
+
+        $times = array_except(Input::all(), ['cinema_id', 'movie_showing_date', '_token']);
+
+        CinemaTime::where('cinema_id', $cinemaId)->delete();
+
+        Movie::where('cinema_id', $cinemaId)->update([
+            'showing_date'  =>  $showingDate
+        ]);
+
+        for ($i = 0; $i < count($this->manipulateTimes($times)); $i++)
+        {
+            CinemaTime::create([
+                'cinema_id' =>  $cinemaId,
+                'time_id'   =>  (int) $this->manipulateTimes($times)[$i]
+            ]);
+        }
+
+        return Redirect::back()->withMessage('Updated Successfully');
+    }
+
+    private function manipulateTimes($times)
+    {
+        return explode(', ', str_replace('time_', '', implode(', ', array_keys($times))));
     }
 
     public function ticket()

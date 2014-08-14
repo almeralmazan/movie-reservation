@@ -75,6 +75,7 @@ Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function
     Route::post('reserved-seat', 'AdminController@reservedSeat');
     Route::get('cinema', 'AdminController@cinema');
     Route::get('manage-showtime/{cinemaId}', 'AdminController@manageShowtime');
+    Route::post('update/cinema', 'AdminController@updateCinema');
     Route::get('transaction', 'AdminController@transaction');
     Route::get('pay/transaction/{transactionId}', 'AdminController@payTransactionToBank');
     Route::get('delete/transaction/{transactionId}', 'AdminController@deleteTransaction');
