@@ -79,7 +79,7 @@ var controllerPage = function () {
             );
         });
 
-        // Delete a movie on dashboard
+        // Delete a transaction on transaction dashboard page
         $(document).on('click', '.delete-transaction', function () {
             var transactionId = $(this).data('transaction-id');
 
@@ -88,6 +88,20 @@ var controllerPage = function () {
                 function (accept) {
                     if (accept) {
                         location.href = '/admin/dashboard/delete/transaction/' + transactionId;
+                    }
+                }
+            );
+        });
+
+        // Pay transaction on transaction dashboard page
+        $(document).on('click', '.pay-transaction', function () {
+            var transactionId = $(this).data('transaction-id');
+
+            bootbox.confirm(
+                'Are you sure you want to set this to Paid status?',
+                function (accept) {
+                    if (accept) {
+                        location.href = '/admin/dashboard/pay/transaction/' + transactionId;
                     }
                 }
             );

@@ -144,6 +144,18 @@ class AdminController extends BaseController {
         return View::make('admin.transaction', compact('title'));
     }
 
+    public function payTransactionToBank($transactionId)
+    {
+        $transactionNumber = 'PSB-' . strtoupper( str_random(8) );
+
+        $transaction = Transaction::find($transactionId);
+        $transaction->transaction_number = $transactionNumber;
+        $transaction->paid_status = 1;
+        $transaction->save();
+
+        return Redirect::back()->withMessage('Paid successfully');
+    }
+
     public function deleteTransaction($transactionId)
     {
         Transaction::find($transactionId)->delete();

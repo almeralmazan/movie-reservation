@@ -65,7 +65,7 @@
                             </span>
                         </td>
                         <td>
-                            <a href="" class="btn btn-xs btn-primary" ng-show="transaction.paid_status == 0">
+                            <a href="#" data-transaction-id="{[ transaction.id ]}" class="btn btn-xs btn-primary pay-transaction" ng-show="transaction.paid_status == 0">
                                 Pay now
                             </a>
                             <a href="#" data-transaction-id="{[ transaction.id ]}" class="btn btn-xs btn-danger delete-transaction" ng-show="transaction.paid_status == 0">

@@ -15,6 +15,7 @@ class CreateTransactionsTable extends Migration {
         Schema::create('transactions', function($table)
         {
             $table->increments('id');
+            $table->string('transaction_number')->default('');
             $table->integer('receipt_number');
             $table->tinyInteger('tickets_bought');
             $table->integer('burger_bought');
