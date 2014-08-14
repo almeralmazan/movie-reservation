@@ -277,10 +277,6 @@ class AdminController extends BaseController {
                                 'transactions.paid_status'
                             )
                             ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
-<<<<<<< HEAD
-                            ->join('users', 'users.first_name', '=', 'reserved_seats.customer_name')
-=======
->>>>>>> aug_14_2014
                             ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
                             ->join('times', 'times.id', '=', 'reserved_seats.time_id')
                             ->distinct()
