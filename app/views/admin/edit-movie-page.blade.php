@@ -21,7 +21,7 @@
         </div>
     </div>
     @endif
-    
+
     <div class="row margin-top">
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-lg">
