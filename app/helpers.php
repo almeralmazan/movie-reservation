@@ -10,6 +10,14 @@ function show_times($movieId)
             ->get();
 }
 
+function show_cinema_number($movieId)
+{
+    return DB::table('movies')
+            ->select('movies.cinema_id')
+            ->where('movies.id', $movieId)
+            ->first();
+}
+
 function show_movie_title($cinemaId)
 {
     return DB::table('movies')

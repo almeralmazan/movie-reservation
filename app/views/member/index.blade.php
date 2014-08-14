@@ -13,6 +13,8 @@
         <div class="row">
             <div class="col-sm-12 col-md-4">
                 {{ HTML::image('img/movies/' . $movie->image, null, ['class' => 'img-rounded img-responsive', 'height' => '300']) }}
+                <?php $cinema_number = show_cinema_number($movie->id) ?>
+                <h4>Cinema# {{ $cinema_number->cinema_id }}</h4>
             </div>
 
             <div class="col-sm-12 col-md-8">
