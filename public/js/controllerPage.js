@@ -412,37 +412,93 @@ var controllerPage = function () {
                 seatsContent.empty();
 
                 var html = '';
-                if (data.length === 0) {
+                var addColumnCounter = 0;
+
+                if (data.length == 0) {
                     for (var index = 0; index < 50; index++) {
+
+                        addColumnCounter++;
+
                         html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
                         html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
                         html += "</div>";
+
+
+                        if (addColumnCounter % 5 == 0) {
+
+                            if ((index + 1) % 10 == 0) {
+                                html += '';
+                            } else {
+                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                            }
+
+                        }
                     }
                 } else {
                     var currentIndexValue = 0;
 
                     for (var index = 0; index < 50; index++) {
-                        if (data[currentIndexValue] !== undefined &&
-                            (index + 1) === data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status === 1) {
+                        if (data[currentIndexValue] != undefined &&
+                            (index + 1) == data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status == 1) {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                             html += "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
                             html += "</div>";
 
                             currentIndexValue++;
 
-                        } else if (data[currentIndexValue] !== undefined &&
-                            (index + 1) === data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status === 0) {
+                            addColumnCounter++;
+
+                            if (addColumnCounter % 5 == 0) {
+
+                                if ((index + 1) % 10 == 0) {
+                                    html += '';
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                }
+
+                            }
+
+                        } else if (data[currentIndexValue] != undefined &&
+                            (index + 1) == data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status == 0) {
 
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                             html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
                             html += "</div>";
 
+                            addColumnCounter++;
+
+                            if (addColumnCounter % 5 == 0) {
+
+                                if ((index + 1) % 10 == 0) {
+                                    html += '';
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                }
+
+                            }
+
                         } else {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
                             html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
                             html += "</div>";
+
+                            addColumnCounter++;
+
+                            if (addColumnCounter % 5 == 0) {
+
+                                if ((index + 1) % 10 == 0) {
+                                    html += '';
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                }
+
+                            }
                         }
                     }
                 }
@@ -460,44 +516,104 @@ var controllerPage = function () {
         dataService.getMemberReservedSeats(timeId)
             .done(function (data) {
 
-                console.log(data);
-
                 var seatsContent = $('#populate-seats');
                 seatsContent.empty();
 
                 var html = '';
-                if (data.length === 0) {
+                var addColumnCounter = 0;
+
+                if (data.length == 0) {
                     for (var index = 0; index < 50; index++) {
+
+                        addColumnCounter++;
+
                         html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
                         html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
                         html += "</div>";
+
+
+                        if (addColumnCounter % 5 == 0) {
+
+                            if ((index + 1) % 10 == 0) {
+                                html += '';
+                            } else {
+                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                            }
+
+                        }
                     }
+
+
+
                 } else {
                     var currentIndexValue = 0;
 
                     for (var index = 0; index < 50; index++) {
-                        if (data[currentIndexValue] !== undefined &&
-                            (index + 1) === data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status === 1) {
+                        if (data[currentIndexValue] != undefined &&
+                            (index + 1) == data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status == 1) {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                             html += "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
                             html += "</div>";
 
                             currentIndexValue++;
 
-                        } else if (data[currentIndexValue] !== undefined &&
-                            (index + 1) === data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status === 0) {
+                            addColumnCounter++;
+
+                            if (addColumnCounter % 5 == 0) {
+
+                                if ((index + 1) % 10 == 0) {
+                                    html += '';
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                }
+
+                            }
+
+
+                        } else if (data[currentIndexValue] != undefined &&
+                            (index + 1) == data[currentIndexValue].seat_number &&
+                            data[currentIndexValue].paid_status == 0) {
 
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                             html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
                             html += "</div>";
 
+                            addColumnCounter++;
+
+                            if (addColumnCounter % 5 == 0) {
+
+                                if ((index + 1) % 10 == 0) {
+                                    html += '';
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                }
+
+                            }
+
+
                         } else {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
                             html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
                             html += "</div>";
+
+                            addColumnCounter++;
+
+                            if (addColumnCounter % 5 == 0) {
+
+                                if ((index + 1) % 10 == 0) {
+                                    html += '';
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                }
+
+                            }
                         }
+
                     }
                 }
 
