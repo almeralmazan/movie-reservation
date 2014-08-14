@@ -13,6 +13,15 @@
             </a>
         </div>
     </div>
+
+    @if (Session::has('message'))
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+        </div>
+    </div>
+    @endif
+    
     <div class="row margin-top">
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-lg">
@@ -28,19 +37,19 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {{ Form::open(['url', '/', 'class' => 'form-horizontal', 'role' => 'form']) }}
+                        {{ Form::open(['url' => 'admin/dashboard/update-movie/' . $movie->id, 'class' => 'form-horizontal', 'role' => 'form']) }}
                             <div class="form-group">
                                 <label for="movie-title" class="col-sm-3 control-label">Movie title</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="movie-title" name="movie_title" value="{{ $movie->title }}" placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="movie-banner" class="col-sm-3 control-label">Image</label>
-                                <div class="col-sm-8">
-                                    <input type="file" id="movie-banner">
-                                </div>
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label for="movie-banner" class="col-sm-3 control-label">Image</label>-->
+<!--                                <div class="col-sm-8">-->
+<!--                                    <input type="file" id="movie-banner">-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="form-group">
                                 <label for="movie-description" class="col-sm-3 control-label">Description</label>
                                 <div class="col-sm-8">
@@ -50,7 +59,7 @@
                             <div class="form-group">
                                 <label for="movie-trailer" class="col-sm-3 control-label">Embed URL Trailer</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="movie-trailer" name="movie_url_trailer" value="{{ $movie->trailer_url }}">
+                                    <input type="text" class="form-control" id="movie-trailer" name="movie_trailer_url" value="{{ $movie->trailer_url }}">
                                 </div>
                             </div>
                             <div class="form-group">

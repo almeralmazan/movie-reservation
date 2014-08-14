@@ -58,6 +58,17 @@ class AdminController extends BaseController {
         return View::make('admin.edit-movie-page', compact('title', 'movie'));
     }
 
+    public function updateMovie($movieId)
+    {
+        $movie = Movie::find($movieId);
+        $movie->title = Input::get('movie_title');
+        $movie->description = Input::get('movie_description');
+        $movie->trailer_url = Input::get('movie_trailer_url');
+        $movie->save();
+
+        return Redirect::back()->withMessage('Updated Successfully!');
+    }
+
     public function member()
     {
         $title = 'Member Page';

@@ -69,6 +69,7 @@ Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function
     Route::post('add-movie', 'AdminController@addMovie');
     Route::get('delete/movie/{movieId}', 'AdminController@deleteMovie');
     Route::get('edit-movie-page/{movieId}', 'AdminController@editMovie');
+    Route::post('update-movie/{movieId}', 'AdminController@updateMovie');
     Route::get('member', 'AdminController@member');
     Route::get('seat', 'AdminController@seat');
     Route::post('reserved-seat', 'AdminController@reservedSeat');
