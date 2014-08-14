@@ -27,29 +27,30 @@
                             <small>Selected Movie:</small> {{ $movie->title }}
                         </h2>
                     </div>
-                    <div class="col-md-3">
-                        <h5>
-                            <strong>Movie</strong>
-                        </h5>
+<!--                    <div class="col-md-3">-->
+<!--                        <h5>-->
+<!--                            <strong>Movie</strong>-->
+<!--                        </h5>-->
+<!---->
+<!--                        <select class="form-control" id="movie">-->
+<!--                            <option> -- Select Movie -- </option>-->
+<!--                            <option>How To Train Your Dragon 2</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
 
-                        <select class="form-control" id="movie">
-                            <option> -- Select Movie -- </option>
-                            <option>How To Train Your Dragon 2</option>
-                        </select>
-                    </div>
-
+                    {{ Form::open(['url' => 'admin/dashboard/update/cinema']) }}
                     <div class="col-md-12">
                         <h5>
                             <strong>Showing date:</strong>
                         </h5>
 
-                        <div class="input-group date form_date col-md-3" data-date="" data-date-format="MM dd yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <div class="input-group date form_date col-md-3" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                             <input name="movie_showing_date" class="form-control" size="16" type="text" value="{{ $movie->showing_date }}" readonly>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
 
-                        <input type="hidden" id="dtp_input2" value="" />
+                        <input type="hidden" name="cinema_id" id="cinema-id" value="{{ $cinema_id }}" />
                     </div>
                     <div class="col-md-12">
                         <h5><strong>Showtimes</strong></h5>
@@ -70,8 +71,9 @@
                     </div>
 
                     <div class="col-md-4 col-md-offset-4">
-                        <button class="btn btn-primary btn-block">Update</button>
+                        <button type="submit" class="btn btn-primary btn-block">Update</button>
                     </div>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

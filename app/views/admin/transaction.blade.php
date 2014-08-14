@@ -29,7 +29,6 @@
                 <thead>
                     <th>Receipt #</th>
                     <th>Name</th>
-                    <th>Contact #</th>
                     <th>Movie Watched</th>
                     <th>Date</th>
                     <th>Showtime</th>
@@ -46,7 +45,6 @@
                     <tr ng-repeat="transaction in transactions | filter:search_transaction | filter:ps">
                         <td>{[ transaction.receipt_number ]}</td>
                         <td>{[ transaction.customer_name ]}</td>
-                        <td>{[ transaction.mobile_number ]}</td>
                         <td>{[ transaction.movie_title ]}</td>
                         <td>{[ transaction.created_at | date:'shortDate' ]}</td>
                         <td>{[ transaction.start_time ]}</td>
