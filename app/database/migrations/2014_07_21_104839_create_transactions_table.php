@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration {
             $table->integer('burger_bought');
             $table->integer('fries_bought');
             $table->integer('soda_bought');
-            $table->decimal('total', 5, 2);
+            $table->decimal('total', 8, 2);
             $table->boolean('paid_status');
             $table->timestamps();
         });

@@ -7,14 +7,14 @@ class TransactionTableSeeder extends Seeder {
         DB::table('transactions')->delete();
 
         Transaction::create([
-            'transaction_number'    =>  'EC-9CU21348NC477050L',
+            'transaction_number'    =>  '',
             'receipt_number'        =>  1,
             'tickets_bought'        =>  3,
             'burger_bought'         =>  1,
             'fries_bought'          =>  1,
             'soda_bought'           =>  1,
-            'total'                 =>  295,
-            'paid_status'           =>  1
+            'total'                 =>  880,
+            'paid_status'           =>  0
         ]);
 
         Transaction::create([
@@ -24,7 +24,7 @@ class TransactionTableSeeder extends Seeder {
             'burger_bought'         =>  3,
             'fries_bought'          =>  3,
             'soda_bought'           =>  3,
-            'total'                 =>  435,
+            'total'                 =>  1140,
             'paid_status'           =>  1
         ]);
 
@@ -35,7 +35,7 @@ class TransactionTableSeeder extends Seeder {
             'burger_bought'         =>  2,
             'fries_bought'          =>  2,
             'soda_bought'           =>  2,
-            'total'                 =>  365,
+            'total'                 =>  1010,
             'paid_status'           =>  1
         ]);
 
@@ -46,7 +46,7 @@ class TransactionTableSeeder extends Seeder {
             'burger_bought'         =>  0,
             'fries_bought'          =>  0,
             'soda_bought'           =>  0,
-            'total'                 =>  75,
+            'total'                 =>  250,
             'paid_status'           =>  0
         ]);
 
@@ -57,7 +57,7 @@ class TransactionTableSeeder extends Seeder {
             'burger_bought'         =>  2,
             'fries_bought'          =>  2,
             'soda_bought'           =>  2,
-            'total'                 =>  290,
+            'total'                 =>  760,
             'paid_status'           =>  1
         ]);
     }

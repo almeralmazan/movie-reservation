@@ -20,9 +20,9 @@ class UserTableSeeder extends Seeder {
         User::create([
             'first_name'    =>  'ayi',
             'last_name'     =>  'madia',
-            'email'         =>  'ayi@gmail.com',
+            'email'         =>  'almeralmazan@gmail.com',
             'password'      =>  Hash::make('ayi'),
-            'mobile_number' =>  '+639353626640',
+            'mobile_number' =>  '+639236923431',
             'admin'         =>  2,   // member
             'code'          =>  '',
             'active'        =>  1

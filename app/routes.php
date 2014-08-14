@@ -86,4 +86,7 @@ Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function
     Route::get('get-movie-times/{cinemaId}', 'AdminController@getMovieTimesById');
     Route::get('get-admin-reserved-seats/{cinemaId}/{timeId}', 'AdminController@getReservedSeats');
     Route::get('get-all-transactions', 'AdminController@getAllTransactions');
+
+    // email
+    Route::get('receipt-ticket', 'AdminController@receiptTicket');
 });
