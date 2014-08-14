@@ -35,10 +35,12 @@ class AdminController extends BaseController {
         $file->move($destinationPath, $filename);
 
         Movie::create([
-            'title'         => Input::get('movie_title'),
-            'description'   => Input::get('movie_description'),
-            'image'         => $filename,
-            'trailer_url'   => Input::get('trailer_url'),
+            'title'         =>  Input::get('movie_title'),
+            'description'   =>  Input::get('movie_description'),
+            'image'         =>  $filename,
+            'trailer_url'   =>  Input::get('trailer_url'),
+            'showing_date'  =>  '0000-00-00',
+            'cinema_id'     =>  0
         ]);
 
         return Redirect::back()->withMessage('Created successfully');
