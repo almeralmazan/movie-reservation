@@ -132,22 +132,31 @@ class AdminController extends BaseController {
         return View::make('admin.cinema-add-showtime', compact('title', 'movie', 'cinemaTimes', 'times'));
     }
 
-    public function transaction()
-    {
-        $title = 'Transaction Page';
-        return View::make('admin.transaction', compact('title'));
-    }
-
     public function ticket()
     {
         $title = 'Ticket Page';
         return View::make('admin.ticket', compact('title'));
     }
 
+    public function transaction()
+    {
+        $title = 'Transaction Page';
+        return View::make('admin.transaction', compact('title'));
+    }
+
+    public function deleteTransaction($transactionId)
+    {
+        Transaction::find($transactionId)->delete();
+        ReservedSeat::where('transaction_id', $transactionId)->delete();
+
+        return Redirect::back()->withDelete('Deleted successfully');
+    }
+
     public function getAllTransactions()
     {
         $transactions = DB::table('transactions')
                             ->select(
+                                'transactions.id',
                                 'transactions.receipt_number',
                                 'reserved_seats.customer_name',
                                 'users.mobile_number',

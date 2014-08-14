@@ -79,6 +79,19 @@ var controllerPage = function () {
             );
         });
 
+        // Delete a movie on dashboard
+        $(document).on('click', '.delete-transaction', function () {
+            var transactionId = $(this).data('transaction-id');
+
+            bootbox.confirm(
+                'Are you sure you want to delete?',
+                function (accept) {
+                    if (accept) {
+                        location.href = '/admin/dashboard/delete/transaction/' + transactionId;
+                    }
+                }
+            );
+        });
 
         $('#show-times').on('change', function () {
             var cinemaId = $('#movie-select').val();
