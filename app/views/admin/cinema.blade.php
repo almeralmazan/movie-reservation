@@ -24,9 +24,9 @@
                 <?php $movie = show_movie_title($cinema->id) ?>
                 <h5>
                     {{ $movie->title }}
-                    <a href="{{ URL::to('admin/dashboard/remove/movie', [$cinema->id]) }}" class="btn btn-xs btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </a>
+<!--                    <a href="{{ URL::to('admin/dashboard/remove/movie', [$cinema->id]) }}" class="btn btn-xs btn-danger">-->
+<!--                        <span class="glyphicon glyphicon-remove"></span>-->
+<!--                    </a>-->
                 </h5>
 
 
