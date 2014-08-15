@@ -11,6 +11,7 @@ var controllerPage = function () {
         getReservedSeats,
         getAdminReservedSeats,
         saveAdminReservedSeats,
+        adminWalkinSaveReserveSeats,
         getMemberReservedSeats;
 
     init = function () {
