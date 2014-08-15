@@ -97,11 +97,54 @@ class AdminController extends BaseController {
 
     public function reservedSeat()
     {
-        $burger_bought = Input::get('burger_bought');
-        $fries_bought = Input::get('fries_bought');
-        $soda_bought = Input::get('soda_bought');
+        $cinemaId           = Input::get('cinemaId');
+        $selectedTime       = Input::get('selectedTime');
+        $walkinName         = Input::get('walkinName');
+        $seatsReserved      = Input::get('seatsReserved');
+        $ticketsQuantity    = Input::get('seatsQuantity');
+        $burgerQuantity     = Input::get('burgerQuantity');
+        $friesQuantity      = Input::get('friesQuantity');
+        $sodaQuantity       = Input::get('sodaQuantity');
+        $totalBurgerPrice   = Input::get('totalBurgerPrice');
+        $totalFriesPrice    = Input::get('totalFriesPrice');
+        $totalSodaPrice     = Input::get('totalSodaPrice');
+        $totalPrice         = Input::get('totalPrice');
 
-        dd($burger_bought);
+        // Get transaction count
+        $transactionCount = Transaction::count();
+
+
+        $reservedSeats = explode(',', str_replace('seat-', '', $seatsReserved));
+
+        for ($i = 0; $i < count($reservedSeats); $i++)
+        {
+            ReservedSeat::create([
+                'customer_name'     =>  $walkinName,
+                'customer_status'   =>  'walkin',
+                'transaction_id'    =>  $transactionCount + 1,
+                'seat_number'       =>  $reservedSeats[$i],
+                'cinema_id'         =>  $cinemaId,
+                'time_id'           =>  $selectedTime
+            ]);
+        }
+
+        Transaction::create([
+            'transaction_number'    =>  'WI-' . strtoupper(str_random(8)),
+            'receipt_number'        =>  $transactionCount + 1,
+            'tickets_bought'        =>  $ticketsQuantity,
+            'burger_bought'         =>  $burgerQuantity,
+            'fries_bought'          =>  $friesQuantity,
+            'soda_bought'           =>  $sodaQuantity,
+            'total'                 =>  $totalPrice,
+            'paid_status'           =>  1
+        ]);
+
+        // store walkin name in session
+        Session::put('customer_name', $walkinName);
+
+        return Response::json([
+            'transactionId' =>  ($transactionCount + 1)
+        ]);
     }
 
     public function getMovieTimesById($cinemaId)
@@ -146,20 +189,20 @@ class AdminController extends BaseController {
             'showing_date'  =>  $showingDate
         ]);
 
-        for ($i = 0; $i < count($this->manipulateTimes($times)); $i++)
+        for ($i = 0; $i < count($this->getOnlyTheNumbers('time_', $times)); $i++)
         {
             CinemaTime::create([
                 'cinema_id' =>  $cinemaId,
-                'time_id'   =>  (int) $this->manipulateTimes($times)[$i]
+                'time_id'   =>  (int) $this->getOnlyTheNumbers('time_', $times)[$i]
             ]);
         }
 
         return Redirect::back()->withMessage('Updated Successfully');
     }
 
-    private function manipulateTimes($times)
+    private function getOnlyTheNumbers($wordToReplace, $times)
     {
-        return explode(', ', str_replace('time_', '', implode(', ', array_keys($times))));
+        return explode(', ', str_replace($wordToReplace, '', implode(', ', array_keys($times))));
     }
 
     public function ticket()
@@ -168,10 +211,50 @@ class AdminController extends BaseController {
         return View::make('admin.ticket', compact('title'));
     }
 
-    public function receiptTicket()
+    public function receiptTicket($transaction_id)
     {
+        $transactionId = (int) $transaction_id;
         $title = 'Receipt Ticket Page';
-        return View::make('emails.ticket.receipt-ticket', compact('title'));
+
+        $seats = ReservedSeat::where('transaction_id', $transactionId)->lists('seat_number');
+        $seatNumbers = implode(', ', $seats);
+
+        $user = DB::table('transactions')
+            ->select(
+                'transactions.transaction_number',
+                'movies.title',
+                'reserved_seats.cinema_id',
+                'times.start_time',
+                'movies.showing_date',
+                'transactions.tickets_bought',
+                'transactions.burger_bought',
+                'transactions.fries_bought',
+                'transactions.soda_bought',
+                'transactions.total'
+            )
+            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+            ->where('transactions.id', $transactionId)
+            ->first();
+
+        $movieTitle = $user->title;
+        $cinemaNumber = $user->cinema_id;
+        $startTime = $user->start_time;
+        $showingDate = $user->showing_date;
+        $transactionNumber = $user->transaction_number;
+        $ticketsBought = $user->tickets_bought;
+        $burgerBought = $user->burger_bought;
+        $friesBought = $user->fries_bought;
+        $sodaBought = $user->soda_bought;
+        $totalPrice = $user->total;
+        $fullName = Session::get('customer_name');
+
+        return View::make('emails.ticket.receipt-ticket', compact(
+            'title', 'seatNumbers', 'movieTitle', 'cinemaNumber', 'startTime',
+            'showingDate', 'transactionNumber', 'ticketsBought', 'burgerBought',
+            'friesBought', 'sodaBought', 'totalPrice', 'fullName'
+        ));
     }
 
     public function transaction()

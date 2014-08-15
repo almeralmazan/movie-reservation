@@ -48,27 +48,32 @@
                             <th>Purchased</th>
                             <th>Qty</th>
                             <th>Price</th>
+                            <th>Sub Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Seats</td>
                             <td>{{ $ticketsBought }}</td>
+                            <td>250</td>
                             <td>{{ $ticketsBought * 250 }}</td>
                         </tr>
                         <tr>
                             <td>Burger</td>
                             <td>{{ $burgerBought }}</td>
+                            <td>50</td>
                             <td>{{ $burgerBought * 50 }}</td>
                         </tr>
                         <tr>
                             <td>Fries</td>
                             <td>{{ $friesBought }}</td>
+                            <td>50</td>
                             <td>{{ $friesBought * 50 }}</td>
                         </tr>
                         <tr>
                             <td>Soda</td>
                             <td>{{ $sodaBought }}</td>
+                            <td>30</td>
                             <td>{{ $sodaBought * 30 }}</td>
                         </tr>
                         <tr>

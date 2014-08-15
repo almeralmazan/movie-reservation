@@ -43,9 +43,34 @@ var dataService = function () {
         return $.getJSON(urlBase + '/member/get-member-reserved-seats/' + timeId);
     },
 
+    adminWalkinSaveReserveSeats = function(
+            cinemaId, selectedTime, walkinName, seatsReserved,
+            seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+            totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        ) {
+        return $.ajax({
+            url: urlBase + '/admin/dashboard/reserved-seat',
+            data: {
+                cinemaId: cinemaId,
+                selectedTime: selectedTime,
+                walkinName: walkinName,
+                seatsReserved: seatsReserved,
+                seatsQuantity: seatsQuantity,
+                burgerQuantity: burgerQuantity,
+                friesQuantity: friesQuantity,
+                sodaQuantity: sodaQuantity,
+                totalBurgerPrice: totalBurgerPrice,
+                totalFriesPrice: totalFriesPrice,
+                totalSodaPrice: totalSodaPrice,
+                totalPrice: totalPrice
+            },
+            type: 'POST'
+        })
+    },
+
     saveAdminReservedSeats = function(seatsArray, movieId, timeId, customerName) {
         return $.ajax({
-            url: urlBase + '/admin/save-reserved-seats',
+            url: urlBase + '/admin/dashboard/reserved-seat',
             data: {
                 adminReservedSeats: seatsArray,
                 movieId: movieId,
@@ -81,6 +106,7 @@ var dataService = function () {
         getMovieTimesById: getMovieTimesById,
         getAdminReservedSeats: getAdminReservedSeats,
         getMemberReservedSeats: getMemberReservedSeats,
+        adminWalkinSaveReserveSeats: adminWalkinSaveReserveSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
         saveReservedSeats: saveReservedSeats,
         depositAmount: depositAmount

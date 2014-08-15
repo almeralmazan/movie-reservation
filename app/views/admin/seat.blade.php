@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('header')
-@include('layouts.partials.nav')
+    @include('layouts.partials.nav')
 @stop
 
 @section('content')
@@ -18,7 +18,7 @@
             <form class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="" for="cinema">Movie title</label>
-                    <select name="movie_id" id="movie-select" class="form-control">
+                    <select name="cinema_id" id="movie-select" class="form-control">
                         <option value="">-- Select Movies --</option>
                         @foreach ($movies as $movie)
                         <option value="{{ $movie->cinema_id }}">{{ $movie->title }}</option>
@@ -83,7 +83,7 @@
                                         <tr>
                                             <td class="col-md-7"><em id="reserving-for-seat"></em></h4></td>
                                             <td id="total-seats" class="col-md-3 text-center"></td>
-                                            <td id="price-per-seat" class="col-md-1 text-center">75</td>
+                                            <td id="price-per-seat" class="col-md-1 text-center">250</td>
                                             <td id="total-seat-price" class="sub-totals col-md-1 text-center">0</td>
                                         </tr>
                                     </tbody>
@@ -105,10 +105,10 @@
                                             </td>
                                             <td class="col-md-3">
                                                 <input type="number" name="burger_bought" class="form-control"
-                                                       id="qty-burger" min="0">
+                                                       id="qty-burger" value="0" min="0">
                                             </td>
                                             <td id="price-per-burger" class="col-md-1 text-center">
-                                                30
+                                                50
                                             </td>
                                             <td id="total-burger-price" class="col-md-1 text-center">0</td>
                                         </tr>
@@ -117,11 +117,11 @@
                                                 <em>Fries</em>
                                             </td>
                                             <td class="col-md-3">
-                                                <input type="number" name="fries_bought" class="form-control" id="qty-fries"
-                                                       min="0">
+                                                <input type="number" name="fries_bought" class="form-control"
+                                                       id="qty-fries" value="0" min="0">
                                             </td>
                                             <td id="price-per-fries" class="col-md-1 text-center">
-                                                25
+                                                50
                                             </td>
                                             <td id="total-fries-price" class="col-md-1 text-center">0</td>
                                         </tr>
@@ -130,16 +130,18 @@
                                                 <em>Soda</em>
                                             </td>
                                             <td class="col-md-3">
-                                                <input type="number" name="soda_bought" class="form-control" id="qty-soda"
-                                                       min="0">
+                                                <input type="number" name="soda_bought" class="form-control"
+                                                       id="qty-soda" value="0" min="0">
                                             </td>
                                             <td id="price-per-soda" class="col-md-1 text-center">
-                                                15
+                                                30
                                             </td>
                                             <td id="total-soda-price" class="col-md-1 text-center">0</td>
                                         </tr>
                                         <tr>
-                                            <td></td>
+                                            <td>
+                                                <input type="text" name="walkin_name" id="walkin-name" class="form-control" placeholder="Walkin Name" required />
+                                            </td>
                                             <td></td>
                                             <td class="text-right"><h4><strong>Total: </strong></h4></td>
                                             <td class="text-center text-danger"><h4 id="total"><strong></strong></h4></td>

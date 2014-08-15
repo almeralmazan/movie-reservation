@@ -89,5 +89,5 @@ Route::group(['before' => 'auth|admin', 'prefix' => 'admin/dashboard'], function
     Route::get('get-all-transactions', 'AdminController@getAllTransactions');
 
     // email
-    Route::get('receipt-ticket', 'AdminController@receiptTicket');
+    Route::get('receipt-ticket/{transactionId}', 'AdminController@receiptTicket');
 });

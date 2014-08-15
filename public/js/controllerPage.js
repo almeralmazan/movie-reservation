@@ -118,10 +118,28 @@ var controllerPage = function () {
         $('#admin-reserve-seat').on('submit', function(event) {
             event.preventDefault();
 
-            var seatsReserved = $('#reserving-for-seat').text();
-            var totalSeats = $('#total-seats').text();
+            var cinemaId = $('#movie-select').val();
+            var selectedTime = $('#show-times').val();
 
-            console.log(typeof seatsReserved);
+            var walkinName = $('#walkin-name').val();
+//            var customerStatus = 'walkin';
+            var seatsReserved = $('#reserving-for-seat').text();
+
+            var seatsQuantity = $('#total-seats').text();
+            var burgerQuantity = $('#qty-burger').val();
+            var friesQuantity = $('#qty-fries').val();
+            var sodaQuantity = $('#qty-soda').val();
+
+            var totalBurgerPrice = $('#total-burger-price').text();
+            var totalFriesPrice = $('#total-fries-price').text();
+            var totalSodaPrice = $('#total-soda-price').text();
+            var totalPrice = $('h4#total').text();
+
+            adminWalkinSaveReserveSeats(
+                cinemaId, selectedTime, walkinName, seatsReserved,
+                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+            );
 
 //            location.href = '/admin/dashboard/seat';
         });
@@ -649,6 +667,25 @@ var controllerPage = function () {
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
             });
+    };
+
+    adminWalkinSaveReserveSeats = function(
+            cinemaId, selectedTime, walkinName, seatsReserved,
+            seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+            totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        ) {
+        dataService.adminWalkinSaveReserveSeats(
+            cinemaId, selectedTime, walkinName, seatsReserved,
+            seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+            totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        )
+        .done(function (data) {
+            console.log('Success sending data...');
+            location.href = urlBase + '/admin/dashboard/receipt-ticket/' + data.transactionId
+        })
+        .fail(function (jqXHR, textStatus, error) {
+            console.log(textStatus);
+        });
     };
 
     saveAdminReservedSeats = function (seatsArray, movieId, timeId, customerName) {
