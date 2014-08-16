@@ -108,6 +108,8 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header"></div>
+
+                            {{ Form::open(['url' => 'member/reserved-seat', 'id' => 'member-reserve-seat']) }}
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
@@ -136,7 +138,7 @@
                                                     <th>Add-ons</th>
                                                     <th>Qty</th>
                                                     <th class="text-center">Price</th>
-                                                    <th class="text-center">Total</th>
+                                                    <th class="text-center">Sub Total</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -145,7 +147,7 @@
                                                         <em>Burger</em>
                                                     </td>
                                                     <td class="col-md-3">
-                                                        <input type="number" class="form-control" id="qty-burger" min="0">
+                                                        <input type="number" value="0" class="form-control" id="qty-burger" min="0">
                                                     </td>
                                                     <td id="price-per-burger" class="col-md-1 text-center">
                                                         50
@@ -157,7 +159,7 @@
                                                         <em>Fries</em>
                                                     </td>
                                                     <td class="col-md-3">
-                                                        <input type="number" class="form-control" id="qty-fries" min="0">
+                                                        <input type="number" value="0" class="form-control" id="qty-fries" min="0">
                                                     </td>
                                                     <td id="price-per-fries" class="col-md-1 text-center">
                                                         50
@@ -169,7 +171,7 @@
                                                         <em>Soda</em>
                                                     </td>
                                                     <td class="col-md-3">
-                                                        <input type="number" class="form-control" id="qty-soda" min="0">
+                                                        <input type="number" value="0" class="form-control" id="qty-soda" min="0">
                                                     </td>
                                                     <td id="price-per-soda" class="col-md-1 text-center">
                                                         30
@@ -191,8 +193,9 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>
-                                <a href="{{ URL::to('member/success-page') }}" id="bank-deposit" class="btn btn-warning">Bank Deposit</a>
+<!--                                <button type="button" class="btn btn-primary">Online Payment (Paypal)</button>-->
+                                <a href="{{ URL::to('member/online-payment') }}" id="online-deposit" class="btn btn-primary">Online Payment (Paypal)</a>
+                                {{ Form::submit('Bank Deposit', ['id' => 'bank-deposit', 'class' => 'btn btn-warning']) }}
                                 <p id="sms-loading-message" style="color: green; margin-top: 10px;"></p>
                             </div>
             </div>
