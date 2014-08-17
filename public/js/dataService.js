@@ -43,6 +43,31 @@ var dataService = function () {
         return $.getJSON(urlBase + '/member/get-member-reserved-seats/' + timeId);
     },
 
+    memberSaveReserveSeats = function(
+        cinemaId, selectedTime, walkinName, seatsReserved,
+        seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+        totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        ) {
+        return $.ajax({
+            url: urlBase + '/member/reserved-seat',
+            data: {
+                cinemaId: cinemaId,
+                selectedTime: selectedTime,
+                walkinName: walkinName,
+                seatsReserved: seatsReserved,
+                seatsQuantity: seatsQuantity,
+                burgerQuantity: burgerQuantity,
+                friesQuantity: friesQuantity,
+                sodaQuantity: sodaQuantity,
+                totalBurgerPrice: totalBurgerPrice,
+                totalFriesPrice: totalFriesPrice,
+                totalSodaPrice: totalSodaPrice,
+                totalPrice: totalPrice
+            },
+            type: 'POST'
+        })
+    },
+
     adminWalkinSaveReserveSeats = function(
             cinemaId, selectedTime, walkinName, seatsReserved,
             seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
@@ -106,6 +131,7 @@ var dataService = function () {
         getMovieTimesById: getMovieTimesById,
         getAdminReservedSeats: getAdminReservedSeats,
         getMemberReservedSeats: getMemberReservedSeats,
+        memberSavedReservedSeats: memberSaveReserveSeats,
         adminWalkinSaveReserveSeats: adminWalkinSaveReserveSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
         saveReservedSeats: saveReservedSeats,
