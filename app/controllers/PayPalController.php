@@ -1,5 +1,7 @@
 <?php
 
+use \Omnipay\Omnipay;
+
 class PayPalController extends BaseController {
 
     protected $gateway;
@@ -13,20 +15,66 @@ class PayPalController extends BaseController {
         $this->gateway->setTestMode(true);
     }
 
+    public function reservedSeat()
+    {
+        $cinemaId           = Input::get('cinemaId');
+        $selectedTime       = Input::get('selectedTime');
+        $memberName         = Input::get('memberName');
+        $seatsReserved      = Input::get('seatsReserved');
+        $ticketsQuantity    = Input::get('seatsQuantity');
+        $burgerQuantity     = Input::get('burgerQuantity');
+        $friesQuantity      = Input::get('friesQuantity');
+        $sodaQuantity       = Input::get('sodaQuantity');
+        $totalPrice         = Input::get('totalPrice');
+
+        // Get transaction count
+        $transactionCount = Transaction::count();
+
+
+        $reservedSeats = explode(',', str_replace('seat-', '', $seatsReserved));
+
+        for ($i = 0; $i < count($reservedSeats); $i++)
+        {
+            ReservedSeat::create([
+                'customer_name'     =>  $memberName,
+                'customer_status'   =>  'member-paypal',
+                'transaction_id'    =>  $transactionCount + 1,
+                'seat_number'       =>  $reservedSeats[$i],
+                'cinema_id'         =>  $cinemaId,
+                'time_id'           =>  $selectedTime
+            ]);
+        }
+
+        Transaction::create([
+            'transaction_number'    =>  Input::get('token'),
+            'receipt_number'        =>  $transactionCount + 1,
+            'tickets_bought'        =>  $ticketsQuantity,
+            'burger_bought'         =>  $burgerQuantity,
+            'fries_bought'          =>  $friesQuantity,
+            'soda_bought'           =>  $sodaQuantity,
+            'total'                 =>  $totalPrice,
+            'paid_status'           =>  1
+        ]);
+
+        // store walkin name in session
+        Session::put('customer_name', $memberName);
+
+        return Response::json([
+            'transactionId' =>  ($transactionCount + 1)
+        ]);
+    }
+
     public function buyWithPayPal()
     {
-        $applicant = DB::table('applicants')
-                        ->select('applicants.id', 'applicants.new_exam_level', 'applicants.controlno')
-                        ->where('controlno', Input::get('controlNumber'))
-                        ->first();
+        $user = User::find(Session::get('user_id'));
 
-        if ( isset($applicant) )
+        if ( isset($user) )
         {
             $response = $this->gateway->purchase([
                 'cancelUrl'     =>  getenv('DOMAIN_NAME') . 'cancel-payment',
-                'returnUrl'     =>  getenv('DOMAIN_NAME') . 'success-payment/' . $applicant->id,
-                'description'   =>  '',
-                'amount'        =>  '',
+                'returnUrl'     =>  getenv('DOMAIN_NAME') . 'success-payment/' . $user->id,
+                'description'   =>  'E-Movie Reservation Transaction',
+                'amount'        =>  '820.00',
                 'currency'      =>  'PHP'
             ])->send();
 

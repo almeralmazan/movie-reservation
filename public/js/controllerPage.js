@@ -11,6 +11,7 @@ var controllerPage = function () {
         getReservedSeats,
         getAdminReservedSeats,
         saveAdminReservedSeats,
+        memberPayOnline,
         memberSaveReserveSeats,
         adminWalkinSaveReserveSeats,
         getMemberReservedSeats;
@@ -116,7 +117,34 @@ var controllerPage = function () {
             getAdminReservedSeats(cinemaId, timeId);
         });
 
-        // Admin Reserve Seat
+        // Pay Online
+//        $('#online-deposit').on('click', function(e) {
+//            e.preventDefault();
+//
+//            var cinemaId = $('#cinema-id').val();
+//            var selectedTime = $('#show-start-time').val();
+//
+//            var memberName = $('#member-name').val();
+//            var seatsReserved = $('#reserving-for-seat').text();
+//
+//            var seatsQuantity = $('#total-seats').text();
+//            var burgerQuantity = $('#qty-burger').val();
+//            var friesQuantity = $('#qty-fries').val();
+//            var sodaQuantity = $('#qty-soda').val();
+//
+//            var totalBurgerPrice = $('#total-burger-price').text();
+//            var totalFriesPrice = $('#total-fries-price').text();
+//            var totalSodaPrice = $('#total-soda-price').text();
+//            var totalPrice = $('h4#total').text();
+//
+//            memberPayOnline(
+//                cinemaId, selectedTime, memberName, seatsReserved,
+//                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+//                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+//            );
+//        });
+
+        // Member Reserve Seat
         $('#member-reserve-seat').on('submit', function(event) {
             event.preventDefault();
 
@@ -696,6 +724,26 @@ var controllerPage = function () {
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
             });
+    };
+
+    memberPayOnline = function(
+            cinemaId, selectedTime, memberName, seatsReserved,
+            seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+            totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        ) {
+        dataService.memberPayOnline(
+                cinemaId, selectedTime, memberName, seatsReserved,
+                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+            )
+            .done(function (data) {
+                console.log('Success sending data...');
+                location.href = urlBase + '/member/receipt-ticket/' + data.transactionId
+            })
+            .fail(function (jqXHR, textStatus, error) {
+                console.log(textStatus);
+            });
+
     };
 
     memberSaveReserveSeats = function(
