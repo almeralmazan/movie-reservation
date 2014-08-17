@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "twilio/sdk": "3.12.4"
+        "twilio/sdk": "3.12.4",
+        "omnipay/paypal": "~2.0"
 	},
 	"autoload": {
 		"classmap": [
