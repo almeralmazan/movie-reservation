@@ -746,17 +746,17 @@ var controllerPage = function () {
             });
     };
 
-    depositAmount = function (amount) {
-        dataService.depositAmount(amount)
-            .done( function (data) {
-                console.log('Done');
-
-                window.location.href = urlBase + '/member/success-page'
-            })
-            .fail(function (jqXHR, textStatus, error) {
-                console.log(textStatus);
-            });
-    };
+//    depositAmount = function (amount) {
+//        dataService.depositAmount(amount)
+//            .done( function (data) {
+//                console.log('Done');
+//
+//                window.location.href = urlBase + '/member/success-page'
+//            })
+//            .fail(function (jqXHR, textStatus, error) {
+//                console.log(textStatus);
+//            });
+//    };
 
     saveReservedSeats = function (seatsArray, movieId, timeId) {
         dataService.saveReservedSeats(seatsArray, movieId, timeId)
