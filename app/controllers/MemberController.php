@@ -79,6 +79,174 @@ class MemberController extends BaseController {
 
     }
 
+    public function receiptTicket($transaction_id)
+    {
+        $transactionId = (int) $transaction_id;
+        $title = 'Receipt Ticket Page';
+
+        $seats = ReservedSeat::where('transaction_id', $transactionId)->lists('seat_number');
+        $seatNumbers = implode(', ', $seats);
+
+        $user = DB::table('transactions')
+            ->select(
+                'transactions.transaction_number',
+                'movies.title',
+                'reserved_seats.cinema_id',
+                'times.start_time',
+                'movies.showing_date',
+                'transactions.tickets_bought',
+                'transactions.burger_bought',
+                'transactions.fries_bought',
+                'transactions.soda_bought',
+                'transactions.total'
+            )
+            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+            ->where('transactions.id', $transactionId)
+            ->first();
+
+        $movieTitle = $user->title;
+        $cinemaNumber = $user->cinema_id;
+        $startTime = $user->start_time;
+        $showingDate = $user->showing_date;
+        $transactionNumber = $user->transaction_number;
+        $ticketsBought = $user->tickets_bought;
+        $burgerBought = $user->burger_bought;
+        $friesBought = $user->fries_bought;
+        $sodaBought = $user->soda_bought;
+        $totalPrice = $user->total;
+        $fullName = Session::get('customer_name');
+
+        return View::make('emails.ticket.receipt-ticket', compact(
+            'title', 'seatNumbers', 'movieTitle', 'cinemaNumber', 'startTime',
+            'showingDate', 'transactionNumber', 'ticketsBought', 'burgerBought',
+            'friesBought', 'sodaBought', 'totalPrice', 'fullName'
+        ));
+    }
+
+
+    public function reservedSeat()
+    {
+        $cinemaId           = Input::get('cinemaId');
+        $selectedTime       = Input::get('selectedTime');
+        $memberName         = Input::get('memberName');
+        $seatsReserved      = Input::get('seatsReserved');
+        $ticketsQuantity    = Input::get('seatsQuantity');
+        $burgerQuantity     = Input::get('burgerQuantity');
+        $friesQuantity      = Input::get('friesQuantity');
+        $sodaQuantity       = Input::get('sodaQuantity');
+        $totalPrice         = Input::get('totalPrice');
+
+        // Get transaction count
+        $transactionCount = Transaction::count();
+
+
+        $reservedSeats = explode(',', str_replace('seat-', '', $seatsReserved));
+
+        for ($i = 0; $i < count($reservedSeats); $i++)
+        {
+            ReservedSeat::create([
+                'customer_name'     =>  $memberName,
+                'customer_status'   =>  'member-bank',
+                'transaction_id'    =>  $transactionCount + 1,
+                'seat_number'       =>  $reservedSeats[$i],
+                'cinema_id'         =>  $cinemaId,
+                'time_id'           =>  $selectedTime
+            ]);
+        }
+
+        Transaction::create([
+            'transaction_number'    =>  'PSB-' . strtoupper(str_random(8)),
+            'receipt_number'        =>  $transactionCount + 1,
+            'tickets_bought'        =>  $ticketsQuantity,
+            'burger_bought'         =>  $burgerQuantity,
+            'fries_bought'          =>  $friesQuantity,
+            'soda_bought'           =>  $sodaQuantity,
+            'total'                 =>  $totalPrice,
+            'paid_status'           =>  1
+        ]);
+
+        // store walkin name in session
+        Session::put('customer_name', $memberName);
+
+        return Response::json([
+            'transactionId' =>  ($transactionCount + 1)
+        ]);
+    }
+
+    // Bank Deposit
+    public function payTransactionToBank($transactionId)
+    {
+        $transactionNumber = 'PSB-' . strtoupper( str_random(8) );
+
+        $transaction = Transaction::find($transactionId);
+        $transaction->transaction_number = $transactionNumber;
+        $transaction->paid_status = 1;
+        $transaction->save();
+
+        $seats = ReservedSeat::where('transaction_id', $transactionId)->lists('seat_number');
+        $seatNumbers = implode(', ', $seats);
+
+        $user = DB::table('users')
+            ->select(
+                'users.email',
+                'users.mobile_number',
+                'users.first_name',
+                'users.last_name',
+                'transactions.transaction_number',
+                'movies.title',
+                'reserved_seats.cinema_id',
+                'times.start_time',
+                'movies.showing_date',
+                'transactions.tickets_bought',
+                'transactions.burger_bought',
+                'transactions.fries_bought',
+                'transactions.soda_bought',
+                'transactions.total'
+            )
+            ->join('reserved_seats', 'reserved_seats.customer_name', '=', 'users.first_name')
+            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+            ->join('transactions', 'transactions.id', '=', 'reserved_seats.transaction_id')
+            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+            ->where('transactions.id', $transactionId)
+            ->first();
+
+        // Initiate sms sending to user
+        $account_sid = $_ENV['TWILIO_SID'];
+        $auth_token = $_ENV['TWILIO_AUTH_TOKEN'];
+        $client = new Services_Twilio($account_sid, $auth_token);
+
+        $client->account->messages->create(array(
+            'To' => $user->mobile_number,
+            'From' => $_ENV['TWILIO_ACCOUNT_NUMBER'],
+            'Body' => 'You can now claim your receipt and ticket with your email account. Thank you and enjoy!'
+        ));
+
+        Mail::send('emails.ticket.receipt-ticket',
+            [
+                'title'             => 'Receipt and Ticket',
+                'fullName'          =>  $user->first_name . ' ' . $user->last_name,
+                'transactionNumber' =>  $user->transaction_number,
+                'movieTitle'        =>  $user->title,
+                'cinemaNumber'      =>  $user->cinema_id,
+                'startTime'         =>  $user->start_time,
+                'showingDate'       =>  $user->showing_date,
+                'ticketsBought'     =>  $user->tickets_bought,
+                'burgerBought'      =>  $user->burger_bought,
+                'friesBought'       =>  $user->fries_bought,
+                'sodaBought'        =>  $user->soda_bought,
+                'totalPrice'        =>  $user->total,
+                'seatNumbers'       =>  $seatNumbers
+            ], function($message) use ($user)
+            {
+                $message->to($user->email, $user->first_name . ' ' . $user->last_name)
+                    ->subject('Receipt and Ticket');
+            });
+
+        return Redirect::back()->withMessage('Paid successfully');
+    }
+
     public function memberTransaction()
     {
         $title = 'Transaction Page';

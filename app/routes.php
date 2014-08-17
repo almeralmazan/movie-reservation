@@ -38,6 +38,13 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
     Route::get('get-member-reserved-seats/{timeId}', 'MemberController@getReservedSeats');
     Route::post('save-reserved-seats', 'MemberController@saveReservedSeats');
     Route::post('deposit-amount', 'MemberController@depositAmount');
+
+    // Payments
+    Route::post('reserved-seat', 'MemberController@reservedSeat');
+    Route::get('online-payment', 'PayPalController@buyWithPayPal');
+
+    // email
+    Route::get('receipt-ticket/{transactionId}', 'MemberController@receiptTicket');
 });
 
 

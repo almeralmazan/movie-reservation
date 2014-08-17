@@ -114,6 +114,11 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="row">
+
+                                            <input type="hidden" id="member-name" name="member_name" value="{{ Session::get('member_name') }}"/>
+                                            <?php $cinema_number = show_cinema_number(Session::get('movie_id')) ?>
+                                            <input type="hidden" name="cinema_id" id="cinema-id" value="{{ $cinema_number->cinema_id }}"/>
+
                                             <table class="table table-hover table-bordered">
                                                 <thead>
                                                 <tr>

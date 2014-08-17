@@ -44,7 +44,7 @@ var dataService = function () {
     },
 
     memberSaveReserveSeats = function(
-        cinemaId, selectedTime, walkinName, seatsReserved,
+        cinemaId, selectedTime, memberName, seatsReserved,
         seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
         totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
         ) {
@@ -53,7 +53,7 @@ var dataService = function () {
             data: {
                 cinemaId: cinemaId,
                 selectedTime: selectedTime,
-                walkinName: walkinName,
+                memberName: memberName,
                 seatsReserved: seatsReserved,
                 seatsQuantity: seatsQuantity,
                 burgerQuantity: burgerQuantity,
@@ -131,7 +131,7 @@ var dataService = function () {
         getMovieTimesById: getMovieTimesById,
         getAdminReservedSeats: getAdminReservedSeats,
         getMemberReservedSeats: getMemberReservedSeats,
-        memberSavedReservedSeats: memberSaveReserveSeats,
+        memberSaveReserveSeats: memberSaveReserveSeats,
         adminWalkinSaveReserveSeats: adminWalkinSaveReserveSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
         saveReservedSeats: saveReservedSeats,

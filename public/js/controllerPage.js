@@ -11,6 +11,7 @@ var controllerPage = function () {
         getReservedSeats,
         getAdminReservedSeats,
         saveAdminReservedSeats,
+        memberSaveReserveSeats,
         adminWalkinSaveReserveSeats,
         getMemberReservedSeats;
 
@@ -116,6 +117,34 @@ var controllerPage = function () {
         });
 
         // Admin Reserve Seat
+        $('#member-reserve-seat').on('submit', function(event) {
+            event.preventDefault();
+
+            var cinemaId = $('#cinema-id').val();
+            var selectedTime = $('#show-start-time').val();
+
+            var memberName = $('#member-name').val();
+            var seatsReserved = $('#reserving-for-seat').text();
+
+            var seatsQuantity = $('#total-seats').text();
+            var burgerQuantity = $('#qty-burger').val();
+            var friesQuantity = $('#qty-fries').val();
+            var sodaQuantity = $('#qty-soda').val();
+
+            var totalBurgerPrice = $('#total-burger-price').text();
+            var totalFriesPrice = $('#total-fries-price').text();
+            var totalSodaPrice = $('#total-soda-price').text();
+            var totalPrice = $('h4#total').text();
+
+            memberSaveReserveSeats(
+                cinemaId, selectedTime, memberName, seatsReserved,
+                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+            );
+
+        });
+
+        // Admin Reserve Seat
         $('#admin-reserve-seat').on('submit', function(event) {
             event.preventDefault();
 
@@ -142,7 +171,6 @@ var controllerPage = function () {
                 totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
             );
 
-//            location.href = '/admin/dashboard/seat';
         });
 
         // Admin Reserve Button
@@ -313,13 +341,13 @@ var controllerPage = function () {
 
         // ---------------
         // Bank Deposit
-        $('#bank-deposit').on('click', function(e) {
-            e.preventDefault();
-
-            $('#sms-loading-message').html('<strong>Sending SMS... Please wait for a moment.</strong>');
-
-            depositAmount( $('#total').text() );
-        });
+//        $('#bank-deposit').on('click', function(e) {
+//            e.preventDefault();
+//
+//            $('#sms-loading-message').html('<strong>Sending SMS... Please wait for a moment.</strong>');
+//
+//            depositAmount( $('#total').text() );
+//        });
 
     };
 
@@ -668,6 +696,25 @@ var controllerPage = function () {
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
             });
+    };
+
+    memberSaveReserveSeats = function(
+        cinemaId, selectedTime, memberName, seatsReserved,
+        seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+        totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        ) {
+        dataService.memberSaveReserveSeats(
+                cinemaId, selectedTime, memberName, seatsReserved,
+                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+        )
+        .done(function (data) {
+            console.log('Success sending data...');
+            location.href = urlBase + '/member/receipt-ticket/' + data.transactionId
+        })
+        .fail(function (jqXHR, textStatus, error) {
+            console.log(textStatus);
+        });
     };
 
     adminWalkinSaveReserveSeats = function(

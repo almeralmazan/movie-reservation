@@ -22,6 +22,7 @@ class SessionController extends BaseController {
         {
             $user = User::where('email', Input::get('email'))->first();
 
+            Session::put('member_name', $user->first_name);
             Session::put('email', Input::get('email'));
             Session::put('mobile_number', $user->mobile_number);
 
