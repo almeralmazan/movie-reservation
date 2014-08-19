@@ -48,11 +48,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="member in members | filter:name | orderBy:predicate:reverse">
-                        <td>{[ member.first_name ]}</td>
-                        <td>{[ member.last_name ]}</td>
-                        <td>{[ member.email ]}</td>
-                        <td>{[ member.mobile_number ]}</td>
-                        <td>{[ member.created_at | date:'longDate']}</td>
+                        <td>@{{ member.first_name }}</td>
+                        <td>@{{ member.last_name }}</td>
+                        <td>@{{ member.email }}</td>
+                        <td>@{{ member.mobile_number }}</td>
+                        <td>@{{ member.created_at | date:'longDate'}}</td>
                     </tr>
                 </tbody>
             </table>

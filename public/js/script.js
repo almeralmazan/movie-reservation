@@ -2,10 +2,10 @@
 
     var adminApp = angular.module('AdminApp', ['ui.bootstrap']);
 
-    adminApp.config(['$interpolateProvider', function ($interpolateProvider) {
-        $interpolateProvider.startSymbol('{[');
-        $interpolateProvider.endSymbol(']}');
-    }]);
+//    adminApp.config(['$interpolateProvider', function ($interpolateProvider) {
+//        $interpolateProvider.startSymbol('{[');
+//        $interpolateProvider.endSymbol(']}');
+//    }]);
 
 
     // AdminTransactionController

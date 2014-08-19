@@ -43,16 +43,16 @@
 
                 <tbody>
                     <tr ng-repeat="transaction in transactions | filter:search_transaction | filter:ps">
-                        <td>{[ transaction.receipt_number ]}</td>
-                        <td>{[ transaction.customer_name ]}</td>
-                        <td>{[ transaction.movie_title ]}</td>
-                        <td>{[ transaction.created_at | date:'shortDate' ]}</td>
-                        <td>{[ transaction.start_time ]}</td>
-                        <td>{[ transaction.tickets_bought ]}</td>
-                        <td>{[ transaction.burger_bought ]}</td>
-                        <td>{[ transaction.fries_bought ]}</td>
-                        <td>{[ transaction.soda_bought ]}</td>
-                        <td>{[ transaction.total ]}</td>
+                        <td>@{{ transaction.receipt_number }}</td>
+                        <td>@{{ transaction.customer_name }}</td>
+                        <td>@{{ transaction.movie_title }}</td>
+                        <td>@{{ transaction.created_at | date:'shortDate' }}</td>
+                        <td>@{{ transaction.start_time }}</td>
+                        <td>@{{ transaction.tickets_bought }}</td>
+                        <td>@{{ transaction.burger_bought }}</td>
+                        <td>@{{ transaction.fries_bought }}</td>
+                        <td>@{{ transaction.soda_bought }}</td>
+                        <td>@{{ transaction.total }}</td>
 
                         <td>
                             <span class="label label-success" ng-show="transaction.paid_status">
