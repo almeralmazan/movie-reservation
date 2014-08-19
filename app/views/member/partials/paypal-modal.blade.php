@@ -4,15 +4,15 @@
         <div class="modal-content">
             <div class="modal-header">
             </div>
-            {{ Form::open(['id' => 'paypal-reserve']) }}
+            {{ Form::open(['id' => 'paypal-reserve', 'method' => 'GET']) }}
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="row">
 
-                            <input type="hidden" id="member-name" name="member_name" value="{{ Session::get('member_name') }}"/>
+                            <input type="hidden" id="member-name-paypal" name="member_name_paypal" value="{{ Session::get('member_name') }}"/>
                             <?php $cinema_number = show_cinema_number(Session::get('movie_id')) ?>
-                            <input type="hidden" name="cinema_id" id="cinema-id" value="{{ $cinema_number->cinema_id }}"/>
+                            <input type="hidden" name="cinema_id_paypal" id="cinema-id-paypal" value="{{ $cinema_number->cinema_id }}"/>
 
                             <table class="table table-hover table-bordered">
                                 <thead>

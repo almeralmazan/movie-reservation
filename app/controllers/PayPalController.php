@@ -46,69 +46,47 @@ class PayPalController extends BaseController {
         }
 
         Transaction::create([
-            'transaction_number'    =>  Input::get('token'),
+            'transaction_number'    =>  '',
             'receipt_number'        =>  $transactionCount + 1,
             'tickets_bought'        =>  $ticketsQuantity,
             'burger_bought'         =>  $burgerQuantity,
             'fries_bought'          =>  $friesQuantity,
             'soda_bought'           =>  $sodaQuantity,
             'total'                 =>  $totalPrice,
-            'paid_status'           =>  1
+            'paid_status'           =>  0
         ]);
 
-        // store walkin name in session
+        // i don't know what is this
         Session::put('customer_name', $memberName);
 
         return Response::json([
-            'transactionId' =>  ($transactionCount + 1)
+            'transactionId' =>  ($transactionCount + 1),
+            'totalPrice'    =>  $totalPrice
         ]);
     }
 
     public function buyWithPayPal($transactionId, $totalPrice)
     {
-        $user = User::find(Session::get('user_id'));
+        $response = $this->gateway->purchase([
+            'cancelUrl'     =>  getenv('DOMAIN_NAME') . 'http://dev.new-movie-res/member/cancel-payment',
+            'returnUrl'     =>  getenv('DOMAIN_NAME') . 'member/success-payment/' . (int)$transactionId,
+            'description'   =>  'E-Movie Reservation Transaction',
+            'amount'        =>  $totalPrice + '.00',
+            'currency'      =>  'PHP'
+        ])->send();
 
-        // PAYPAL OPERATIONS
-        if ( isset($user) )
-        {
-            $response = $this->gateway->purchase([
-                'cancelUrl'     =>  getenv('DOMAIN_NAME') . 'cancel-payment',
-                'returnUrl'     =>  getenv('DOMAIN_NAME') . 'member/success-payment/' + $transactionId,
-                'description'   =>  'E-Movie Reservation Transaction',
-                'amount'        =>  $totalPrice + '.00',
-                'currency'      =>  'PHP'
-            ])->send();
-
-            $response->redirect();
-        }
-        else
-        {
-            return Redirect::back()->withMessage('Control # does not exist. Try again.');
-        }
-
+        $response->redirect();
     }
 
-    public function successPayment()
+    public function successPayment($transactionId)
     {
         $transactionNumber = Input::get('token');
-        dd($transactionNumber);
 
-        // Make this customize using DB::table('applicants')
-//        $applicant = Applicant::find($applicantId);
-//        $applicant->paid_status = 1;
-//        $applicant->save();
-//
-//        $payment = Payment::find($applicantId);
-//        $payment->transaction_number = $transactionNumber;
-//        $payment->paid_date = date('Y-m-d');
-//        $payment->save();
-//
-//        $testing = DB::table('testing_centers')
-//            ->select('testing_centers.location')
-//            ->where('testing_centers.id', $applicant->testing_centers_location_id)
-//            ->first();
-//
-//        $title = 'Success Payment Page';
-//        return View::make('paypal.success-payment', compact('title', 'transactionNumber', 'applicant', 'testing'));
+        $transaction = Transaction::find($transactionId);
+        $transaction->transaction_number = $transactionNumber;
+        $transaction->paid_status = 1;
+        $transaction->save();
+
+        return Redirect::to('member/receipt-ticket/' . $transactionId);
     }
 }

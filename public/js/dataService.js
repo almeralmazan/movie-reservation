@@ -43,7 +43,7 @@ var dataService = function () {
         return $.getJSON(urlBase + '/member/get-member-reserved-seats/' + timeId);
     },
 
-    memberPayOnline = function(
+    memberPayPalDeposit = function(
         cinemaId, selectedTime, memberName, seatsReserved,
         seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
         totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
@@ -156,7 +156,7 @@ var dataService = function () {
         getMovieTimesById: getMovieTimesById,
         getAdminReservedSeats: getAdminReservedSeats,
         getMemberReservedSeats: getMemberReservedSeats,
-        memberPayOnline: memberPayOnline,
+        memberPayPalDeposit: memberPayPalDeposit,
         memberBankDeposit: memberBankDeposit,
         adminWalkinSaveReserveSeats: adminWalkinSaveReserveSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,

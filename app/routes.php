@@ -41,9 +41,9 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
 
     // Payments
     Route::post('bank-deposit', 'MemberController@bankDeposit');
-//    Route::post('paypal/reserved-seat', 'MemberController@paypalReservedSeat');
-//    Route::get('online-payment/{transactionId}/{totalPrice}', 'PayPalController@buyWithPayPal');
-//    Route::get('success-payment', 'PayPalController@successPayment');
+    Route::post('paypal/reserved-seat', 'PayPalController@reservedSeat');
+    Route::get('online-payment/{transactionId}/{totalPrice}', 'PayPalController@buyWithPayPal');
+    Route::get('success-payment/{transactionId}', 'PayPalController@successPayment');
 
     // email
     Route::get('receipt-ticket/{transactionId}', 'MemberController@receiptTicket');

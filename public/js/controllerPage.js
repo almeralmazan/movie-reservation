@@ -11,7 +11,7 @@ var controllerPage = function () {
         getReservedSeats,
         getAdminReservedSeats,
         saveAdminReservedSeats,
-        memberPayOnline,
+        memberPayPalDeposit,
         memberBankDeposit,
         adminWalkinSaveReserveSeats,
         getMemberReservedSeats;
@@ -118,26 +118,26 @@ var controllerPage = function () {
         });
 
         // Pay Online
-        $('#online-deposit').on('click', function(e) {
+        $('#paypal-deposit').on('click', function(e) {
             e.preventDefault();
 
-            var cinemaId = $('#cinema-id').val();
+            var cinemaId = $('#cinema-id-paypal').val();
             var selectedTime = $('#show-start-time').val();
 
-            var memberName = $('#member-name').val();
-            var seatsReserved = $('#reserving-for-seat').text();
+            var memberName = $('#member-name-paypal').val();
+            var seatsReserved = $('#reserving-for-seat-paypal').text();
 
-            var seatsQuantity = $('#total-seats').text();
-            var burgerQuantity = $('#qty-burger').val();
-            var friesQuantity = $('#qty-fries').val();
-            var sodaQuantity = $('#qty-soda').val();
+            var seatsQuantity = $('#total-seats-paypal').text();
+            var burgerQuantity = $('#qty-burger-paypal').val();
+            var friesQuantity = $('#qty-fries-paypal').val();
+            var sodaQuantity = $('#qty-soda-paypal').val();
 
-            var totalBurgerPrice = $('#total-burger-price').text();
-            var totalFriesPrice = $('#total-fries-price').text();
-            var totalSodaPrice = $('#total-soda-price').text();
-            var totalPrice = $('h4#total').text();
+            var totalBurgerPrice = $('#total-burger-price-paypal').text();
+            var totalFriesPrice = $('#total-fries-price-paypal').text();
+            var totalSodaPrice = $('#total-soda-price-paypal').text();
+            var totalPrice = $('h4#total-paypal').text();
 
-            memberPayOnline(
+            memberPayPalDeposit(
                 cinemaId, selectedTime, memberName, seatsReserved,
                 seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
                 totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
@@ -728,12 +728,12 @@ var controllerPage = function () {
             });
     };
 
-    memberPayOnline = function(
+    memberPayPalDeposit = function(
             cinemaId, selectedTime, memberName, seatsReserved,
             seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
             totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
         ) {
-        dataService.memberPayOnline(
+        dataService.memberPayPalDeposit(
                 cinemaId, selectedTime, memberName, seatsReserved,
                 seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
                 totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
