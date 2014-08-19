@@ -150,7 +150,7 @@ class AdminController extends BaseController {
     public function getMovieTimesById($cinemaId)
     {
         $result =  DB::table('times')
-                    ->select('times.start_time', 'cinema_time.time_id')
+                    ->select(DB::raw("TIME_FORMAT(times.start_time, '%H:%i %p') AS start_time"), "cinema_time.time_id")
                     ->join('cinema_time', 'cinema_time.time_id', '=', 'times.id')
                     ->where('cinema_time.cinema_id', $cinemaId)
                     ->get();
