@@ -148,10 +148,10 @@ var controllerPage = function () {
         $('#member-bank-deposit-form').on('submit', function(event) {
             event.preventDefault();
 
-            var cinemaId = $('#cinema-id').val();
+            var cinemaId = $('#bank-cinema-id').val();
             var selectedTime = $('#show-start-time').val();
 
-            var memberName = $('#member-name').val();
+            var memberName = $('#bank-member-name').val();
             var seatsReserved = $('#reserving-for-seat').text();
 
             var seatsQuantity = $('#total-seats').text();

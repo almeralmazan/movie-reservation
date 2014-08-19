@@ -218,8 +218,8 @@ class MemberController extends BaseController {
             'paid_status'           =>  1
         ]);
 
-        // store walkin name in session
-        Session::put('customer_name', $memberName);
+        // Notify user thru sms
+        $this->notifyUserWithSms($totalPrice);
 
         return Response::json([
             'transactionId' =>  ($transactionCount + 1)
@@ -335,10 +335,8 @@ class MemberController extends BaseController {
         return View::make('member.reserve-movie', compact('title', 'movie', 'times'));
     }
 
-    public function depositAmount()
+    public function notifyUserWithSms($totalPrice)
     {
-        $totalPrice = Input::get('amount');
-
         // Initiate sms sending to user
         $account_sid = $_ENV['TWILIO_SID'];
         $auth_token = $_ENV['TWILIO_AUTH_TOKEN'];

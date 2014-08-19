@@ -37,7 +37,6 @@ Route::group(['before' => 'auth', 'prefix' => 'member'], function()
     Route::get('movie/{movieId}/{timeId}', 'MemberController@checkReserveSeats');
     Route::get('get-member-reserved-seats/{timeId}', 'MemberController@getReservedSeats');
     Route::post('save-reserved-seats', 'MemberController@saveReservedSeats');
-    Route::post('deposit-amount', 'MemberController@depositAmount');
 
     // Payments
     Route::post('bank-deposit', 'MemberController@bankDeposit');
