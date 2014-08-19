@@ -64,17 +64,18 @@ class PayPalController extends BaseController {
         ]);
     }
 
-    public function buyWithPayPal()
+    public function buyWithPayPal($transactionId, $totalPrice)
     {
         $user = User::find(Session::get('user_id'));
 
+        // PAYPAL OPERATIONS
         if ( isset($user) )
         {
             $response = $this->gateway->purchase([
                 'cancelUrl'     =>  getenv('DOMAIN_NAME') . 'cancel-payment',
-                'returnUrl'     =>  getenv('DOMAIN_NAME') . 'success-payment/' . $user->id,
+                'returnUrl'     =>  getenv('DOMAIN_NAME') . 'member/success-payment/' + $transactionId,
                 'description'   =>  'E-Movie Reservation Transaction',
-                'amount'        =>  '820.00',
+                'amount'        =>  $totalPrice + '.00',
                 'currency'      =>  'PHP'
             ])->send();
 
@@ -87,25 +88,27 @@ class PayPalController extends BaseController {
 
     }
 
-    public function successPayment($applicantId)
+    public function successPayment()
     {
         $transactionNumber = Input::get('token');
+        dd($transactionNumber);
+
         // Make this customize using DB::table('applicants')
-        $applicant = Applicant::find($applicantId);
-        $applicant->paid_status = 1;
-        $applicant->save();
-
-        $payment = Payment::find($applicantId);
-        $payment->transaction_number = $transactionNumber;
-        $payment->paid_date = date('Y-m-d');
-        $payment->save();
-
-        $testing = DB::table('testing_centers')
-            ->select('testing_centers.location')
-            ->where('testing_centers.id', $applicant->testing_centers_location_id)
-            ->first();
-
-        $title = 'Success Payment Page';
-        return View::make('paypal.success-payment', compact('title', 'transactionNumber', 'applicant', 'testing'));
+//        $applicant = Applicant::find($applicantId);
+//        $applicant->paid_status = 1;
+//        $applicant->save();
+//
+//        $payment = Payment::find($applicantId);
+//        $payment->transaction_number = $transactionNumber;
+//        $payment->paid_date = date('Y-m-d');
+//        $payment->save();
+//
+//        $testing = DB::table('testing_centers')
+//            ->select('testing_centers.location')
+//            ->where('testing_centers.id', $applicant->testing_centers_location_id)
+//            ->first();
+//
+//        $title = 'Success Payment Page';
+//        return View::make('paypal.success-payment', compact('title', 'transactionNumber', 'applicant', 'testing'));
     }
 }

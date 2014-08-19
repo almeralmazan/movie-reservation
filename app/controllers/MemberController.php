@@ -125,8 +125,59 @@ class MemberController extends BaseController {
         ));
     }
 
+    public function paypalReservedSeat()
+    {
+        $cinemaId           = Input::get('cinemaId');
+        $selectedTime       = Input::get('selectedTime');
+        $memberName         = Input::get('memberName');
+        $seatsReserved      = Input::get('seatsReserved');
+        $ticketsQuantity    = Input::get('seatsQuantity');
+        $burgerQuantity     = Input::get('burgerQuantity');
+        $friesQuantity      = Input::get('friesQuantity');
+        $sodaQuantity       = Input::get('sodaQuantity');
+        $totalPrice         = Input::get('totalPrice');
 
-    public function reservedSeat()
+        // Get transaction count
+        $transactionCount = Transaction::count();
+
+
+        $reservedSeats = explode(',', str_replace('seat-', '', $seatsReserved));
+
+        $reservedSeatId = '';
+
+        for ($i = 0; $i < count($reservedSeats); $i++)
+        {
+            $reservedSeatId = ReservedSeat::create([
+                'customer_name'     =>  $memberName,
+                'customer_status'   =>  'member-paypal',
+                'transaction_id'    =>  $transactionCount + 1,
+                'seat_number'       =>  $reservedSeats[$i],
+                'cinema_id'         =>  $cinemaId,
+                'time_id'           =>  $selectedTime
+            ]);
+        }
+
+        Transaction::create([
+            'transaction_number'    =>  '',
+            'receipt_number'        =>  $transactionCount + 1,
+            'tickets_bought'        =>  $ticketsQuantity,
+            'burger_bought'         =>  $burgerQuantity,
+            'fries_bought'          =>  $friesQuantity,
+            'soda_bought'           =>  $sodaQuantity,
+            'total'                 =>  $totalPrice,
+            'paid_status'           =>  0
+        ]);
+
+        // store walkin name in session
+        Session::put('customer_name', $memberName);
+
+        return Response::json([
+            'transactionId'     =>  ($transactionCount + 1),
+            'totalPrice'        =>  $totalPrice
+        ]);
+    }
+
+    public function bankDeposit()
     {
         $cinemaId           = Input::get('cinemaId');
         $selectedTime       = Input::get('selectedTime');

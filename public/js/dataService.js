@@ -49,7 +49,7 @@ var dataService = function () {
         totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
         ) {
         return $.ajax({
-            url: urlBase + '/member/reserved-seat',
+            url: urlBase + '/member/paypal/reserved-seat',   // added with 2 s ===> 'ss'
             data: {
                 cinemaId: cinemaId,
                 selectedTime: selectedTime,
@@ -66,15 +66,15 @@ var dataService = function () {
             },
             type: 'POST'
         })
-    };
+    },
 
-    memberSaveReserveSeats = function(
+    memberBankDeposit = function(
         cinemaId, selectedTime, memberName, seatsReserved,
         seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
         totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
         ) {
         return $.ajax({
-            url: urlBase + '/member/reserved-seat',
+            url: urlBase + '/member/bank-deposit',
             data: {
                 cinemaId: cinemaId,
                 selectedTime: selectedTime,
@@ -157,7 +157,7 @@ var dataService = function () {
         getAdminReservedSeats: getAdminReservedSeats,
         getMemberReservedSeats: getMemberReservedSeats,
         memberPayOnline: memberPayOnline,
-        memberSaveReserveSeats: memberSaveReserveSeats,
+        memberBankDeposit: memberBankDeposit,
         adminWalkinSaveReserveSeats: adminWalkinSaveReserveSeats,
         saveAdminReservedSeats: saveAdminReservedSeats,
         saveReservedSeats: saveReservedSeats,

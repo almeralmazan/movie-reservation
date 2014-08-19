@@ -3,15 +3,15 @@
         <div class="modal-content">
             <div class="modal-header"></div>
 
-            {{ Form::open(['url' => 'member/reserved-seat', 'id' => 'member-reserve-seat']) }}
+            {{ Form::open(['id' => 'member-bank-deposit-form']) }}
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="row">
 
-                            <input type="hidden" id="member-name" name="member_name" value="{{ Session::get('member_name') }}"/>
+                            <input type="hidden" id="bank-member-name" name="bank_member_name" value="{{ Session::get('member_name') }}"/>
                             <?php $cinema_number = show_cinema_number(Session::get('movie_id')) ?>
-                            <input type="hidden" name="cinema_id" id="cinema-id" value="{{ $cinema_number->cinema_id }}"/>
+                            <input type="hidden" name="bank_cinema_id" id="bank-cinema-id" value="{{ $cinema_number->cinema_id }}"/>
 
                             <table class="table table-hover table-bordered">
                                 <thead>
@@ -92,8 +92,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a href="{{ URL::to('member/online-payment') }}" id="online-deposit" class="btn btn-primary">Online Payment (Paypal)</a>
-                {{ Form::submit('Bank Deposit', ['id' => 'bank-deposit', 'class' => 'btn btn-warning']) }}
+                {{ Form::submit('Bank Deposit', ['class' => 'btn btn-warning']) }}
                 <p id="sms-loading-message" style="color: green; margin-top: 10px;"></p>
             </div>
         </div>

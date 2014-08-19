@@ -12,7 +12,7 @@ var controllerPage = function () {
         getAdminReservedSeats,
         saveAdminReservedSeats,
         memberPayOnline,
-        memberSaveReserveSeats,
+        memberBankDeposit,
         adminWalkinSaveReserveSeats,
         getMemberReservedSeats;
 
@@ -118,34 +118,34 @@ var controllerPage = function () {
         });
 
         // Pay Online
-//        $('#online-deposit').on('click', function(e) {
-//            e.preventDefault();
-//
-//            var cinemaId = $('#cinema-id').val();
-//            var selectedTime = $('#show-start-time').val();
-//
-//            var memberName = $('#member-name').val();
-//            var seatsReserved = $('#reserving-for-seat').text();
-//
-//            var seatsQuantity = $('#total-seats').text();
-//            var burgerQuantity = $('#qty-burger').val();
-//            var friesQuantity = $('#qty-fries').val();
-//            var sodaQuantity = $('#qty-soda').val();
-//
-//            var totalBurgerPrice = $('#total-burger-price').text();
-//            var totalFriesPrice = $('#total-fries-price').text();
-//            var totalSodaPrice = $('#total-soda-price').text();
-//            var totalPrice = $('h4#total').text();
-//
-//            memberPayOnline(
-//                cinemaId, selectedTime, memberName, seatsReserved,
-//                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
-//                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
-//            );
-//        });
+        $('#online-deposit').on('click', function(e) {
+            e.preventDefault();
+
+            var cinemaId = $('#cinema-id').val();
+            var selectedTime = $('#show-start-time').val();
+
+            var memberName = $('#member-name').val();
+            var seatsReserved = $('#reserving-for-seat').text();
+
+            var seatsQuantity = $('#total-seats').text();
+            var burgerQuantity = $('#qty-burger').val();
+            var friesQuantity = $('#qty-fries').val();
+            var sodaQuantity = $('#qty-soda').val();
+
+            var totalBurgerPrice = $('#total-burger-price').text();
+            var totalFriesPrice = $('#total-fries-price').text();
+            var totalSodaPrice = $('#total-soda-price').text();
+            var totalPrice = $('h4#total').text();
+
+            memberPayOnline(
+                cinemaId, selectedTime, memberName, seatsReserved,
+                seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
+                totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
+            );
+        });
 
         // Member Reserve Seat
-        $('#member-reserve-seat').on('submit', function(event) {
+        $('#member-bank-deposit-form').on('submit', function(event) {
             event.preventDefault();
 
             var cinemaId = $('#cinema-id').val();
@@ -164,7 +164,7 @@ var controllerPage = function () {
             var totalSodaPrice = $('#total-soda-price').text();
             var totalPrice = $('h4#total').text();
 
-            memberSaveReserveSeats(
+            memberBankDeposit(
                 cinemaId, selectedTime, memberName, seatsReserved,
                 seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
                 totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
@@ -302,6 +302,57 @@ var controllerPage = function () {
             $(this).toggleClass('btn-info');
         });
 
+        // counting seats - paypal
+        $ ( "#reserve-seat-paypal" ).on('click', function(){
+            // for seats
+            var seats = [];
+            var total_seats = $(".btn-info").length;
+            var price = 250.00;
+            var total_burger_price = $("#total-burger-price-paypal").text();
+            var total_fries_price = $("#total-fries-price-paypal").text();
+            var total_soda_price = $("#total-soda-price-paypal").text();
+            // for seats
+            $(".container").find(".btn-info").each(function(){ seats.push(this.id); });
+            $("#reserving-for-seat-paypal").text(seats);
+            $("#total-seats-paypal").text(total_seats);
+            $("#total-seat-price-paypal").text(total_seats*price);
+            $("#total-paypal").text(parseInt($("#total-seat-price-paypal").text()) + parseInt(total_fries_price) + parseInt(total_soda_price) + parseInt(total_burger_price));
+        });
+
+        // Add-ons burger
+        $ ("#qty-burger-paypal").on('input',function(){
+            var qty_burger = $("#qty-burger-paypal").val();
+            var price_burger = 50.00;
+            var total = $("#total-seat-price-paypal").text();
+            var total_fries_price = $("#total-fries-price-paypal").text();
+            var total_soda_price = $("#total-soda-price-paypal").text();
+            $("#total-burger-price-paypal").text(qty_burger*price_burger);
+            $("#total-paypal").text(parseInt(total) + parseInt($("#total-burger-price-paypal").text()) + parseInt(total_fries_price) + parseInt(total_soda_price));
+        });
+
+        // Add-ons fries
+        $ ("#qty-fries-paypal").on('input',function(){
+            var qty_fries = $("#qty-fries-paypal").val();
+            var price_fries = 50.00;
+            var total_burger_price = $("#total-burger-price-paypal").text();
+            var total_soda_price = $("#total-soda-price-paypal").text();
+            var total = $("#total-seat-price-paypal").text();
+            $("#total-fries-price-paypal").text(qty_fries*price_fries);
+            $("#total-paypal").text(parseInt(total) + parseInt($("#total-fries-price-paypal").text()) + parseInt(total_burger_price) + parseInt(total_soda_price));
+        });
+
+        // Add-ons soda
+        $ ("#qty-soda-paypal").on('input',function(){
+            var qty_soda = $("#qty-soda-paypal").val();
+            var price_soda = 30.00;
+            var total_burger_price = $("#total-burger-price-paypal").text();
+            var total_fries_price = $("#total-fries-price-paypal").text();
+            var total = $("#total-seat-price-paypal").text();
+            $("#total-soda-price-paypal").text(qty_soda*price_soda);
+            $("#total-paypal").text(parseInt(total) + parseInt($("#total-soda-price-paypal").text())+ parseInt(total_burger_price) + parseInt(total_fries_price));
+        });
+
+
         // counting seats
         $("#reserve-seat").on('click', function () {
             // for seats
@@ -366,16 +417,6 @@ var controllerPage = function () {
                 opacity: 1
             });
         });
-
-        // ---------------
-        // Bank Deposit
-//        $('#bank-deposit').on('click', function(e) {
-//            e.preventDefault();
-//
-//            $('#sms-loading-message').html('<strong>Sending SMS... Please wait for a moment.</strong>');
-//
-//            depositAmount( $('#total').text() );
-//        });
 
     };
 
@@ -614,112 +655,91 @@ var controllerPage = function () {
             });
     };
 
+    // -----------------------
+    // Populate Member Seats
+    // -----------------------
     getMemberReservedSeats = function (timeId) {
         dataService.getMemberReservedSeats(timeId)
-            .done(function (data) {
+                .done( function(data) {
+                    var seatsContent = $('#populate-seats');
 
-                var seatsContent = $('#populate-seats');
-                seatsContent.empty();
+                    seatsContent.empty();
 
-                var html = '';
-                var addColumnCounter = 0;
+                    var html = "";
+                    var addColumnCounter = 0;
 
-                if (data.length == 0) {
-                    for (var index = 0; index < 50; index++) {
-
-                        addColumnCounter++;
-
-                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
-                        html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
-                        html += "</div>";
-
-
-                        if (addColumnCounter % 5 == 0) {
-
-                            if ((index + 1) % 10 == 0) {
-                                html += '';
-                            } else {
-                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
-                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
-                            }
-
-                        }
-                    }
-
-
-
-                } else {
-                    var currentIndexValue = 0;
-
-                    for (var index = 0; index < 50; index++) {
-                        if (data[currentIndexValue] != undefined &&
-                            (index + 1) == data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status == 1) {
-                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
-                            html += "<button class='btn-seats btn btn-danger btn-block' id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
-                            html += "</div>";
-
-                            currentIndexValue++;
-
+                    if (data.length == 0) {
+                        for (var index = 0; index < 50; index++) {
                             addColumnCounter++;
 
-                            if (addColumnCounter % 5 == 0) {
-
-                                if ((index + 1) % 10 == 0) {
-                                    html += '';
-                                } else {
-                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
-                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
-                                }
-
-                            }
-
-
-                        } else if (data[currentIndexValue] != undefined &&
-                            (index + 1) == data[currentIndexValue].seat_number &&
-                            data[currentIndexValue].paid_status == 0) {
-
-                            html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
-                            html += "<button class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'id='seat-" + (index + 1) + "' disabled>" + (index + 1) + "</button>";
-                            html += "</div>";
-
-                            addColumnCounter++;
-
-                            if (addColumnCounter % 5 == 0) {
-
-                                if ((index + 1) % 10 == 0) {
-                                    html += '';
-                                } else {
-                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
-                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
-                                }
-
-                            }
-
-
-                        } else {
                             html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
-                            html += "<button class='btn-seats btn btn-success btn-block' id='seat-" + (index + 1) + "'>" + (index + 1) + "</button>";
+                            html += "<button id='seat-" + (index+1) + "' class='btn-seats btn btn-success btn-block'>" + (index + 1) + "</button>";
                             html += "</div>";
 
-                            addColumnCounter++;
-
                             if (addColumnCounter % 5 == 0) {
-
                                 if ((index + 1) % 10 == 0) {
-                                    html += '';
+//                                html += '';
                                 } else {
                                     html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
                                     html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
                                 }
-
                             }
                         }
+                    } else {
+                        var currentIndexValue = 0;
 
+                        for (var index = 0; index < 50; index++) {
+                            if ( data[currentIndexValue] != undefined &&
+                                (index+1) == data[currentIndexValue].seat_number) {
+
+                                addColumnCounter++;
+
+                                if (data[currentIndexValue].paid_status == 1) {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
+                                    html += "<button id='seat-" + (index+1) + "' class='btn-seats btn btn-danger btn-block' disabled>" + (index + 1) + "</button>";
+                                    html += "</div>";
+                                } else {
+                                    html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
+                                    html += "<button id='seat-" + (index+1) + "'" + " class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "' disabled>" + (index + 1) + "</button>";
+                                    html += "</div>";
+                                }
+
+                                currentIndexValue++;
+
+                                if (addColumnCounter % 5 == 0) {
+                                    if ((index + 1) % 10 == 0) {
+//                                html += '';
+                                    } else {
+                                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    }
+                                }
+
+                            }
+
+                            else {
+//                                html += "<div id='seat-number-" + (index+1) + "' class='btn btn-success available-seats'>" + (index+1) + "</div>";
+                                html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
+                                html += "<button id='seat-" + (index+1) + "' class='btn-seats btn btn-success btn-block'>" + (index + 1) + "</button>";
+                                html += "</div>";
+
+                                addColumnCounter++;
+
+                                if (addColumnCounter % 5 == 0) {
+                                    if ((index + 1) % 10 == 0) {
+//                                html += '';
+                                    } else {
+                                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                        html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
 
-                seatsContent.html(html);
+                    html += "</div></div>";
+
+                    seatsContent.html(html);
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
@@ -738,7 +758,7 @@ var controllerPage = function () {
             )
             .done(function (data) {
                 console.log('Success sending data...');
-                location.href = urlBase + '/member/receipt-ticket/' + data.transactionId
+                location.href = urlBase + '/member/online-payment/' + data.transactionId + '/' + data.totalPrice;
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
@@ -746,12 +766,12 @@ var controllerPage = function () {
 
     };
 
-    memberSaveReserveSeats = function(
+    memberBankDeposit = function(
         cinemaId, selectedTime, memberName, seatsReserved,
         seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
         totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
         ) {
-        dataService.memberSaveReserveSeats(
+        dataService.memberBankDeposit(
                 cinemaId, selectedTime, memberName, seatsReserved,
                 seatsQuantity, burgerQuantity, friesQuantity, sodaQuantity,
                 totalBurgerPrice, totalFriesPrice, totalSodaPrice, totalPrice
