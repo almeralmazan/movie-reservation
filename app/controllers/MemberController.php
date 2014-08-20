@@ -94,6 +94,7 @@ class MemberController extends BaseController {
                 'reserved_seats.cinema_id',
                 'times.start_time',
                 'movies.showing_date',
+                'transactions.created_at',
                 'transactions.tickets_bought',
                 'transactions.burger_bought',
                 'transactions.fries_bought',
@@ -110,6 +111,7 @@ class MemberController extends BaseController {
         $cinemaNumber = $user->cinema_id;
         $startTime = $user->start_time;
         $showingDate = $user->showing_date;
+        $transactionDate = $user->created_at;
         $transactionNumber = $user->transaction_number;
         $ticketsBought = $user->tickets_bought;
         $burgerBought = $user->burger_bought;
@@ -118,9 +120,9 @@ class MemberController extends BaseController {
         $totalPrice = $user->total;
         $fullName = Session::get('customer_name');
 
-        return View::make('emails.ticket.receipt-ticket', compact(
+        return View::make('emails.ticket.member-bank-deposit-ticket', compact(
             'title', 'seatNumbers', 'movieTitle', 'cinemaNumber', 'startTime',
-            'showingDate', 'transactionNumber', 'ticketsBought', 'burgerBought',
+            'showingDate', 'transactionDate', 'transactionNumber', 'ticketsBought', 'burgerBought',
             'friesBought', 'sodaBought', 'totalPrice', 'fullName'
         ));
     }
@@ -348,7 +350,8 @@ class MemberController extends BaseController {
             'Body' => 'You can now deposit your payment at the nearest PS Bank Branch ' .
                       'at your location. ' . 'Deposit the total amount of P' . $totalPrice . ' pesos ' .
                       "to this \n\nAccount Number: \n5299-7876-5050-7727. \n\nNote: If you cannot pay one day " .
-                      'before the movie showtime, your transaction/s will be cancelled.'
+                      "before the movie showtime, your transaction/s will be cancelled. \n\nPlease present your " .
+                      "receipt at the bank for transaction verification."
         ));
     }
 

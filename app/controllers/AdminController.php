@@ -310,7 +310,7 @@ class AdminController extends BaseController {
             'Body' => 'You can now claim your receipt and ticket with your email account. Thank you and enjoy!'
         ));
 
-        Mail::send('emails.ticket.receipt-ticket',
+        Mail::send('emails.ticket.email-member-bank-deposit-ticket',
             [
                 'title'             => 'Receipt and Ticket',
                 'fullName'          =>  $user->first_name . ' ' . $user->last_name,
