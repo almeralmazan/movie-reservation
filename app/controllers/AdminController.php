@@ -307,7 +307,7 @@ class AdminController extends BaseController {
         $client->account->messages->create(array(
             'To' => $user->mobile_number,
             'From' => $_ENV['TWILIO_ACCOUNT_NUMBER'],
-            'Body' => 'You can now claim your receipt and ticket with your email account. Thank you and enjoy!'
+            'Body' => 'You can now claim your receipt and ticket within your email account. Thank you and enjoy!'
         ));
 
         Mail::send('emails.ticket.email-member-bank-deposit-ticket',
