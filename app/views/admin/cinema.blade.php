@@ -22,17 +22,22 @@
                 <h4><strong>Cinema {{ $cinema->id }}</strong></h4>
 
                 <?php $movie = show_movie_title($cinema->id) ?>
-                <h5>
-                    {{ $movie->title }}
-<!--                    <a href="{{ URL::to('admin/dashboard/remove/movie', [$cinema->id]) }}" class="btn btn-xs btn-danger">-->
-<!--                        <span class="glyphicon glyphicon-remove"></span>-->
-<!--                    </a>-->
-                </h5>
 
+                @if ( ! is_null($movie) )
+                    <h5> {{ $movie->title }} </h5>
 
-                <a href="{{ URL::to('admin/dashboard/manage-showtime', [$cinema->id]) }}" class="btn btn-sm btn-primary">
-                    <span class="glyphicon glyphicon-pencil"></span> Manage Cinema
-                </a>
+                    <a href="{{ URL::to('admin/dashboard/manage-showtime', [$cinema->id]) }}" class="btn btn-sm btn-primary">
+                        <span class="glyphicon glyphicon-pencil"></span> Manage Cinema
+                    </a>
+                @elseif ( count($moviesAvailable) == 0 )
+                    <a href="{{ URL::to('admin/dashboard/add-movie-to-cinema', [$cinema->id]) }}" class="btn btn-sm btn-danger" disabled>
+                        <span class="glyphicon glyphicon-pencil"></span> Add Movie First
+                    </a>
+                @else
+                    <a href="{{ URL::to('admin/dashboard/add-movie-to-cinema', [$cinema->id]) }}" class="btn btn-sm btn-warning">
+                        <span class="glyphicon glyphicon-pencil"></span> Add Movie
+                    </a>
+                @endif
             </div>
         </div>
         @endforeach

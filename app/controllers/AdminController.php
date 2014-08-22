@@ -39,7 +39,7 @@ class AdminController extends BaseController {
             'description'   =>  Input::get('movie_description'),
             'image'         =>  $filename,
             'trailer_url'   =>  Input::get('trailer_url'),
-            'showing_date'  =>  '0000-00-00',
+            'showing_date'  =>  '2000-01-01',
             'cinema_id'     =>  0
         ]);
 
@@ -50,6 +50,9 @@ class AdminController extends BaseController {
     {
         $movie = Movie::find($movieId);
         $movie->delete();
+
+        DB::table('cinemas')->where('cinemas.id', $movie->cinema_id)->update(['cinemas.occupied' => 0]);
+
         return Redirect::back()->withDelete('Deleted successfully');
     }
 
@@ -162,14 +165,64 @@ class AdminController extends BaseController {
     {
         $title = 'Cinema Page';
         $cinemas = Cinema::all();
-        return View::make('admin.cinema', compact('title', 'cinemas'));
+        $moviesAvailable = Movie::where('movies.cinema_id', 0)->get();
+//        dd(count($moviesAvailable) == 0);
+        return View::make('admin.cinema', compact('title', 'cinemas', 'moviesAvailable'));
+    }
+
+    public function addMovieToCinema($cinemaId)
+    {
+        $title = 'Add Movie To Cinema';
+        $cinema_id = (int)$cinemaId;
+        $movie = Movie::where('cinema_id', 0)->first();
+
+        $cinemaIdContent = Request::segment(4);
+        Session::put('cinema_id_from_new_movie', (int)$cinemaIdContent);
+
+        $movies = Movie::where('movies.cinema_id', 0)->lists('title', 'id');
+        $cinemaTimes = CinemaTime::where('cinema_id', $cinema_id)->get();
+        $times = Time::all();
+
+        return View::make('admin.add-movie-to-cinema', compact('title', 'cinema_id', 'movie', 'cinemaIdContent', 'movies', 'cinemaTimes', 'times'));
+    }
+
+    public function updateMovieToCinema()
+    {
+        $cinemaId = Session::get('cinema_id_from_new_movie');
+//        $cinemaId = Input::get('cinema_id');
+
+        $movieIdFromSelect = Input::get('movie_id');
+        $showingDate = Input::get('movie_showing_date');
+
+        $times = array_except(Input::all(), ['cinema_id', 'movie_id', 'movie_showing_date', '_token']);
+
+        Cinema::where('id', $cinemaId)->update(['occupied' => 1]);
+
+        CinemaTime::where('cinema_id', $cinemaId)->delete();
+
+        Movie::where('id', $movieIdFromSelect)->update([
+            'showing_date'  =>  $showingDate,
+            'cinema_id'     =>  $cinemaId
+        ]);
+
+        for ($i = 0; $i < count($this->getOnlyTheNumbers('time_', $times)); $i++)
+        {
+            CinemaTime::create([
+                'cinema_id' =>  $cinemaId,
+                'time_id'   =>  (int) $this->getOnlyTheNumbers('time_', $times)[$i]
+            ]);
+        }
+
+        return Redirect::to('admin/dashboard');
     }
 
     public function manageShowtime($cinemaId)
     {
         $title = 'Manage Showtime';
         $cinema_id = $cinemaId;
-        $movie = Movie::find($cinemaId);
+
+        $movie = Movie::where('cinema_id', $cinemaId)->first();
+
         $cinemaTimes = CinemaTime::where('cinema_id', $cinemaId)->get();
         $times = Time::all();
 

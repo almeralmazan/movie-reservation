@@ -2,7 +2,7 @@
 
 class Movie extends Eloquent {
 
-    protected $fillable = ['title', 'description', 'image', 'trailer_url'];
+    protected $fillable = ['title', 'description', 'image', 'trailer_url', 'showing_date'];
 
     public static function getAllTimes($id)
     {

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('header')
-    @include('layouts.partials.nav')
+@include('layouts.partials.nav')
 @stop
 
 @section('content')
@@ -18,17 +18,21 @@
         <div class="col-md-12">
             <div class="well" ng-controller="CinemaController">
                 <div class="row">
+
+                {{ Form::open(['url' => 'admin/dashboard/update/add-movie-to-cinema']) }}
                     <div class="col-md-12">
                         <h2>
-                            <small>Cinema #:</small> {{ $movie->cinema_id }}
+                            <small>Cinema #:</small> {{ $cinemaIdContent }}
                         </h2>
 
-                        <h2>
-                            <small>Selected Movie:</small> {{ $movie->title }}
-                        </h2>
+                        <div class="form-group col-md-5" style="margin-left: -15px">
+                            <h2>
+                                <small>Select Movie:</small>
+                                {{ Form::select('movie_id', $movies, '', ['class' => 'form-control']) }}
+                            </h2>
+                        </div>
                     </div>
 
-                    {{ Form::open(['url' => 'admin/dashboard/update/cinema']) }}
                     <div class="col-md-12">
                         <h5>
                             <strong>Showing date:</strong>
@@ -48,11 +52,7 @@
                             <tr>
                                 @foreach ($times as $time)
                                 <td>
-                                    @if ( in_array($time->id, $cinemaTimes->lists('time_id')) )
-                                        <input type="checkbox" name="time_{{ $time->id }}" id="{{ $time->id }}" checked>
-                                    @else
-                                        <input type="checkbox" name="time_{{ $time->id }}" id="{{ $time->id }}">
-                                    @endif
+                                    <input type="checkbox" name="time_{{ $time->id }}" id="{{ $time->id }}">
                                     <label for="{{ $time->id }}">{{ date('g:i a', strtotime($time->start_time)) }}</label>
                                 </td>
                                 @endforeach
@@ -73,5 +73,5 @@
 @stop
 
 @section('footer')
-    @include('layouts.partials.footer')
+@include('layouts.partials.footer')
 @stop
