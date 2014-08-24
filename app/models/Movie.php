@@ -11,7 +11,7 @@ class Movie extends Eloquent {
                     ->join('cinema_time', 'cinemas.id', '=', 'cinema_time.cinema_id')
                     ->join('times', 'cinema_time.time_id', '=', 'times.id')
                     ->where('movies.id', $id)
-                    ->select("times.id", DB::raw("TIME_FORMAT(times.start_time, '%H:%i %p') AS start_time"))
+                    ->select("times.id", DB::raw("TIME_FORMAT(times.start_time, '%l:%i %p') AS start_time"))
                     ->get();
 
         return $result;
