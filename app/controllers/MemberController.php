@@ -217,7 +217,7 @@ class MemberController extends BaseController {
             'fries_bought'          =>  $friesQuantity,
             'soda_bought'           =>  $sodaQuantity,
             'total'                 =>  $totalPrice,
-            'paid_status'           =>  1
+            'paid_status'           =>  0
         ]);
 
         // Notify user thru sms
