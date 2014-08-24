@@ -296,6 +296,7 @@ class AdminController extends BaseController {
         $startTime = $user->start_time;
         $showingDate = $user->showing_date;
         $transactionNumber = $user->transaction_number;
+        $transactionDate = date('Y-m-d');
         $ticketsBought = $user->tickets_bought;
         $burgerBought = $user->burger_bought;
         $friesBought = $user->fries_bought;
@@ -305,8 +306,8 @@ class AdminController extends BaseController {
 
         return View::make('emails.ticket.receipt-ticket', compact(
             'title', 'seatNumbers', 'movieTitle', 'cinemaNumber', 'startTime',
-            'showingDate', 'transactionNumber', 'ticketsBought', 'burgerBought',
-            'friesBought', 'sodaBought', 'totalPrice', 'fullName'
+            'showingDate', 'transactionNumber', 'transactionDate', 'ticketsBought',
+            'burgerBought', 'friesBought', 'sodaBought', 'totalPrice', 'fullName'
         ));
     }
 
