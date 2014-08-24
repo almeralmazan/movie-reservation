@@ -722,6 +722,9 @@ var controllerPage = function () {
                     html += "</div></div>";
 
                     seatsContent.html(html);
+
+                    $('#reserve-seat-paypal').removeClass('hidden');
+                    $('#reserve-seat').removeClass('hidden');
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);

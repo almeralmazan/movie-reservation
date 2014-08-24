@@ -95,7 +95,7 @@
                 <!-- Button trigger modal -->
                 <div class="row margin-top-two">
                     <div class="col-md-6 col-md-offset-3">
-                        <button class="btn btn-primary btn-block" id="reserve-seat-paypal" data-toggle="modal" data-target="#myModal-paypal">
+                        <button class="btn btn-primary btn-block hidden" id="reserve-seat-paypal" data-toggle="modal" data-target="#myModal-paypal">
                             PayPal Reserve
                         </button>
                     </div>
@@ -103,7 +103,7 @@
 
                 <div class="row margin-top-two">
                     <div class="col-md-6 col-md-offset-3">
-                        <button class="btn btn-success btn-block" id="reserve-seat" data-toggle="modal" data-target="#bank-modal">
+                        <button class="btn btn-success btn-block hidden" id="reserve-seat" data-toggle="modal" data-target="#bank-modal">
                             Bank Reserve
                         </button>
                     </div>
