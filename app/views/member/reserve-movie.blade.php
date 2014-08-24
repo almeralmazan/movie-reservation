@@ -87,6 +87,11 @@
                         <div class="alert alert-info" role="alert">
                             <h1 class="text-center text-uppercase">screen</h1>
                         </div>
+                        <div id="legend" class="hidden">
+                            <label for="">LEGEND: </label>
+                            <span class="label label-success">Available Seats</span>
+                            <span class="label label-danger">Occupied Seats</span>
+                        </div>
                     </div>
                 </div>
 

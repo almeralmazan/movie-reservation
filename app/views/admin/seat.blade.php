@@ -41,6 +41,12 @@
 
                 <h1 class="text-center text-uppercase">screen</h1>
             </div>
+            <div id="legend" class="hidden">
+                <label for="">LEGEND: </label>
+                <span class="label label-success">Available Seats</span>
+                <span class="label label-danger">Occupied Seats</span>
+                <span class="label label-warning">Reserved Seats</span>
+            </div>
         </div>
     </div>
 
@@ -48,7 +54,7 @@
 
     <div id="populate-seats" class="row"></div>
 
-    <div class="row margin-top-two">
+    <div class="row margin-top-two hidden" id="admin-reserve-button">
         <div class="col-md-6 col-md-offset-3">
             <button class="btn btn-primary btn-block" id="reserve-seat" data-toggle="modal" data-target="#myModal">
                 Reserve seat

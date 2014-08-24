@@ -631,6 +631,9 @@ var controllerPage = function () {
                 html += "</div></div>";
 
                 seatsContent.html(html);
+
+                $('#legend').removeClass('hidden');
+                $('#admin-reserve-button').removeClass('hidden');
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
@@ -682,7 +685,7 @@ var controllerPage = function () {
                                     html += "</div>";
                                 } else {
                                     html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
-                                    html += "<button id='seat-" + (index+1) + "'" + " class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "' disabled>" + (index + 1) + "</button>";
+                                    html += "<button id='seat-" + (index+1) + "'" + " class='btn-seats btn btn-success btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "' disabled>" + (index + 1) + "</button>";
                                     html += "</div>";
                                 }
 
@@ -690,7 +693,7 @@ var controllerPage = function () {
 
                                 if (addColumnCounter % 5 == 0) {
                                     if ((index + 1) % 10 == 0) {
-//                                html += '';
+    //                                html += '';
                                     } else {
                                         html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
                                         html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'></div>";
@@ -700,7 +703,6 @@ var controllerPage = function () {
                             }
 
                             else {
-//                                html += "<div id='seat-number-" + (index+1) + "' class='btn btn-success available-seats'>" + (index+1) + "</div>";
                                 html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two'>";
                                 html += "<button id='seat-" + (index+1) + "' class='btn-seats btn btn-success btn-block'>" + (index + 1) + "</button>";
                                 html += "</div>";
@@ -723,6 +725,7 @@ var controllerPage = function () {
 
                     seatsContent.html(html);
 
+                    $('#legend').removeClass('hidden');
                     $('#reserve-seat-paypal').removeClass('hidden');
                     $('#reserve-seat').removeClass('hidden');
             })
