@@ -298,8 +298,17 @@ var controllerPage = function () {
             }).change();
 
         // Seats
+        // Enable/Disable PayPal and Bank Deposit Button
         $(document).on('click', '.btn-seats', function () {
             $(this).toggleClass('btn-info');
+
+            if ( $('.btn-info').length !== 0 ) {
+                $('#reserve-seat-paypal').removeClass('hidden');
+                $('#reserve-seat').removeClass('hidden');
+            } else {
+                $('#reserve-seat-paypal').addClass('hidden');
+                $('#reserve-seat').addClass('hidden');
+            }
         });
 
         // counting seats - paypal
@@ -726,8 +735,6 @@ var controllerPage = function () {
                     seatsContent.html(html);
 
                     $('#legend').removeClass('hidden');
-                    $('#reserve-seat-paypal').removeClass('hidden');
-                    $('#reserve-seat').removeClass('hidden');
             })
             .fail(function (jqXHR, textStatus, error) {
                 console.log(textStatus);
