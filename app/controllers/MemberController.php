@@ -79,6 +79,56 @@ class MemberController extends BaseController {
 
     }
 
+    public function payPalReceiptTicket($transaction_id)
+    {
+        $transactionId = (int) $transaction_id;
+        $title = 'Receipt Ticket Page';
+
+
+        $seats = ReservedSeat::where('transaction_id', $transactionId)->lists('seat_number');
+        $seatNumbers = implode(', ', $seats);
+
+        $user = DB::table('transactions')
+            ->select(
+                'transactions.transaction_number',
+                'movies.title',
+                'reserved_seats.cinema_id',
+                'times.start_time',
+                'movies.showing_date',
+                'transactions.created_at',
+                'transactions.tickets_bought',
+                'transactions.burger_bought',
+                'transactions.fries_bought',
+                'transactions.soda_bought',
+                'transactions.total'
+            )
+            ->join('reserved_seats', 'reserved_seats.transaction_id', '=', 'transactions.id')
+            ->join('movies', 'movies.cinema_id', '=', 'reserved_seats.cinema_id')
+            ->join('times', 'times.id', '=', 'reserved_seats.time_id')
+            ->where('transactions.id', $transactionId)
+            ->first();
+
+
+        $movieTitle = $user->title;
+        $cinemaNumber = $user->cinema_id;
+        $startTime = $user->start_time;
+        $showingDate = $user->showing_date;
+        $transactionDate = $user->created_at;
+        $transactionNumber = $user->transaction_number;
+        $ticketsBought = $user->tickets_bought;
+        $burgerBought = $user->burger_bought;
+        $friesBought = $user->fries_bought;
+        $sodaBought = $user->soda_bought;
+        $totalPrice = $user->total;
+        $fullName = Session::get('customer_name');
+
+        return View::make('emails.ticket.member-paypal-full', compact(
+            'title', 'seatNumbers', 'movieTitle', 'cinemaNumber', 'startTime',
+            'showingDate', 'transactionDate', 'transactionNumber', 'ticketsBought', 'burgerBought',
+            'friesBought', 'sodaBought', 'totalPrice', 'fullName'
+        ));
+    }
+
     public function receiptTicket($transaction_id)
     {
         $transactionId = (int) $transaction_id;
@@ -106,6 +156,7 @@ class MemberController extends BaseController {
             ->join('times', 'times.id', '=', 'reserved_seats.time_id')
             ->where('transactions.id', $transactionId)
             ->first();
+
 
         $movieTitle = $user->title;
         $cinemaNumber = $user->cinema_id;
@@ -140,7 +191,7 @@ class MemberController extends BaseController {
         $totalPrice         = Input::get('totalPrice');
 
         // Get transaction count
-        $transactionCount = Transaction::count();
+        // $transactionCount = Transaction::count();
 
 
         $reservedSeats = explode(',', str_replace('seat-', '', $seatsReserved));
@@ -159,7 +210,7 @@ class MemberController extends BaseController {
             ]);
         }
 
-        Transaction::create([
+        $transactionId = Transaction::create([
             'transaction_number'    =>  '',
             'receipt_number'        =>  $transactionCount + 1,
             'tickets_bought'        =>  $ticketsQuantity,
@@ -174,7 +225,7 @@ class MemberController extends BaseController {
         Session::put('customer_name', $memberName);
 
         return Response::json([
-            'transactionId'     =>  ($transactionCount + 1),
+            'transactionId'     =>  $transactionId,
             'totalPrice'        =>  $totalPrice
         ]);
     }
@@ -190,6 +241,7 @@ class MemberController extends BaseController {
         $friesQuantity      = Input::get('friesQuantity');
         $sodaQuantity       = Input::get('sodaQuantity');
         $totalPrice         = Input::get('totalPrice');
+
 
         // Get transaction count
         $transactionCount = Transaction::count();
@@ -209,7 +261,7 @@ class MemberController extends BaseController {
             ]);
         }
 
-        Transaction::create([
+        $trans = Transaction::create([
             'transaction_number'    =>  'PSB-' . strtoupper(str_random(8)),
             'receipt_number'        =>  $transactionCount + 1,
             'tickets_bought'        =>  $ticketsQuantity,
@@ -224,7 +276,7 @@ class MemberController extends BaseController {
         $this->notifyUserWithSms($totalPrice);
 
         return Response::json([
-            'transactionId' =>  ($transactionCount + 1)
+            'transactionId' =>  $trans->receipt_number
         ]);
     }
 

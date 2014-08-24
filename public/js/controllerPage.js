@@ -589,7 +589,7 @@ var controllerPage = function () {
                                 html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                                 html += "<button id='seat-" + (index+1) + "' class='btn-seats btn btn-danger btn-block' disabled>" + (index + 1) + "</button>";
                                 html += "</div>";
-                            } else {
+                            } else if (data[currentIndexValue].paid_status == 0){
                                 html += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-1 margin-top-two' data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "'>";
                                 html += "<button id='seat-" + (index+1) + "'" + " class='btn-seats btn btn-warning btn-block'  data-toggle='tooltip' data-placement='top' title='" + data[currentIndexValue].customer_name + "' disabled>" + (index + 1) + "</button>";
                                 html += "</div>";

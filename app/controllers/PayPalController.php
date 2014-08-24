@@ -68,7 +68,7 @@ class PayPalController extends BaseController {
     public function buyWithPayPal($transactionId, $totalPrice)
     {
         $response = $this->gateway->purchase([
-            'cancelUrl'     =>  getenv('DOMAIN_NAME') . 'http://dev.new-movie-res/member/cancel-payment',
+            'cancelUrl'     =>  getenv('DOMAIN_NAME') . 'member/cancel-payment',
             'returnUrl'     =>  getenv('DOMAIN_NAME') . 'member/success-payment/' . (int)$transactionId,
             'description'   =>  'E-Movie Reservation Transaction',
             'amount'        =>  $totalPrice + '.00',
